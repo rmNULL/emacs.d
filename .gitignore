@@ -1,0 +1,13 @@
+## ignore all files and folders except the selected few.
+*
+
+##
+!.gitignore
+!custom-config.el
+!early-init.el
+!init.el
+
+##
+!conf/
+!conf/*
+!conf/*/
