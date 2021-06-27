@@ -1,38 +1,31 @@
+;;; init.el --- self explanatory
+;;
+;; Commentary
+;; ----------
+;; 1) Module naming convention:
+;;   iduh/name - these files contain only function definitions
+;;      and requiring this file should have no side effect on the system apart from
+;;      those functions being loaded.
+;;  
+;;   iduh-* - these are config files that modify system variables or
+;;            change the environment in some way
 (let ((minver "27.2"))
   (when (version< emacs-version minver)
     (message "Untested emacs version, update to v%s or higher" minver)))
 
-(add-to-list 'load-path (concat user-emacs-directory "conf/"))
+(add-to-list 'load-path (concat user-emacs-directory "lisp/"))
+(add-to-list 'load-path (concat user-emacs-directory "lisp/conf/"))
 
+(require 'iduh/buffers)
 (require 'iduh-init-stray-files)
-(require 'iduh-init-editing)
 (require 'iduh-init-package-manager)
+(require 'iduh-init-editing)
 (require 'iduh-init-core-packages)
+(require 'iduh-init-programming)
 (require 'iduh-init-docker)
-; (require 'iduh-init-prolog)
-
+(require 'iduh-init-vcs)
+(require 'iduh-init-prolog)
 (require 'iduh-init-visual-pleasures)
-
-(when nil ;(executable-find "fd")
-  (setq helm-locate-recursive-dirs-command "fd --hidden --type d .*%s.*$ %s"))
-(when nil ;(executable-find "rg")
-  (setq helm-grep-default-command
-        (concat "rg"
-                " --smart-case"
-                " --max-depth 1"
-                " --max-columns 160"
-                " --max-columns-preview"
-                " --no-heading --with-filename"
-                " -e %p %f")
-        helm-grep-default-recurse-command
-        (concat "rg"
-                " --smart-case"
-                " --max-columns 160"
-                " --max-columns-preview"
-                " --no-heading --with-filename"
-                " %p %f")
-        helm-ag-base-command
-        "rg --color=always --smart-case --no-heading --line-number %s %s %s"))
 
 
 (setq custom-file (concat user-emacs-directory "custom-config.el"))

@@ -6,8 +6,23 @@
 !custom-config.el
 !early-init.el
 !init.el
+!lisp
+!snippets
+
+
 
 ##
-!conf/
-!conf/*
-!conf/*/
+!lisp/*
+!lisp/conf/*
+lisp/conf/*~
+!lisp/iduh/*
+
+## custom snippets
+!snippets/*/
+!snippets/*/*
+
+## regular ignore inside ignored directories
+*~
+\#*\#
+*.elc
+.\#*
