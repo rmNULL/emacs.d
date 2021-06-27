@@ -32,15 +32,16 @@ toggle like that on subsequent presses."
 (use-package easy-kill
   :config
   (global-set-key [remap kill-ring-save] 'easy-kill)
-  (global-set-key [remap mark-sexp] 'easy-kill))
+  (global-set-key [remap mark-sexp] 'easy-mark))
 
 (use-package ws-butler
-  :init (setq show-trailing-whitespace t)
-  :hook (prog-mode-hook . ws-butler-mode))
+ :init (setq show-trailing-whitespace t)
+ :hook (prog-mode-hook . ws-butler-mode))
 
 
 (use-package undo-tree
   :bind ()
+  :diminish
   :straight (undo-tree :type git
                        :host gitlab
                        :repo "tsc25/undo-tree")

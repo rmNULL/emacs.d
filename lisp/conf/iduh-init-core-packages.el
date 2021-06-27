@@ -25,11 +25,18 @@
          ("C-x C-f" . helm-find-files)
          ("M-y" . helm-show-kill-ring))
   :config
+  (global-unset-key (kbd "C-z"))
   (helm-mode 1)
   (global-set-key (kbd "C-c h") 'helm-command-prefix)
   (global-set-key (kbd "C-c h o") 'helm-occur)
+  (global-set-key (kbd "C-c h SPC") 'helm-all-mark-rings)
+  (global-set-key (kbd "C-c h x") 'helm-regexp)
+  (global-set-key (kbd "C-c h r") 'helm-register)
   (global-unset-key (kbd "C-x c"))
-  (global-unset-key (kbd "C-z"))
+
+  (define-key shell-mode-map
+    (kbd "C-c C-l")
+    'helm-comint-input-ring)
 
   (add-hook 'eshell-mode-hook
             (lambda ()
@@ -42,10 +49,8 @@
                                     helm-eshell-prompts helm-imenu
                                     helm-imenu-in-all-buffers))
 
-  (helm-grep-command)
   (when (executable-find "fd")
-    
-    nil)
+        nil)
 
   (when (executable-find "rg")
     (setq helm-grep-default-command
@@ -88,8 +93,14 @@
   :diminish
   :init  (which-key-mode))
 
-(use-package projectile)
-
-
+(use-package projectile
+  :diminish " P"
+  :config
+  (add-hook 'prog-mode-hook #'projectile-mode)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (setq projectile-sort-order 'recently-active)
+  
+  (setq projectile-completion-system 'helm))
+  
 
 (provide 'iduh-init-core-packages)

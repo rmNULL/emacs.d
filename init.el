@@ -24,9 +24,9 @@
 (require 'iduh-init-programming)
 (require 'iduh-init-docker)
 (require 'iduh-init-vcs)
+(require 'iduh-init-web)
 (require 'iduh-init-prolog)
 (require 'iduh-init-visual-pleasures)
-
 
 (setq custom-file (concat user-emacs-directory "custom-config.el"))
 (when (file-exists-p custom-file)

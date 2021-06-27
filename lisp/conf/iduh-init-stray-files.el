@@ -1,3 +1,5 @@
+(require 'recentf)
+
 (defvar iduh-stray-files-prefix
   (expand-file-name "backup/" user-emacs-directory))
 
@@ -13,13 +15,18 @@
 (make-directory auto-save-dir t)
 (make-directory undo-tree-dir t)
 
+
+(run-at-time nil (* 4 60) 'recentf-save-list)
 (setq backup-by-copying t
       backup-directory-alist
       `(("." . ,auto-backup-dir))
       auto-save-file-name-transforms
       `((".*" ,auto-save-dir t))
       version-control t
-      delete-old-version t
+      delete-old-versions t
+      recentf-max-menu-items 16
+      recentf-max-menu-items 16
+      recentf-max-saved-items 16
       kept-new-versions 8)
 
 (provide 'iduh-init-stray-files)

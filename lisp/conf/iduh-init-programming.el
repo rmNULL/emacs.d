@@ -14,10 +14,13 @@
 (use-package lsp-mode
    :commands lsp
    :hook ((js-mode . lsp)
+          (php-mode . lsp)
           (lsp-mode . lsp-enable-which-key-integration))
    :init
    (with-eval-after-load 'js
-    (define-key js-mode-map (kbd "M-.") nil))
+     (define-key js-mode-map (kbd "M-.") nil))
+   (setq lsp-phpactor-path
+         (expand-file-name "local/phpactor/bin/phpactor" (getenv "HOME")))
    (setq lsp-keymap-prefix "C-c l")
    (setq gc-cons-threshold (* 200 1024 1024))
    (setq read-process-output-max (* 3 1024 1024)))
@@ -62,8 +65,6 @@
   :diminish editorconfig-mode
   :config
   (editorconfig-mode 1))
-
-(use-package dash-docs)
 
 (use-package yasnippet-snippets)
 
