@@ -3,6 +3,7 @@
 
 ##
 !.gitignore
+!LICENSE
 !custom-config.el
 !early-init.el
 !init.el
