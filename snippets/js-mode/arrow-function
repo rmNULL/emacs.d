@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: arrow funciton
+# key: a
+# --
+
+(${params}) => {
+ $0
+}
+

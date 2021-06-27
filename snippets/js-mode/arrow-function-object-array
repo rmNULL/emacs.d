@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: arrow-function-object-array
+# key: aoa
+# --
+
+({${arg}}) => ([
+ $0
+])

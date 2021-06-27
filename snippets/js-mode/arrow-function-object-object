@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: arrow-function-object-object
+# key: aoo
+# --
+
+({${kwargs}}) => ({
+ $0
+})
