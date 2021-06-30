@@ -35,6 +35,7 @@
   :diminish company-mode
   :config
   (global-company-mode)
+  (setq company-minimum-prefix-length 4)
   (setq company-idle-delay 0))
 
 (use-package helm-company

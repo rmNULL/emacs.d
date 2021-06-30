@@ -7,7 +7,6 @@
 
  '(docker-container-default-sort-key '("Created" . t))
  '(docker-image-default-sort-key '("Created" . t))
- '(global-linum-mode t)
  '(helm-completion-style 'emacs)
  '(helm-external-programs-associations '(("pdf" . "mupdf")))
  '(inhibit-startup-screen t)

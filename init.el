@@ -17,6 +17,7 @@
 (add-to-list 'load-path (concat user-emacs-directory "lisp/conf/"))
 
 (require 'iduh/buffers)
+(require 'iduh/lines)
 (require 'iduh-init-stray-files)
 (require 'iduh-init-package-manager)
 (require 'iduh-init-editing)

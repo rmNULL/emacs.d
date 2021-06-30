@@ -1,14 +1,7 @@
 (setq-default indent-tabs-mode nil)
 
-(defun iduh/move-beginning-of-line ()
-  "Move to indentation first then to actual beginning.
-toggle like that on subsequent presses."
-  (interactive)
-  (let ((org-point (point)))
-    (back-to-indentation)
-    (when (equal (point) org-point)
-      (move-beginning-of-line nil))))
-
+(global-set-key (kbd "M-n") 'ewiki/move-line-region-down)
+(global-set-key (kbd "M-p") 'ewiki/move-line-region-up)
 (global-set-key (kbd "M-\\") 'fixup-whitespace)
 (global-set-key (kbd "C-a") 'iduh/move-beginning-of-line)
 (global-set-key (kbd "C-h") 'delete-backward-char)
@@ -41,7 +34,7 @@ toggle like that on subsequent presses."
 
 (use-package undo-tree
   :bind ()
-  :diminish
+  :diminish undo-tree-mode
   :straight (undo-tree :type git
                        :host gitlab
                        :repo "tsc25/undo-tree")

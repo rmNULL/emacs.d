@@ -27,3 +27,4 @@ lisp/conf/*~
 \#*\#
 *.elc
 .\#*
+flycheck_*
