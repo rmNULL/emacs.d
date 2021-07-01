@@ -1,12 +1,13 @@
 (setq-default indent-tabs-mode nil)
 
+(define-key  isearch-mode-map (kbd "C-j") 'isearch-done)
+
 (global-set-key (kbd "M-n") 'ewiki/move-line-region-down)
 (global-set-key (kbd "M-p") 'ewiki/move-line-region-up)
 (global-set-key (kbd "M-\\") 'fixup-whitespace)
 (global-set-key (kbd "C-a") 'iduh/move-beginning-of-line)
 (global-set-key (kbd "C-h") 'delete-backward-char)
 (global-set-key (kbd "M-h") 'backward-kill-word)
-(global-set-key (kbd "C-?") 'help-command)
 (global-set-key (kbd "M-?") 'mark-paragraph)
 (global-set-key (kbd "C-x O") (lambda ()
                                 "source: emacsredux.com"
@@ -33,7 +34,6 @@
 
 
 (use-package undo-tree
-  :bind ()
   :diminish undo-tree-mode
   :straight (undo-tree :type git
                        :host gitlab

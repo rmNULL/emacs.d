@@ -2,7 +2,7 @@
   :init
   (setq avy-timeout-seconds 0.3)
   :bind (("C-'" . 'avy-goto-char-timer)
-         ("M-g g" . 'avy-goto-line)
+         ("M-g M-g" . 'avy-goto-line)
          ("M-g c" . 'avy-goto-char)
          ("M-g w" . 'avy-goto-word-1)
          ("M-g e" . 'avy-goto-word-0)))
@@ -11,7 +11,6 @@
   (diminish 'eldoc-mode)
   (diminish 'electric-pair-mode))
   
-
 (use-package beginend
   :diminish (beginend-global-mode
               beginend-prog-mode)
@@ -42,7 +41,7 @@
             (lambda ()
               (eshell-cmpl-initialize)
               (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete)
-              (define-key eshell-mode-map (kbd "M-p") 'helm-eshell-history)))
+              (define-key eshell-mode-map (kbd "M-s") 'helm-eshell-history)))
 
   (setq helm-commands-using-frame '(completion-at-point
                                     helm-apropos
