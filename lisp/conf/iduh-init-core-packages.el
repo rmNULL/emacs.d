@@ -10,7 +10,7 @@
   :config
   (diminish 'eldoc-mode)
   (diminish 'electric-pair-mode))
-  
+
 (use-package beginend
   :diminish (beginend-global-mode
               beginend-prog-mode)
@@ -41,12 +41,16 @@
             (lambda ()
               (eshell-cmpl-initialize)
               (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete)
-              (define-key eshell-mode-map (kbd "M-s") 'helm-eshell-history)))
+              (define-key eshell-mode-map (kbd "M-p") 'helm-eshell-history)))
 
-  (setq helm-commands-using-frame '(completion-at-point
-                                    helm-apropos
-                                    helm-eshell-prompts helm-imenu
-                                    helm-imenu-in-all-buffers))
+  (setq
+   helm-commands-using-frame '(completion-at-point
+                               helm-apropos
+                               helm-eshell-prompts helm-imenu
+                               helm-imenu-in-all-buffers)
+   helm-completion-style 'flex
+   helm-external-programs-associations '(("pdf" . "mupdf")))
+
 
   (when (executable-find "fd")
         nil)
@@ -92,14 +96,29 @@
   :diminish
   :init  (which-key-mode))
 
+
+(use-package org
+  :bind (("C-c l" . org-store-link)
+         ("C-c a" . org-agenda)
+         ("C-c s" . org-capture))
+  :config
+  (let ((iduh-org-private-dir "~/notes/private/org/")
+        ( iduh-org-public-dir "~/notes/public/"))
+    (setq org-directory "~/notes/")
+    (setq org-agenda-files
+          (list
+           (expand-file-name  "work.org" iduh-org-private-dir)
+           (expand-file-name "learn.org" iduh-org-private-dir)
+           (expand-file-name "eos.org" iduh-org-private-dir)))))
+
 (use-package projectile
   :diminish " P"
   :config
   (add-hook 'prog-mode-hook #'projectile-mode)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (setq projectile-sort-order 'recently-active)
-  
+  (setq projectile-file-exists-remote-cache-expire nil)
   (setq projectile-completion-system 'helm))
-  
+
 
 (provide 'iduh-init-core-packages)

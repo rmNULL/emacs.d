@@ -18,6 +18,7 @@
 
 (require 'iduh/buffers)
 (require 'iduh/lines)
+
 (require 'iduh-init-stray-files)
 (require 'iduh-init-package-manager)
 (require 'iduh-init-editing)
@@ -27,6 +28,8 @@
 (require 'iduh-init-vcs)
 (require 'iduh-init-web)
 (require 'iduh-init-prolog)
+(require 'iduh-init-winframes)
+(require 'iduh-init-shell)
 (require 'iduh-init-visual-pleasures)
 
 (setq custom-file (concat user-emacs-directory "custom-config.el"))

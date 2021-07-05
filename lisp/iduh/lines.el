@@ -1,4 +1,3 @@
-
 (defun iduh/move-beginning-of-line ()
   "Move to indentation first then to actual beginning.
 toggle like that on subsequent presses."
@@ -59,6 +58,22 @@ toggle like that on subsequent presses."
 (defun ewiki/move-line-region-down (&optional start end n)
  (interactive "r\np")
  (if (use-region-p) (ewiki/move-region-down start end n) (ewiki/move-line-down n)))
+
+
+(defun iduh/open-next-line (arg)
+  "somewhat like vim's o"
+  (interactive "p")
+  (end-of-line)
+  (newline arg t))
+
+(defun iduh/open-previous-line (arg)
+  "somewhat like vim's O"
+  (interactive "p")
+  (beginning-of-line)
+  (open-line arg)
+  (funcall indent-line-function))
+;;
+
 
 (provide 'iduh/lines)
 

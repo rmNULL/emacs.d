@@ -1,9 +1,9 @@
 (add-hook 'prog-mode-hook (lambda ()
                             (flyspell-prog-mode)
-                            (diminish 'flyspell-mode)
-                            (electric-pair-mode)
-                            (add-to-list 'electric-pair-pairs '(?\< . ?\>))
-                            (add-to-list 'electric-pair-pairs '(?\{ . ?\}))))
+                            (diminish 'flyspell-mode)))
+                            ;; (electric-pair-mode)
+                            ;; (add-to-list 'electric-pair-pairs '(?\< . ?\>))
+                            ;; (add-to-list 'electric-pair-pairs '(?\{ . ?\}))
 
 (use-package flycheck
   :config
@@ -47,21 +47,21 @@
   :config
   (company-quickhelp-mode))
 
-(use-package parinfer-rust-mode
-  :hook ((emacs-lisp-mode . (lambda ()
-                              (electric-pair-mode 0)
-                              (parinfer-rust-mode))))
-  :init
-  (setq parinfer-rust-auto-download t)
-  (setq parinfer-rust-dim-parens nil)
-  :config
-  (diminish 'parinfer-rust-mode
-          '(:eval (cond
-                    ((equal parinfer-rust--mode  "paren") "()")
-                    ((equal parinfer-rust--mode "indent") " ⭾")
-                    (t "")))))
+;; (use-package parinfer-rust-mode
+;;   :hook ((emacs-lisp-mode . (lambda ()
+;;                               (electric-pair-mode 0)
+;;                               (parinfer-rust-mode))))
+;;   :init
+;;   (setq parinfer-rust-auto-download t)
+;;   (setq parinfer-rust-dim-parens nil)
+;;   :config
+;;   (diminish 'parinfer-rust-mode
+;;           '(:eval (cond
+;;                     ((equal parinfer-rust--mode  "paren") "()")
+;;                     ((equal parinfer-rust--mode "indent") " ⭾")
+;;                     (t "")))))
 
-  
+
 (use-package editorconfig
   :diminish editorconfig-mode
   :config

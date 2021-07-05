@@ -1,6 +1,10 @@
 (setq-default indent-tabs-mode nil)
 
-(define-key  isearch-mode-map (kbd "C-j") 'isearch-done)
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+
+(define-key isearch-mode-map (kbd "C-j") 'isearch-done)
+
 
 (global-set-key (kbd "M-n") 'ewiki/move-line-region-down)
 (global-set-key (kbd "M-p") 'ewiki/move-line-region-up)
@@ -19,19 +23,21 @@
                                         (interactive)
                                         (kill-line 0)
                                         (indent-according-to-mode)))
+(global-set-key (kbd "C-o") 'iduh/open-next-line)
+(global-set-key (kbd "C-S-o") 'iduh/open-previous-line)
+
 
 (add-hook 'text-mode-hook 'flyspell-mode)
 
 
 (use-package easy-kill
   :config
-  (global-set-key [remap kill-ring-save] 'easy-kill)
-  (global-set-key [remap mark-sexp] 'easy-mark))
+  (global-set-key [remap kill-ring-save] 'easy-mark)
+  (global-set-key [remap mark-sexp] 'easy-kill))
 
 (use-package ws-butler
  :init (setq show-trailing-whitespace t)
  :hook (prog-mode-hook . ws-butler-mode))
-
 
 (use-package undo-tree
   :diminish undo-tree-mode
