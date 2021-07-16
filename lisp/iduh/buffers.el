@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 ;;; iduh/buffers --- helper or interactive functions related to buffers
 ;;;
 ;;; Commentary:

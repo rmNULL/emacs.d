@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t -*-
 (defun iduh/move-beginning-of-line ()
   "Move to indentation first then to actual beginning.
 toggle like that on subsequent presses."
@@ -73,7 +74,6 @@ toggle like that on subsequent presses."
   (open-line arg)
   (funcall indent-line-function))
 ;;
-
 
 (provide 'iduh/lines)
 
