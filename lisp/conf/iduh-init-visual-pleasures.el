@@ -1,5 +1,5 @@
-(require 'zone)
-(zone-when-idle 120)
+;(require 'zone)
+;(zone-when-idle 0)
 
 (require 'calendar)
 (setq-default
