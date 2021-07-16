@@ -45,8 +45,8 @@
                        :host gitlab
                        :repo "tsc25/undo-tree")
   :config
+  (global-undo-tree-mode)
   (setq undo-tree-history-directory-alist
-        `((".*" .  ,iduh-stray-files-undo-tree-directory)))
-  (global-undo-tree-mode))
+        `((".*" .  ,iduh-stray-files-undo-tree-directory))))
 
 (provide 'iduh-init-editing)
