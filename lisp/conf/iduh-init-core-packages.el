@@ -91,16 +91,15 @@
   (setq helm-occur-key-closest-position nil))
 
 
-
 (use-package which-key
   :diminish
   :init  (which-key-mode))
 
 
 (use-package org
-  :bind (("C-c l" . org-store-link)
-         ("C-c a" . org-agenda)
-         ("C-c s" . org-capture))
+  :bind (("C-c o l" . org-store-link)
+         ("C-c o a" . org-agenda)
+         ("C-c o s" . org-capture))
   :config
   (let ((iduh-org-private-dir "~/notes/private/org/")
         ( iduh-org-public-dir "~/notes/public/"))
