@@ -13,5 +13,7 @@
   :init
   (setq eshell-history-size 8192)
   :config
-  (add-to-list 'eshell-visual-commands "ipython"))
+  (add-hook 'eshell-mode-hook
+            (lambda ()
+              (add-to-list 'eshell-visual-commands "ipython"))))
 (provide 'iduh-init-shell)
