@@ -13,10 +13,10 @@
  ;; If there is more than one, they won't work right.
  '(rainbow-delimiters-base-face ((t (:inherit nil))))
  '(rainbow-delimiters-depth-1-face
-   ((t (:inherit rainbow-delimiters-base-face :foreground "#de392e"))))
- '(rainbow-delimiters-depth-2-face
    ((t (:inherit rainbow-delimiters-base-face :foreground "#df9326"))))
- '(rainbow-delimiters-depth-3-face ((t (:foreground "#e6e13d"))))
+ '(rainbow-delimiters-depth-2-face
+   ((t (:inherit rainbow-delimiters-base-face :foreground "#e6e13d"))))
+ '(rainbow-delimiters-depth-3-face ((t (:foreground "#de392e"))))
  '(rainbow-delimiters-depth-4-face ((t (:foreground "#37cb39"))))
  '(rainbow-delimiters-depth-5-face ((t (:foreground "#3d9dce"))))
  '(rainbow-delimiters-depth-6-face ((t (:foreground "#5640d2"))))
