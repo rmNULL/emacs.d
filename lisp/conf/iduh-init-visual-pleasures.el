@@ -1,5 +1,5 @@
-;(require 'zone)
-;(zone-when-idle 0)
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 (require 'calendar)
 (setq-default
