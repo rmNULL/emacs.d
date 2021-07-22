@@ -31,6 +31,8 @@
   (global-set-key (kbd "C-c h SPC") 'helm-all-mark-rings)
   (global-set-key (kbd "C-c h x") 'helm-regexp)
   (global-set-key (kbd "C-c h r") 'helm-register)
+  (global-set-key (kbd "C-c h s") 'helm-do-grep-ag)
+  (global-set-key (kbd "C-c h w") 'helm-surfraw)
   (global-unset-key (kbd "C-x c"))
 
   (define-key shell-mode-map
