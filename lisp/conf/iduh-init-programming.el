@@ -23,6 +23,7 @@
    (setq lsp-phpactor-path
          (expand-file-name "local/phpactor/bin/phpactor" (getenv "HOME")))
    (setq lsp-keymap-prefix "C-c l")
+   (setq lsp-keep-workspace-alive nil)
    (setq gc-cons-threshold (* 200 1024 1024))
    (setq read-process-output-max (* 3 1024 1024)))
 

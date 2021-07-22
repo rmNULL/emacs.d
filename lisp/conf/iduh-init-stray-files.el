@@ -30,6 +30,7 @@
         `((".*" ,auto-save-dir t))
         version-control t
         delete-old-versions t
+        create-lockfiles nil
         recentf-max-menu-items 16
         recentf-max-menu-items 16
         recentf-max-saved-items 16
