@@ -4,6 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(electric-pair-mode t)
+ '(epg-pinentry-mode 'loopback)
  '(lsp-clients-typescript-server-args '("--stdio" "--tsserver-log-file" "/tmp/tsserver.log"))
  '(show-paren-mode t))
 
