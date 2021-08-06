@@ -22,6 +22,7 @@
 (require 'iduh-init-stray-files)
 (require 'iduh-init-package-manager)
 (require 'iduh-init-core-packages)
+(require 'iduh-init-dired)
 (require 'iduh-init-editing)
 (require 'iduh-init-programming)
 (require 'iduh-init-docker)
