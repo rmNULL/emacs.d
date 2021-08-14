@@ -4,10 +4,10 @@
 (put 'downcase-region 'disabled nil)
 
 (define-key isearch-mode-map (kbd "C-j") 'isearch-done)
-
-
+(global-set-key (kbd "M-j") 'join-line)
 (global-set-key (kbd "M-n") 'ewiki/move-line-region-down)
-(global-set-key (kbd "M-p") 'ewiki/move-line-region-up)
+(global-set-key (kbd "M-p") 'ewikio/move-line-region-up)
+(global-set-key (kbd "M-Z") 'zap-up-to-char)
 (global-set-key (kbd "M-\\") 'fixup-whitespace)
 (global-set-key (kbd "C-a") 'iduh/move-beginning-of-line)
 (global-set-key (kbd "C-h") 'delete-backward-char)
@@ -17,7 +17,6 @@
                                 "source: emacsredux.com"
                                 (interactive)
                                 (other-window -1)))
-
 (global-set-key (kbd "C-<backspace>") (lambda ()
                                         "source: emacsredux.com"
                                         (interactive)
@@ -26,14 +25,12 @@
 (global-set-key (kbd "C-o") 'iduh/open-next-line)
 (global-set-key (kbd "C-S-o") 'iduh/open-previous-line)
 
-
 (add-hook 'text-mode-hook 'flyspell-mode)
-
 
 (use-package easy-kill
   :config
-  (global-set-key [remap kill-ring-save] 'easy-mark)
-  (global-set-key [remap mark-sexp] 'easy-kill))
+  (global-set-key [remap kill-ring-save] 'easy-kill)
+  (global-set-key [remap mark-sexp] 'easy-mark))
 
 (use-package ws-butler
  :init (setq show-trailing-whitespace t)
