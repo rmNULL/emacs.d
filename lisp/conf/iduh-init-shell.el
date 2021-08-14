@@ -16,4 +16,5 @@
   (add-hook 'eshell-mode-hook
             (lambda ()
               (add-to-list 'eshell-visual-commands "ipython"))))
+
 (provide 'iduh-init-shell)
