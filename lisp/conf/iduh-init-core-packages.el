@@ -22,40 +22,28 @@
          ("<menu>" . helm-M-x)
          ("M-x" . helm-M-x)
          ("C-x C-f" . helm-find-files)
-         ("M-y" . helm-show-kill-ring))
+         ("M-y" . helm-show-kill-ring)
+         :map helm-command-map
+         ("SPC" . helm-all-mark-rings)
+         ("o" . helm-occur)
+         ("r" . helm-register)
+         ("s" . helm-do-grep-ag)
+         ("w" . helm-surfraw)
+         ("x" . helm-regexp))
   :config
   (global-unset-key (kbd "C-z"))
   (helm-mode 1)
   (global-set-key (kbd "C-c h") 'helm-command-prefix)
-  (global-set-key (kbd "C-c h o") 'helm-occur)
-  (global-set-key (kbd "C-c h SPC") 'helm-all-mark-rings)
-  (global-set-key (kbd "C-c h x") 'helm-regexp)
-  (global-set-key (kbd "C-c h r") 'helm-register)
-  (global-set-key (kbd "C-c h s") 'helm-do-grep-ag)
-  (global-set-key (kbd "C-c h w") 'helm-surfraw)
   (global-unset-key (kbd "C-x c"))
 
-  (define-key shell-mode-map
-    (kbd "C-c C-l")
-    'helm-comint-input-ring)
-
-  (add-hook 'eshell-mode-hook
-            (lambda ()
-              (eshell-cmpl-initialize)
-              (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete)
-              (define-key eshell-mode-map (kbd "M-p") 'helm-eshell-history)))
-
   (setq
+   helm-buffer-max-length 28
    helm-commands-using-frame '(completion-at-point
                                helm-apropos
                                helm-eshell-prompts helm-imenu
                                helm-imenu-in-all-buffers)
    helm-completion-style 'flex
-   helm-external-programs-associations '(("pdf" . "mupdf")))
-
-
-  (when (executable-find "fd")
-        nil)
+   helm-external-programs-associations '(("pdf" . "PDF")))
 
   (when (executable-find "rg")
     (setq helm-grep-default-command
