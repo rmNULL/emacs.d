@@ -30,6 +30,7 @@
 (require 'iduh-init-web)
 (require 'iduh-init-prolog)
 (require 'iduh-init-org)
+(require 'iduh-init-markdown)
 (require 'iduh-init-winframes)
 (require 'iduh-init-shell)
 (require 'iduh-init-visual-pleasures)
