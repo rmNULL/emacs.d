@@ -6,7 +6,7 @@
 (define-key isearch-mode-map (kbd "C-j") 'isearch-done)
 (global-set-key (kbd "M-j") 'join-line)
 (global-set-key (kbd "M-n") 'ewiki/move-line-region-down)
-(global-set-key (kbd "M-p") 'ewikio/move-line-region-up)
+(global-set-key (kbd "M-p") 'ewiki/move-line-region-up)
 (global-set-key (kbd "M-Z") 'zap-up-to-char)
 (global-set-key (kbd "M-\\") 'fixup-whitespace)
 (global-set-key (kbd "C-a") 'iduh/move-beginning-of-line)

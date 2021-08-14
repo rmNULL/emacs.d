@@ -146,8 +146,11 @@
   (setq org-roam-v2-ack t))
 
 (use-package projectile
+  :init
+  (use-package ripgrep)
   :bind (:map projectile-mode-map
-         ("C-c p" . projectile-command-map))
+         ("C-c p" . projectile-command-map)
+         ("C-c p /" . projectile-ripgrep))
   :diminish " P"
   :config
   (add-hook 'prog-mode-hook #'projectile-mode)
