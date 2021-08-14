@@ -21,6 +21,9 @@
 
   (defvar iduh-stray-files-undo-tree-directory undo-tree-dir)
   (run-at-time nil (* 4 60) 'recentf-save-list)
+  (setq-default
+   recentf-max-menu-items 24
+   recentf-max-saved-items 24)
   (setq backup-by-copying t
         backup-directory-alist
         `(("." . ,auto-backup-dir))
@@ -31,9 +34,6 @@
         version-control t
         delete-old-versions t
         create-lockfiles nil
-        recentf-max-menu-items 16
-        recentf-max-menu-items 16
-        recentf-max-saved-items 16
         kept-new-versions 8))
 
 (provide 'iduh-init-stray-files)
