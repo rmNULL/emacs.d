@@ -13,6 +13,7 @@
 (global-set-key (kbd "C-h") 'delete-backward-char)
 (global-set-key (kbd "M-h") 'backward-kill-word)
 (global-set-key (kbd "M-?") 'mark-paragraph)
+(global-set-key (kbd "C-S-k") 'kill-whole-line)
 (global-set-key (kbd "C-x O") (lambda ()
                                 "source: emacsredux.com"
                                 (interactive)
