@@ -27,15 +27,6 @@
    (setq gc-cons-threshold (* 200 1024 1024))
    (setq read-process-output-max (* 3 1024 1024)))
 
-(use-package web-mode
-  :config
-  (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
-  (setq web-mode-content-types-alist
-        '(("jsx" . "\\.js[x]?\\'")))
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2))
-
 (use-package helm-lsp
   :commands helm-lsp-workspace-symbol
   :config
