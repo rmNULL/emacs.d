@@ -29,6 +29,7 @@
 (require 'iduh-init-vcs)
 (require 'iduh-init-web)
 (require 'iduh-init-prolog)
+(require 'iduh-init-lisp)
 (require 'iduh-init-racket)
 (require 'iduh-init-org)
 (require 'iduh-init-markdown)
