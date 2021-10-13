@@ -10,6 +10,7 @@
 (use-package web-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
   (setq web-mode-content-types-alist
         '(("jsx" . "\\.js[x]?\\'")))
   (setq web-mode-markup-indent-offset 2)
