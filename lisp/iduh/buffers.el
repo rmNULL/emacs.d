@@ -1,5 +1,5 @@
 ;; -*- lexical-binding: t -*-
-
+(require 'seq)
 ;;; iduh/buffers --- helper or interactive functions related to buffers
 ;;;
 ;;; Commentary:
@@ -32,5 +32,12 @@ each buffer"
           (kill-buffer buffer)
           (kill-buffer-ask buffer))))))
 
+(defun iduh/get-initial-buffer ()
+  (let ((buffer-candidates
+         (if (boundp 'server-name)
+             (list (format "%s.org" server-name))
+           (list))))
+    (get-buffer (seq-find 'get-buffer buffer-candidates ""))))
+(setq initial-buffer-choice 'iduh/get-initial-buffer)
 
 (provide 'iduh/buffers)
