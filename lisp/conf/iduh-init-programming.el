@@ -78,4 +78,9 @@
   (yas-reload-all)
   (add-hook 'prog-mode-hook #'yas-minor-mode))
 
+(use-package julia-mode)
+(use-package julia-repl
+  :hook
+  ((julia-mode . julia-repl-mode)))
+
 (provide 'iduh-init-programming)
