@@ -38,6 +38,6 @@ each buffer"
              (list (format "%s.org" server-name))
            (list))))
     (get-buffer (seq-find 'get-buffer buffer-candidates ""))))
-(setq initial-buffer-choice 'iduh/get-initial-buffer)
+(setq initial-buffer-choice (iduh/get-initial-buffer))
 
 (provide 'iduh/buffers)
