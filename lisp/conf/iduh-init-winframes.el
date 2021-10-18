@@ -19,7 +19,15 @@
   ("C-x 4 d" . switch-window-then-dired)
   ("C-x 4 f" . switch-window-then-find-file)
   ("C-x 4 0" . switch-window-then-kill-buffer)
+  :custom
+  (switch-window-threshold 3)
   :config
   (setq switch-window-shortcut-style 'qwerty))
+
+(use-package burly
+  :straight (burly
+             :type git
+             :host github
+             :repo "alphapapa/burly.el"))
 
 (provide 'iduh-init-winframes)

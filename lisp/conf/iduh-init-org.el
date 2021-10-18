@@ -10,6 +10,7 @@
   :init
   (setq
    org-hide-leading-stars t
+   org-hide-emphasis-markers t
    org-adapt-indentation nil
    org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "ON-IT(o)" "|" "CANCELLED(c)" "DONE(d)"))
    org-directory "~/notes/")
