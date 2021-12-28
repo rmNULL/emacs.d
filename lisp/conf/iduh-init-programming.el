@@ -83,4 +83,10 @@
   :hook
   ((julia-mode . julia-repl-mode)))
 
+;; (use-package topsy
+;;   :straight (topsy :type git
+;;                    :host github
+;;                    :repo "alphapapa/topsy.el")
+;;   :hook (prog-mode . topsy-mode))
+
 (provide 'iduh-init-programming)
