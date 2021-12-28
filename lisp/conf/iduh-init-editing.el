@@ -39,12 +39,14 @@
 
 (use-package undo-tree
   :diminish undo-tree-mode
+  :hook (Authinfo . (lambda () (undo-tree-mode 0)))
   :straight (undo-tree :type git
                        :host gitlab
                        :repo "tsc25/undo-tree")
   :config
   (global-undo-tree-mode)
   (setq undo-tree-history-directory-alist
-        `((".*" .  ,iduh-stray-files-undo-tree-directory))))
+        `((".*" .  ,iduh-stray-files-undo-tree-directory))
+        undo-tree-visualizer-timestamps t))
 
 (provide 'iduh-init-editing)
