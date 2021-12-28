@@ -11,7 +11,7 @@
   (interactive)
   (dolist (buffer (buffer-list) (message "Refreshed open files"))
     (let ((fn (buffer-file-name buffer)))
-      (when (and fn (not (buffer-modified-p buffer)))
+      (when (and fn (buffer-modified-p buffer))
         (if (file-exists-p fn)
           (progn
             (set-buffer buffer)
