@@ -16,6 +16,7 @@
    :hook ((web-mode . lsp)
           (js-mode . lsp)
           (php-mode . lsp)
+          (rust-mode . lsp)
           (lsp-mode . lsp-enable-which-key-integration))
    :init
    (with-eval-after-load 'js
@@ -82,6 +83,8 @@
 (use-package julia-repl
   :hook
   ((julia-mode . julia-repl-mode)))
+
+(use-package rust-mode)
 
 ;; (use-package topsy
 ;;   :straight (topsy :type git
