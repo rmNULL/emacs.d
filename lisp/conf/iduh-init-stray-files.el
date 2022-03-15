@@ -12,14 +12,23 @@
       (auto-save-dir
        (expand-file-name "auto-saves/" iduh-stray-files-prefix))
       (undo-tree-dir
-       (expand-file-name "undo-tree/" iduh-stray-files-prefix)))
+       (expand-file-name "undo-tree/" iduh-stray-files-prefix))
+      (perspective-dir
+       (expand-file-name "perspective/" iduh-stray-files-prefix)))
 
   (make-directory auto-backup-dir t)
   (make-directory auto-backup-dir-tramp t)
   (make-directory auto-save-dir t)
   (make-directory undo-tree-dir t)
+  (make-directory perspective-dir t)
 
   (defvar iduh-stray-files-undo-tree-directory undo-tree-dir)
+  (defvar iduh-stray-files-perspective-default-file
+    (expand-file-name
+     ;; (format-time-string "default-%s-%d_%h_%Y")
+     (if (boundp 'server-name) server-name "default")
+     perspective-dir))
+
   (run-at-time nil (* 4 60) 'recentf-save-list)
   (setq-default
    recentf-max-menu-items 24

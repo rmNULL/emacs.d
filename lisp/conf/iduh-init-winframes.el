@@ -4,8 +4,6 @@
 ;;;
 
 (use-package winner
-  :bind (("C-c w u" . winner-undo)
-         ("C-c w r" . winner-redo))
   :config
   (winner-mode 1))
 
@@ -24,10 +22,21 @@
   :config
   (setq switch-window-shortcut-style 'qwerty))
 
-(use-package burly
-  :straight (burly
-             :type git
-             :host github
-             :repo "alphapapa/burly.el"))
+;; (use-package burly
+;;   :straight (burly
+;;              :type git
+;;              :host github
+;;              :repo "alphapapa/burly.el"))
+
+(use-package perspective
+  :bind
+  ("C-x C-b" . helm-buffers-list)
+  :custom
+  (persp-sort 'created)
+  (persp-state-default-file iduh-stray-files-perspective-default-file)
+  (persp-modestring-short t)
+  (persp-mode-prefix-key (kbd "C-c w"))
+  :init
+  (persp-mode))
 
 (provide 'iduh-init-winframes)
