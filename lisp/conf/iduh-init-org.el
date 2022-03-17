@@ -37,12 +37,15 @@
 (use-package org-roam
   :bind
   (("C-c n i" . org-roam-node-insert)
-   ("C-c n f" . org-roam-node-find))
+   ("C-c n f" . org-roam-node-find)
+   ("C-c n l" . org-roam-buffer-toggle)
+   ("C-c n t" . org-roam-tag-add))
   :init
-  (make-directory (expand-file-name "org-roam/" org-directory) t)
+  (setq org-roam-v2-ack t)
+  (make-directory (expand-file-name "org-roam/daily/" org-directory) t)
   :custom
   (org-roam-directory (expand-file-name "org-roam/" org-directory))
   :config
-  (setq org-roam-v2-ack t))
+  (org-roam-db-autosync-mode))
 
 (provide 'iduh-init-org)
