@@ -18,6 +18,7 @@
 
 (require 'iduh/buffers)
 (require 'iduh/lines)
+(require 'iduh/dired)
 
 (require 'iduh-init-stray-files)
 (require 'iduh-init-package-manager)
