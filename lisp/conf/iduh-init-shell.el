@@ -6,16 +6,17 @@
       (let ((win (selected-window)))
         (kill-buffer) (delete-window win)))
     (advice-add 'comint-send-eof :after 'comint--advice-send-eof))
+  (setq shell-command-switch "-ic")
   :bind (:map shell-mode-map
-         ("M-p" . helm-comint-input-ring)))
+              ("M-p" . helm-comint-input-ring)))
 
 (use-package eshell
   :hook
   (eshell-mode . (lambda ()
-                        (eshell-cmpl-initialize)
-                        (define-key eshell-mode-map (kbd "M-p") 'helm-eshell-history)
-                        (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete)
-                        (add-to-list 'eshell-visual-commands "ipython")))
+                   (eshell-cmpl-initialize)
+                   (define-key eshell-mode-map (kbd "M-p") 'helm-eshell-history)
+                   (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete)
+                   (add-to-list 'eshell-visual-commands "ipython")))
   :init
   (setq eshell-history-size 8192))
 
