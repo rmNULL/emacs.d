@@ -2,5 +2,5 @@
 (defun iduh/stringify (v)
   (format "%s" v))
 
-(provide 'iduh/strings)
+(provide 'iduh/string)
 

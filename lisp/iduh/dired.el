@@ -1,6 +1,6 @@
 ;; -*- lexical-binding: t -*-
 
-(require 'iduh/strings)
+(require 'iduh/string)
 
 (defun iduh/--build-dired-guess-shell-alist (pairs)
   (mapcar (lambda (cmd-extensions)
