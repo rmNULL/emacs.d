@@ -14,7 +14,6 @@
   :config
   (dired-hist-mode))
 
-
 (use-package dired-x
   :straight nil
   :custom

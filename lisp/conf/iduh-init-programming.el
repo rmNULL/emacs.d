@@ -28,7 +28,8 @@
    (setq gc-cons-threshold (* 200 1024 1024))
    (setq read-process-output-max (* 3 1024 1024))
    :config
-   (add-to-list 'lsp--formatting-indent-alist '(web-mode . web-mode-code-indent-offset)))
+   (add-to-list 'lsp--formatting-indent-alist '(web-mode . web-mode-code-indent-offset))
+   (add-to-list 'auto-mode-alist '("\\.ts$" . js-mode)))
 
 (use-package helm-lsp
   :commands helm-lsp-workspace-symbol
