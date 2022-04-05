@@ -85,6 +85,11 @@
   :hook
   ((julia-mode . julia-repl-mode)))
 
+(use-package python
+  :custom
+  (python-shell-interpreter "ipython")
+  (python-shell-interpreter-args "--simple-prompt -i"))
+
 (use-package rust-mode)
 
 ;; (use-package topsy
