@@ -6,7 +6,7 @@
       (let ((win (selected-window)))
         (kill-buffer) (delete-window win)))
     (advice-add 'comint-send-eof :after 'comint--advice-send-eof))
-  (setq shell-command-switch "-ic")
+  (setq shell-command-switch "-lc")
   :bind (:map shell-mode-map
               ("M-p" . helm-comint-input-ring)))
 
