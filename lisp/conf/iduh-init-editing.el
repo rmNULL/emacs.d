@@ -26,7 +26,10 @@
 (global-set-key (kbd "C-o") 'iduh/open-next-line)
 (global-set-key (kbd "C-S-o") 'iduh/open-previous-line)
 
-(add-hook 'text-mode-hook 'flyspell-mode)
+(use-package flyspell
+  :straight nil
+  :hook
+  (text-mode . flyspell-mode))
 
 (use-package easy-kill
   :config
