@@ -1,21 +1,20 @@
 ;;;
 (use-package emmet-mode
   :diminish " M8"
-  :config
-  (add-hook 'css-mode-hook  #'emmet-mode)
-  (add-hook 'sgml-mode-hook  #'emmet-mode))
+  :hook
+  (css-mode sgml-mode web-mode))
 
 (use-package php-mode)
 
 (use-package web-mode
+  :custom
+  (web-mode-markup-indent-offset 2)
+  (web-mode-css-indent-offset 2)
+  (web-mode-code-indent-offset 2)
+  (web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
   :config
   (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  (setq web-mode-content-types-alist
-        '(("jsx" . "\\.js[x]?\\'")))
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
 
 
 (provide 'iduh-init-web)

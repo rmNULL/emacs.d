@@ -6,7 +6,7 @@
 ;;   iduh/name - these files contain only function definitions
 ;;      and requiring this file should have no side effect on the system apart from
 ;;      those functions being loaded.
-;;  
+;;
 ;;   iduh-* - these are config files that modify system variables or
 ;;            change the environment in some way
 (let ((minver "27.2"))
