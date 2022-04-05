@@ -37,8 +37,10 @@
   (global-set-key [remap mark-sexp] 'easy-mark))
 
 (use-package ws-butler
- :init (setq show-trailing-whitespace t)
- :hook (prog-mode-hook . ws-butler-mode))
+  :diminish
+  :custom
+  (show-trailing-whitespace t)
+  :hook (prog-mode . ws-butler-mode))
 
 (use-package undo-tree
   :diminish undo-tree-mode
