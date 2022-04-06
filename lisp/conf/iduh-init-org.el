@@ -7,13 +7,13 @@
          ("C-c a" . 'org-agenda)
          (  "M-p" . 'org-metaup)
          (  "M-n" . 'org-metadown))
+  :custom
+  (org-hide-leading-stars t)
+  (org-hide-emphasis-markers t)
+  (org-adapt-indentation nil)
+  (org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "ON-IT(o)" "|" "CANCELLED(c)" "DONE(d)")))
   :init
-  (setq
-   org-hide-leading-stars t
-   org-hide-emphasis-markers t
-   org-adapt-indentation nil
-   org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "ON-IT(o)" "|" "CANCELLED(c)" "DONE(d)"))
-   org-directory "~/notes/")
+  (setq-default org-directory "~/notes/")
   :config
   (let ((iduh-org-private-dir (expand-file-name "private/org" org-directory))
         ( iduh-org-public-dir (expand-file-name "public" org-directory)))

@@ -19,8 +19,7 @@
   ("C-x 4 0" . switch-window-then-kill-buffer)
   :custom
   (switch-window-threshold 3)
-  :config
-  (setq switch-window-shortcut-style 'qwerty))
+  (switch-window-shortcut-style 'qwerty))
 
 ;; (use-package burly
 ;;   :straight (burly

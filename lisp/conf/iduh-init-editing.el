@@ -51,14 +51,14 @@
   ;; in Bytes
   (undo-tree-limit (* 4 1024 1024))
   (undo-tree-strong-limit (* 8 1024 1024))
+  (undo-tree-history-directory-alist
+   `((".*.gpg" .  "/dev/null")
+     (".*straight-stderr-.*" .  "/dev/null")
+     (".*.~undo-tree~" .  "/dev/null")
+     (".*" .  ,iduh-stray-files-undo-tree-directory)))
+  (undo-tree-visualizer-timestamps t)
   :config
   (add-to-list 'undo-tree-incompatible-major-modes #'inferior-python-mode)
-  (global-undo-tree-mode)
-  (setq undo-tree-history-directory-alist
-        `((".*.gpg" .  "/dev/null")
-          (".*straight-stderr-.*" .  "/dev/null")
-          (".*.~undo-tree~" .  "/dev/null")
-          (".*" .  ,iduh-stray-files-undo-tree-directory))
-        undo-tree-visualizer-timestamps t))
+  (global-undo-tree-mode))
 
 (provide 'iduh-init-editing)

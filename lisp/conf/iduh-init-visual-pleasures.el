@@ -2,11 +2,10 @@
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package calendar
-  :config
-  (setq-default
-   calendar-week-start-day 6
-   scroll-preserve-screen-position 'always
-   inhibit-startup-screen t))
+  :custom
+  (calendar-week-start-day 6)
+  (scroll-preserve-screen-position 'always)
+  (inhibit-startup-screen t))
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
