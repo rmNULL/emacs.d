@@ -35,6 +35,9 @@
   (persp-state-default-file iduh-stray-files-perspective-default-file)
   (persp-modestring-short t)
   (persp-mode-prefix-key (kbd "C-c w"))
+  (display-buffer-base-action
+   '((display-buffer-reuse-window display-buffer-pop-up-window)
+     (reusable-frames . t)))
   :init
   (persp-mode))
 
