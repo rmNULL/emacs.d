@@ -38,9 +38,9 @@
 
 (use-package ws-butler
   :diminish
-  :custom
-  (show-trailing-whitespace t)
-  :hook (prog-mode . ws-butler-mode))
+  :hook
+  (prog-mode . ws-butler-mode)
+  (ws-butler-mode . (lambda () (setq show-trailing-whitespace t))))
 
 (use-package undo-tree
   :diminish undo-tree-mode
