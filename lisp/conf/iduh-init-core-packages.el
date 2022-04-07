@@ -19,10 +19,13 @@
   :config
   (beginend-global-mode))
 
+
+(unless (fboundp 'execute-extended-command-for-buffer)
+  (defalias 'execute-extended-command-for-buffer 'helm-M-x))
 (use-package helm
   :diminish
   :bind (("C-t" . helm-mini)
-         ("<menu>" . helm-M-x)
+         ("<menu>" . execute-extended-command-for-buffer)
          ("M-x" . helm-M-x)
          ("C-x C-f" . helm-find-files)
          ("M-y" . helm-show-kill-ring)
