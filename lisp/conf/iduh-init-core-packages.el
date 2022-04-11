@@ -40,7 +40,6 @@
   (helm-completion-style 'flex)
   (helm-buffer-max-length 28)
   (helm-commands-using-frame '(helm-apropos
-                               helm-eshell-prompts
                                helm-imenu
                                helm-imenu-in-all-buffers))
   :config
@@ -105,3 +104,4 @@
 
 
 (provide 'iduh-init-core-packages)
+;;
