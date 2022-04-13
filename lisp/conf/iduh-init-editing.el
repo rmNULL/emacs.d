@@ -1,5 +1,4 @@
 (setq-default indent-tabs-mode nil)
-
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
@@ -10,14 +9,9 @@
 (global-set-key (kbd "M-Z") 'zap-up-to-char)
 (global-set-key (kbd "M-\\") 'fixup-whitespace)
 (global-set-key (kbd "C-a") 'iduh/move-beginning-of-line)
-(global-set-key (kbd "C-h") help-map)
-(global-set-key (kbd "M-h") 'backward-kill-word)
 (global-set-key (kbd "M-?") 'mark-paragraph)
 (global-set-key (kbd "C-S-k") 'kill-whole-line)
-(global-set-key (kbd "C-x O") (lambda ()
-                                "source: emacsredux.com"
-                                (interactive)
-                                (other-window -1)))
+
 (global-set-key (kbd "C-<backspace>") (lambda ()
                                         "source: emacsredux.com"
                                         (interactive)
@@ -28,8 +22,15 @@
 
 (use-package flyspell
   :straight nil
+  :bind
+  ("C-`" . flyspell-auto-correct-word)
   :hook
-  (text-mode . flyspell-mode))
+  (text-mode . flyspell-mode)
+  (prog-mode . flyspell-prog-mode)
+  :config
+  (let ((keys '("C-," "C-;" "C-." "C-M-i")))
+    (dolist (key keys)
+      (unbind-key key flyspell-mode-map))))
 
 (use-package easy-kill
   :config

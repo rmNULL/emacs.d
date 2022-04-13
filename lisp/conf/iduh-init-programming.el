@@ -1,6 +1,3 @@
-(add-hook 'prog-mode-hook (lambda ()
-                            (flyspell-prog-mode)
-                            (diminish 'flyspell-mode)))
 ;; (electric-pair-mode)
 ;; (add-to-list 'electric-pair-pairs '(?\< . ?\>))
 ;; (add-to-list 'electric-pair-pairs '(?\{ . ?\}))
