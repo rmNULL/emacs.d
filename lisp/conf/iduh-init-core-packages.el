@@ -93,8 +93,9 @@
   :hook
   (prog-mode . projectile-mode)
   :bind
+  ("C-/" . projectile-ripgrep)
   (:map projectile-mode-map
-        ("C-c p" . projectile-command-map))
+        ("Π" . projectile-command-map))
   (:map projectile-command-map
         ("/" . projectile-ripgrep))
   :custom
