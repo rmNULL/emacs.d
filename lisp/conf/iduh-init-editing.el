@@ -32,6 +32,16 @@
     (dolist (key keys)
       (unbind-key key flyspell-mode-map))))
 
+(use-package tiny
+  :straight
+  (tiny :type git
+        :host github
+        :repo "abo-abo/tiny")
+  :config
+  (describe-key (kbd "C-;"))
+  :bind
+  ("C-;" . tiny-expand))
+
 (use-package easy-kill
   :config
   (global-set-key [remap kill-ring-save] 'easy-kill)
