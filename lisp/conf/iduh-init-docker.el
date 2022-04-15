@@ -3,7 +3,8 @@
 
 (use-package docker-compose-mode)
 (use-package docker
-  :bind ("C-c d" . docker)
+  :bind
+  ("C-c d" . docker)
   :custom
   (docker-image-default-sort-key '("Created" . t))
   (docker-container-default-sort-key '("Created" . t)))

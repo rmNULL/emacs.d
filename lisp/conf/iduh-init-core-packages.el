@@ -19,23 +19,25 @@
   :config
   (beginend-global-mode))
 
-
-(unless (fboundp 'execute-extended-command-for-buffer)
-  (defalias 'execute-extended-command-for-buffer 'helm-M-x))
 (use-package helm
   :diminish
-  :bind (("C-t" . helm-mini)
-         ("<menu>" . execute-extended-command-for-buffer)
-         ("M-x" . helm-M-x)
-         ("C-x C-f" . helm-find-files)
-         ("M-y" . helm-show-kill-ring)
-         :map helm-command-map
-         ("SPC" . helm-all-mark-rings)
-         ("o" . helm-occur)
-         ("r" . helm-register)
-         ("s" . helm-do-grep-ag)
-         ("w" . helm-surfraw)
-         ("x" . helm-regexp))
+  :bind-keymap
+  ("C-c h" . helm-command-prefix)
+  :bind
+  (("M-x" . helm-M-x)
+   ("<menu>" . execute-extended-command) ;; helm fail backup
+   ("C-x C-f" . helm-find-files)
+   ("M-y" . helm-show-kill-ring)
+   :map helm-command-map
+   ("SPC" . helm-all-mark-rings)
+   ("o" . helm-occur)
+   ("r" . helm-register)
+   ("s" . helm-do-grep-ag)
+   ("w" . helm-google-suggest)
+   ("x" . helm-regexp)
+   ("q" . helm-eval-expression-with-eldoc)
+   ("!" . helm-run-external-command)
+   ("1" . helm-run-external-command))
   :custom
   (helm-completion-style 'flex)
   (helm-buffer-max-length 28)
@@ -43,9 +45,6 @@
                                helm-imenu
                                helm-imenu-in-all-buffers))
   :config
-  (global-unset-key (kbd "C-z"))
-  (helm-mode 1)
-  (global-set-key (kbd "C-c h") 'helm-command-prefix)
   (global-unset-key (kbd "C-x c"))
 
   (when (executable-find "rg")
@@ -80,23 +79,28 @@
                   " --line-number"
                   " %s %s %s")
           helm-grep-ag-pipe-cmd-switches
-          '("--colors 'match:fg:black'" "--colors 'match:bg:yellow'"))))
+          '("--colors 'match:fg:black'" "--colors 'match:bg:yellow'")))
+  :init
+  (helm-mode 1))
 
 (use-package which-key
   :diminish
-  :init  (which-key-mode))
+  :init
+  (which-key-mode))
 
 (use-package projectile
+  :requires helm
   :diminish " P"
   :init
   (use-package ripgrep)
   :hook
   (prog-mode . projectile-mode)
+  :bind-keymap
+  ("Π" . projectile-command-map)
   :bind
   ("C-/" . projectile-ripgrep)
-  (:map projectile-mode-map
-        ("Π" . projectile-command-map))
   (:map projectile-command-map
+        ("Π" . projectile-find-file)
         ("/" . projectile-ripgrep))
   :custom
   (projectile-completion-system 'helm)
