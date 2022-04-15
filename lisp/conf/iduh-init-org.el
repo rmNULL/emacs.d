@@ -21,6 +21,7 @@
           iduh-gtd-inbox (expand-file-name   "eos.org" iduh-org-private-dir)
           iduh-gtd-work  (expand-file-name  "work.org" iduh-org-private-dir)
           iduh-gtd-learn (expand-file-name "learn.org" iduh-org-private-dir)
+          iduh-gtd-media (expand-file-name "media.org" iduh-org-private-dir)
           iduh-gtd-someday (expand-file-name "long-term.org" iduh-org-private-dir))
     (setq org-capture-templates '(("r" "Reminder" entry
                                    (file+headline iduh-gtd-reminder "Reminder")
@@ -30,7 +31,8 @@
                                    "* TODO %i%?"))
           org-agenda-files (list iduh-gtd-inbox
                                  iduh-gtd-work
-                                 iduh-gtd-learn)
+                                 iduh-gtd-learn
+                                 iduh-gtd-media)
           org-refile-targets `((,iduh-gtd-work :maxlevel . 2)
                                (,iduh-gtd-someday :level . 1)
                                (,iduh-gtd-learn :maxlevel . 2)))))
