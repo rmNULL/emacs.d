@@ -2,6 +2,7 @@
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package calendar
+  :straight nil
   :custom
   (calendar-week-start-day 6)
   (scroll-preserve-screen-position 'always)
