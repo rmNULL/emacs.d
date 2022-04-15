@@ -23,6 +23,7 @@
 (require 'iduh-init-stray-files)
 (require 'iduh-init-package-manager)
 (require 'iduh-init-core-packages)
+(require 'iduh-init-buffers)
 (require 'iduh-init-dired)
 (require 'iduh-init-editing)
 (require 'iduh-init-programming)
@@ -34,8 +35,9 @@
 (require 'iduh-init-racket)
 (require 'iduh-init-org)
 (require 'iduh-init-markdown)
-(require 'iduh-init-winframes)
 (require 'iduh-init-shell)
+(require 'iduh-init-winframes)
+(require 'iduh-init-buffers)
 (require 'iduh-init-visual-pleasures)
 
 (setq custom-file (concat user-emacs-directory "custom-config.el"))

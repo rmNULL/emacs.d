@@ -7,8 +7,10 @@
         (kill-buffer) (delete-window win)))
     (advice-add 'comint-send-eof :after 'comint--advice-send-eof))
   (setq shell-command-switch "-lc")
-  :bind (:map shell-mode-map
-              ("M-p" . helm-comint-input-ring)))
+  (global-set-key (kbd "C-z") 'iduh/shell-or-prev-buffer)
+  :bind
+  (:map shell-mode-map
+        ("M-r" . helm-comint-input-ring)))
 
 (use-package eshell
   :hook

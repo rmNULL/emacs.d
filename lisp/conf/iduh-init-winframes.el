@@ -3,8 +3,6 @@
 ;;; in future when i forget the file.
 ;;;
 
-(global-unset-key (kbd "C-z"))
-
 (use-package winner
   :config
   (winner-mode 1))
