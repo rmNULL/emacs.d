@@ -44,6 +44,7 @@
   (global-company-mode))
 
 (use-package helm-company
+  :requires helm
   :config
   (define-key company-mode-map (kbd "C-:") 'helm-company)
   (define-key company-active-map (kbd "C-:") 'helm-company))
@@ -52,25 +53,16 @@
   :config
   (company-quickhelp-mode))
 
-;; (use-package parinfer-rust-mode
-;;   :hook ((emacs-lisp-mode . (lambda ()
-;;                               (electric-pair-mode 0)
-;;                               (parinfer-rust-mode))))
-;;   :init
-;;   (setq parinfer-rust-auto-download t)
-;;   (setq parinfer-rust-dim-parens nil)
-;;   :config
-;;   (diminish 'parinfer-rust-mode
-;;           '(:eval (cond
-;;                     ((equal parinfer-rust--mode  "paren") "()")
-;;                     ((equal parinfer-rust--mode "indent") " ⭾")
-;;                     (t "")))))
-
-
 (use-package editorconfig
   :diminish editorconfig-mode
   :config
   (editorconfig-mode 1))
+
+(use-package lispy
+  :hook
+  (emacs-lisp-mode . lispy-mode)
+  (lisp-mode . lispy-mode)
+  (racket-mode . lispy-mode))
 
 (use-package yasnippet-snippets)
 
