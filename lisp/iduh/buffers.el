@@ -98,4 +98,20 @@ The returned buffer is not always guaranteed to be user-buffer.
       (iduh/switch-previous-user-buffer 1)
     (shell)))
 
+(defun iduh/kill-current-buffer (force-kill)
+  "only kill the buffer if its associated with a file, or force kill is passed.
+   don't destroy a buffer with contents just like that."
+  (interactive "P")
+
+  (let ((practically-empty (lambda (buffer)
+                             (zerop (length  (with-current-buffer buffer
+                                               (whitespace-cleanup)
+                                               (buffer-string))))))
+        (buffer (current-buffer)))
+    (when (or force-kill
+            (buffer-file-name buffer)
+            (funcall practically-empty buffer)
+            (yes-or-no-p "The buffer has non-blank contents, kill anyway? "))
+      (kill-buffer))))
+
 (provide 'iduh/buffers)
