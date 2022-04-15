@@ -3,4 +3,3 @@
   (format "%s" v))
 
 (provide 'iduh/string)
-

@@ -3,33 +3,35 @@
 ;;; in future when i forget the file.
 ;;;
 
+(global-unset-key (kbd "C-z"))
+
 (use-package winner
   :config
   (winner-mode 1))
 
 (use-package switch-window
   :bind
-  ("C-x o" . switch-window)
-  ("C-x 1" . switch-window-then-maximize)
-  ("C-x 2" . switch-window-then-split-below)
-  ("C-x 3" . switch-window-then-split-right)
-  ("C-x 0" . switch-window-then-delete)
-  ("C-x 4 d" . switch-window-then-dired)
-  ("C-x 4 f" . switch-window-then-find-file)
-  ("C-x 4 0" . switch-window-then-kill-buffer)
+  ("Φ" . other-window)
+  ("∛" . switch-window-then-delete)
+  ("¹" . switch-window-then-maximize)
+  ("²" . switch-window-then-split-below)
+  ("³" . switch-window-then-split-right)
+  :config
+  (global-set-key (kbd "φ") (lambda ()
+                              (interactive)
+                              (other-window -1)))
   :custom
+  (switch-window-qwerty-shortcuts
+   '("a" "s" "d" "f" "j" "k" "l" "g" "h"
+     "q" "w" "e" "r" "t" "y" "u" "i" "p"
+     "z" "x" "c" "v" "b" "n" "m"))
+  (switch-window-minibuffer-shortcut ?z)
   (switch-window-threshold 3)
   (switch-window-shortcut-style 'qwerty))
 
-;; (use-package burly
-;;   :straight (burly
-;;              :type git
-;;              :host github
-;;              :repo "alphapapa/burly.el"))
-
 (use-package perspective
   :bind
-  ("C-x C-b" . helm-buffers-list)
+  ("Β" . helm-buffers-list)
   :custom
   (persp-sort 'created)
   (persp-state-default-file iduh-stray-files-perspective-default-file)
