@@ -75,4 +75,14 @@ toggle like that on subsequent presses."
   (funcall indent-line-function))
 ;;
 
+
+(defun iduh/pulse-line (&rest _)
+  "Pulse the current line.
+
+
+   source: karthinks
+   source-url: https://karthinks.com/software/batteries-included-with-emacs/#pulse--pulse-dot-el
+"
+  (pulse-momentary-highlight-one-line (point)))
+
 (provide 'iduh/lines)

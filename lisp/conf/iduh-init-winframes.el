@@ -71,4 +71,19 @@
   :init
   (persp-mode))
 
+(use-package pulse
+  :straight nil
+  :init
+  (dolist (command '(scroll-up-command scroll-down-command
+                   recenter-top-bottom other-window))
+    (advice-add command :after #'iduh/pulse-line)))
+
+(use-package follow
+  :diminish
+  :straight nil
+  :init
+  (follow-mode))
+
+(setq view-read-only t)
+
 (provide 'iduh-init-winframes)
