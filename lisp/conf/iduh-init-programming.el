@@ -2,13 +2,33 @@
 ;; (add-to-list 'electric-pair-pairs '(?\< . ?\>))
 ;; (add-to-list 'electric-pair-pairs '(?\{ . ?\}))
 
+(global-set-key (kbd "C-=") 'eval-buffer)
+
+(use-package prog-mode
+  :straight nil
+  :hook
+  (prog-mode . prettify-symbols-mode))
+
 (use-package flycheck
+  :diminish "F "
   :custom
   (flycheck-mode-line-prefix "F")
   (flycheck-disabled-checkers '(emacs-lisp-checkdoc))
   :config
+  (defhydra flycheck-hydra
+    (:hint nil)
+    "Move around flycheck errors"
+    ("n" flycheck-next-error "next")
+    ("p" flycheck-previous-error "previous")
+    ("f" flycheck-first-error "first")
+    ("l" flycheck-list-errors "list")
+    ("s" flycheck-error-list-set-filter "filter")
+    ("C" flycheck-select-checker "change-linter")
+    ("V" flycheck-verify-setup "Verify-setup"))
+  :bind
+  ("C-c 1" . flycheck-hydra/body)
+  :init
   (global-flycheck-mode))
-
 
 (use-package lsp-mode
   :commands lsp
@@ -18,7 +38,7 @@
   (lsp-keep-workspace-alive nil)
   (gc-cons-threshold (* 200 1024 1024))
   (lsp-phpactor-path
-        (expand-file-name "local/phpactor/bin/phpactor" (getenv "HOME")))
+   (expand-file-name "local/phpactor/binphpactor" (getenv "HOME")))
   :hook
   ((js-mode php-mode rust-mode web-mode) . lsp)
   (lsp-mode . lsp-enable-which-key-integration)
@@ -59,6 +79,7 @@
   (editorconfig-mode 1))
 
 (use-package lispy
+  :diminish
   :hook
   (emacs-lisp-mode . lispy-mode)
   (lisp-mode . lispy-mode)
@@ -76,20 +97,17 @@
 
 (use-package julia-mode)
 (use-package julia-repl
+  :requires julia-mode
   :hook
   (julia-mode . julia-repl-mode))
 
 (use-package python
+  :straight nil
   :custom
   (python-shell-interpreter "ipython")
   (python-shell-interpreter-args "--simple-prompt -i"))
 
 (use-package rust-mode)
 
-;; (use-package topsy
-;;   :straight (topsy :type git
-;;                    :host github
-;;                    :repo "alphapapa/topsy.el")
-;;   :hook (prog-mode . topsy-mode))
 
 (provide 'iduh-init-programming)
