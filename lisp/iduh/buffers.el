@@ -35,11 +35,13 @@ each buffer"
           (kill-buffer-ask buffer))))))
 
 (defun iduh/get-initial-buffer ()
-  (let ((buffer-candidates
+  (let ((buffer-candidate
          (if (boundp 'server-name)
-             (list (format "%s.org" server-name))
-           (list))))
-    (get-buffer (seq-find 'get-buffer buffer-candidates ""))))
+             (format "%s.org" server-name)
+           "")))
+    (dolist (file org-agenda-files)
+      (find-file-noselect file t nil nil))
+    (get-buffer buffer-candidate)))
 
 (defun iduh/nth-user-buffer (count from-buffer &optional user-buffer-p)
   "get the nth user-buffer starting from the given buffer.
@@ -63,9 +65,10 @@ The returned buffer is not always guaranteed to be user-buffer.
    (t
     (let* ((pred (or user-buffer-p #'iduh/user-buffer-p))
            (source-buffer (get-buffer from-buffer))
+           (buffer-list (mapcar #'car (window-prev-buffers)))
            (buffer-list (seq-filter (lambda (buffer) (or (funcall pred buffer)
                                                          (eq buffer source-buffer)))
-                                    (buffer-list)))
+                                    buffer-list))
            (buffer-list-length (length buffer-list))
            (source-buffer-idx (seq-position buffer-list source-buffer))
            (relative-idx
@@ -78,7 +81,6 @@ The returned buffer is not always guaranteed to be user-buffer.
       ;;   (insert (format "relative-dix %s\n" relative-idx)))
       user-buffer))))
 
-
 (defun iduh/user-buffer-p (buffer)
   (let ((buffer-name (buffer-name buffer)))
     (and
@@ -89,7 +91,22 @@ The returned buffer is not always guaranteed to be user-buffer.
 
 (defun iduh/switch-previous-user-buffer (count)
   (interactive "P")
-  (switch-to-buffer (iduh/nth-user-buffer (- (or count 1)) (current-buffer))))
+
+  (let  ((user-count (cond ((eq ?\- count) 1)
+                           ((numberp count) (- count))
+                           ((listp count) (- (or (car count) 1)))
+                           (t -1)))
+         (user-buffer nil)
+         (source-buffer (current-buffer)))
+
+    (setq user-buffer (iduh/nth-user-buffer user-count source-buffer))
+    (when user-buffer
+      (switch-to-buffer user-buffer t))
+    (format "user-buffer = %s; " user-buffer)
+    ;; (message (format "user-count = %s ; fun = %s ; v = %s" user-count switch-buffer-fn v))
+    ))
+
+
 
 (defun iduh/shell-or-prev-buffer ()
   (interactive)
@@ -98,7 +115,7 @@ The returned buffer is not always guaranteed to be user-buffer.
       (iduh/switch-previous-user-buffer 1)
     (shell)))
 
-(defun iduh/kill-current-buffer (force-kill)
+(defun iduh/kill-or-bury-current-buffer (force-kill)
   "only kill the buffer if its associated with a file, or force kill is passed.
    don't destroy a buffer with contents just like that."
   (interactive "P")
@@ -108,10 +125,12 @@ The returned buffer is not always guaranteed to be user-buffer.
                                                (whitespace-cleanup)
                                                (buffer-string))))))
         (buffer (current-buffer)))
-    (when (or force-kill
+    (if (or force-kill
             (buffer-file-name buffer)
-            (funcall practically-empty buffer)
-            (yes-or-no-p "The buffer has non-blank contents, kill anyway? "))
-      (kill-buffer))))
+            (not (iduh/user-buffer-p buffer))
+            (funcall practically-empty buffer))
+        (kill-buffer buffer)
+      (switch-to-prev-buffer nil 'append))))
+
 
 (provide 'iduh/buffers)
