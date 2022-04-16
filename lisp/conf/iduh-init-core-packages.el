@@ -1,3 +1,5 @@
+(define-key key-translation-map (kbd "💖") (kbd "C-c"))
+
 (use-package avy
   :custom
   (avy-timeout-seconds 0.3)
