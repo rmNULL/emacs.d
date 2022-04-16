@@ -108,5 +108,7 @@
   (projectile-file-exists-remote-cache-expire nil))
 
 
+(use-package hydra)
+
 (provide 'iduh-init-core-packages)
 ;;
