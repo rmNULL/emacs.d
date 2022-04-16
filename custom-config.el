@@ -5,7 +5,8 @@
  ;; If there is more than one, they won't work right.
  '(electric-pair-mode t)
  '(epg-pinentry-mode 'loopback)
- '(show-paren-mode t))
+ '(show-paren-mode t)
+ '(warning-suppress-types '((iedit))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
