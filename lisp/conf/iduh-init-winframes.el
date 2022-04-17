@@ -4,7 +4,7 @@
 ;;;
 
 (require 'hydra)
-(defhydra hydra-scroll-window ()
+(defhydra hydra-scroll-window (:body-pre (scroll-up-command))
   "scroll-window"
   ;; note: inverted scrolling
   ("n" scroll-up-command)
@@ -24,7 +24,7 @@
 
 (use-package switch-window
   :config
-  (defhydra hydra-switch-window ()
+  (defhydra hydra-switch-window (:body-pre (other-window 1))
     "switch-window"
     ("a" (other-window -1) "previous")
     ("s" other-window "next")
@@ -42,10 +42,14 @@
     ("1" switch-window-then-maximize nil)
     ("2" switch-window-then-split-below nil)
     ("3" switch-window-then-split-right nil)
-    ("k" windmove-up nil)
     ("j" windmove-down nil)
+    ("k" windmove-up nil)
     ("h" windmove-left nil)
     ("l" windmove-right nil)
+    ("J" (enlarge-window 5) nil)
+    ("K" (enlarge-window -5) nil)
+    ("H" (enlarge-window -5 t) nil)
+    ("L" (enlarge-window 5 t) nil)
     ("q" nil))
   :bind
   ("Φ" . hydra-switch-window/body)
