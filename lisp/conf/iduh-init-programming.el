@@ -2,7 +2,8 @@
 ;; (add-to-list 'electric-pair-pairs '(?\< . ?\>))
 ;; (add-to-list 'electric-pair-pairs '(?\{ . ?\}))
 
-(global-set-key (kbd "C-=") 'eval-buffer)
+(global-set-key (kbd "C-=") 'eval-defun)
+(global-set-key (kbd "<f6>") 'eval-buffer)
 
 (use-package prog-mode
   :straight nil
