@@ -2,7 +2,7 @@
   :bind (("C-c o l" . org-store-link)
          ("C-c o a" . org-agenda)
          ("C-c o c" . org-capture)
-         (  "C-c c" . org-capture)
+         (  "C-c c" . (lambda () (interactive) (org-capture nil "t")))
          :map org-mode-map
          ("C-c a" . 'org-agenda)
          (  "M-p" . 'org-metaup)
@@ -15,39 +15,84 @@
   :init
   (setq-default org-directory "~/notes/")
   :config
-  (let ((iduh-org-private-dir (expand-file-name "private/org" org-directory))
-        ( iduh-org-public-dir (expand-file-name "public" org-directory)))
-    (setq iduh-gtd-reminder (expand-file-name "reminder.org" iduh-org-private-dir)
-          iduh-gtd-inbox (expand-file-name   "eos.org" iduh-org-private-dir)
-          iduh-gtd-work  (expand-file-name  "work.org" iduh-org-private-dir)
-          iduh-gtd-learn (expand-file-name "learn.org" iduh-org-private-dir)
-          iduh-gtd-media (expand-file-name "media.org" iduh-org-private-dir)
-          iduh-gtd-someday (expand-file-name "long-term.org" iduh-org-private-dir))
-    (setq org-capture-templates '(("r" "Reminder" entry
-                                   (file+headline iduh-gtd-reminder "Reminder")
+  (let* ((iduh-org-private-dir (expand-file-name "private/org" org-directory))
+         (iduh-org-inbox (expand-file-name "eos.org" iduh-org-private-dir))
+         (iduh-org-reminder (expand-file-name "reminder.org" iduh-org-private-dir))
+         (iduh-refile-targets
+          (mapcar (lambda (q) `(,(expand-file-name (format "%s.org" q) iduh-org-private-dir)
+                           :maxlevel . 3))
+                  '(watch learn listen read long-term bugs work)))
+         (iduh-agenda-files
+          `(,iduh-org-inbox
+            ,iduh-org-reminder
+            ,@(mapcar (lambda (e) (car-safe e))
+                      (seq-remove (lambda (e)
+                                    (let ((basename (file-name-base (car-safe e))))
+                                      (or (string= basename "long-term")
+                                          (string= basename "watch"))))
+                                  iduh-refile-targets))))
+         (iduh-lit-filename (lambda () (expand-file-name
+                                   (format "private/litmus/%s.org.gpg"
+                                           (or (read-string "~~>> ")
+                                               "default"))
+                                   org-directory))))
+
+    (setq org-capture-templates `(("r" "🕤 Reminder" entry
+                                   (file+headline ,iduh-org-reminder "Reminder")
                                    "* %i%? \n %U")
-                                  ("t" "Todo [inbox]" entry
-                                   (file+headline iduh-gtd-inbox "Tasks")
-                                   "* TODO %i%?"))
-          org-agenda-files (list iduh-gtd-inbox
-                                 iduh-gtd-work
-                                 iduh-gtd-learn
-                                 iduh-gtd-media)
-          org-refile-targets `((,iduh-gtd-work :maxlevel . 2)
-                               (,iduh-gtd-someday :level . 1)
-                               (,iduh-gtd-learn :maxlevel . 2)))))
+                                  ("t" "📥 Todo" entry
+                                   (file+headline ,iduh-org-inbox "Tasks")
+                                   "* TODO %T %i%?"
+                                   ~:refile-targets iduh-refile-targets)
+                                  ("s" "🧯 Solit" plain
+                                   (file ,iduh-lit-filename)
+                                   "* %t %i%?"))
+          org-agenda-files iduh-agenda-files
+          org-refile-targets iduh-refile-targets
+          org-outline-path-complete-in-steps nil
+          org-refile-use-outline-path t)))
+
 (use-package org-roam
+  :requires (org-roam-dailies)
   :bind
-  (("C-c n i" . org-roam-node-insert)
-   ("C-c n f" . org-roam-node-find)
-   ("C-c n l" . org-roam-buffer-toggle)
-   ("C-c n t" . org-roam-tag-add))
+  ("M-." . org-roam-node-visit)
+  ("C-c n a" . org-roam-alias-add)
+  ("C-c n f" . org-roam-node-find)
+  ("C-c n i" . org-roam-node-insert)
+  ("C-c n l" . org-roam-buffer-toggle)
+  ("C-c n t" . org-roam-tag-add)
+  ("C-c d" . org-roam-dailies-map)
+  :config
+  (org-roam-db-autosync-mode)
+  (dolist (directory '(z/diary z/wiki))
+    (make-directory (expand-file-name (format "%s" directory) org-directory) t))
   :init
   (setq org-roam-v2-ack t)
-  (make-directory (expand-file-name "org-roam/daily/" org-directory) t)
   :custom
-  (org-roam-directory (expand-file-name "org-roam/" org-directory))
-  :config
-  (org-roam-db-autosync-mode))
+  (org-roam-directory (expand-file-name "z/" org-directory))
+  (org-roam-dailies-directory "diary")
+  (org-roam-node-display-template
+   (concat "${title:*} "
+           (propertize "${tags:12}" 'face 'org-tag)))
+  (org-roam-mode-sections
+   (list #'org-roam-backlinks-section
+         #'org-roam-reflinks-section
+         ;; #'org-roam-unlinked-references-section
+         ))
+  (org-roam-capture-templates
+   '(("d" "default" plain "%?"
+      :target (file+head "${slug}.org"
+                         "#+title: ${title}\n#+capture_date: %<%a, %e %b %Y, %H:%M>")
+      :unnarrowed t)
+     ("w" "wiki" plain "%?"
+      :target (file+head "wiki/${slug}.org"
+                         "#+title: ${title}
+#+capture_date: %<%a, %e %b %Y, %H:%M>
+#+FILETAGS: :inf_writings:")
+      :immediate-finish t
+      :unnarrowed t)))
+  (org-roam-dailies-capture-templates '(("d" "default" entry "* %<%H:%M> %?"
+                                         :if-new (file+head "%<%Y-%m-%d>.org"
+                                                            "#+title: %<%Y-%m-%d>.org\n")))))
 
 (provide 'iduh-init-org)
