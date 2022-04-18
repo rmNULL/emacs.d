@@ -15,6 +15,7 @@
   :init
   (setq-default org-directory "~/notes/")
   :config
+  (require 'org-protocol)
   (let* ((iduh-org-private-dir (expand-file-name "private/org" org-directory))
          (iduh-org-inbox (expand-file-name "eos.org" iduh-org-private-dir))
          (iduh-org-reminder (expand-file-name "reminder.org" iduh-org-private-dir))
@@ -46,14 +47,17 @@
                                    ~:refile-targets iduh-refile-targets)
                                   ("s" "🧯 Solit" plain
                                    (file ,iduh-lit-filename)
-                                   "* %t %i%?"))
+                                   "* %t %i%?")
+                                  ("p" "Protocol" entry (file+headline ,iduh-org-inbox "Inbox")
+                                   "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+                                  ("L" "Protocol Link" entry (file+headline ,iduh-org-inbox "Inbox")
+                                   "* %U %? [[%:link][%:description]]\n"))
           org-agenda-files iduh-agenda-files
           org-refile-targets iduh-refile-targets
           org-outline-path-complete-in-steps nil
           org-refile-use-outline-path t)))
 
 (use-package org-roam
-  :requires (org-roam-dailies)
   :bind
   ("M-." . org-roam-node-visit)
   ("C-c n a" . org-roam-alias-add)
@@ -63,6 +67,7 @@
   ("C-c n t" . org-roam-tag-add)
   ("C-c d" . org-roam-dailies-map)
   :config
+  (require 'org-roam-dailies)
   (org-roam-db-autosync-mode)
   (dolist (directory '(z/diary z/wiki))
     (make-directory (expand-file-name (format "%s" directory) org-directory) t))
