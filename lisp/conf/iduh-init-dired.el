@@ -15,7 +15,8 @@
   :bind
   ("C-c C-j" . dired-jump)
   :custom
-  (dired-listing-switches "-lhA --group-directories-first"))
+  (dired-listing-switches "-lhA --group-directories-first")
+  (delete-by-moving-to-trash t))
 
 (use-package dired-x
   :straight nil
