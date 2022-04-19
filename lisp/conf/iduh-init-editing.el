@@ -113,6 +113,7 @@ _h_   _l_     _y_ank        _t_ype       _e_xchange-point          /,`.-'`'   ..
      (".*.~undo-tree~" . "/dev/null")
      (".*.gz" . "/dev/null")
      (".*.xz" . "/dev/null")
+     (".*.trashinfo" . "/dev/null")
      (".*" . ,iduh-stray-files-undo-tree-directory)))
   (undo-tree-visualizer-timestamps t)
   :config
