@@ -4,7 +4,7 @@
 ;;;
 
 (require 'hydra)
-(defhydra hydra-scroll-window (:body-pre (scroll-up-command))
+(defhydra hydra-scroll-window ()
   "scroll-window"
   ;; note: inverted scrolling
   ("n" scroll-up-command)
@@ -16,7 +16,7 @@
   ("f" scroll-other-window-down)
   ("d" scroll-other-window)
   ("l" recenter-top-bottom))
-(global-set-key (kbd "C-v") 'hydra-scroll-window/body)
+(global-set-key (kbd "Λ") 'hydra-scroll-window/body)
 
 (use-package winner
   :config
