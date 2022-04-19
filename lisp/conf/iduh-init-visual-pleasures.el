@@ -18,5 +18,5 @@
                   (list server-name " --- %b")
                 "%b")))
 
-(add-hook 'emacs-startup-hook (load-theme 'wombat))
+(add-hook 'emacs-startup-hook (load-theme 'modus-operandi))
 (provide 'iduh-init-visual-pleasures)
