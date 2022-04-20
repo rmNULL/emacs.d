@@ -2,6 +2,7 @@
   :bind (("C-c o l" . org-store-link)
          ("C-c o a" . org-agenda)
          ("C-c o c" . org-capture)
+         ("C-c o p" . org-timer-set-timer)
          (  "C-c c" . (lambda () (interactive) (org-capture nil "t")))
          :map org-mode-map
          ("C-c a" . 'org-agenda)
