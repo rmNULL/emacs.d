@@ -22,6 +22,7 @@
   (beginend-global-mode))
 
 (use-package helm
+  :straight t
   :diminish
   :bind-keymap
   ("C-c h" . helm-command-prefix)
@@ -46,6 +47,10 @@
   (helm-commands-using-frame '(helm-apropos
                                helm-imenu
                                helm-imenu-in-all-buffers))
+  (helm-recentf-fuzzy-match t)
+  (helm-buffers-fuzzy-matching t)
+  (helm-M-x-fuzzy-matching t)
+  (helm-candidate-number-limit 64)
   :config
   (global-unset-key (kbd "C-x c"))
 
