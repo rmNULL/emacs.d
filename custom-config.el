@@ -5,8 +5,12 @@
  ;; If there is more than one, they won't work right.
  '(electric-pair-mode t)
  '(epg-pinentry-mode 'loopback)
+ '(helm-external-programs-associations '(("pdf" . "mupdf")))
+ '(safe-local-variable-values
+   '((org-todo-keyword-faces
+      ("REJECTED" :foreground "#f41885"))))
  '(show-paren-mode t)
- '(warning-suppress-types '((iedit))))
+ '(warning-suppress-types '((comp) (iedit))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
