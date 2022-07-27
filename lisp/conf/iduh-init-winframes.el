@@ -32,6 +32,7 @@
     ("e" switch-window-then-swap-buffer "exchange")
     ("u" winner-undo "undo")
     ("r" winner-redo "redo")
+    ("b" helm-mini "helm-mini")
     ("f" helm-find-files "find-file")
     ("z" delete-other-windows "zoom")
     ("x" delete-window nil)
@@ -87,6 +88,12 @@
   :straight nil
   :init
   (follow-mode))
+
+;; (use-package gif-screencast
+;;   :straight
+;;   (gif-screencast :type git
+;;         :host gitlab
+;;         :repo "ambrevar/emacs-gif-screencast"))
 
 (setq view-read-only t)
 
