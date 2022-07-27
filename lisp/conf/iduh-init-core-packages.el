@@ -116,6 +116,10 @@
 
 
 (use-package hydra)
+(use-package repeat
+  :straight nil
+  :config
+  (repeat-mode))
 
 (provide 'iduh-init-core-packages)
 ;;
