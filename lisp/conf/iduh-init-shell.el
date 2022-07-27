@@ -1,3 +1,5 @@
+(require 'iduh/repeat)
+
 (use-package shell
   :requires helm
   :config
@@ -8,6 +10,9 @@
     (advice-add 'comint-send-eof :after 'comint--advice-send-eof))
   (setq shell-command-switch "-lc")
   (global-set-key (kbd "C-z") 'iduh/shell-or-prev-buffer)
+  (iduh/def-repeatable-keys shell-navigation
+                            ("p" . comint-previous-prompt)
+                            ("n" . comint-next-prompt))
   :bind
   (:map shell-mode-map
         ("M-r" . helm-comint-input-ring)))
