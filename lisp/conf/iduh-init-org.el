@@ -1,3 +1,5 @@
+(require 'iduh/org-templates)
+
 (use-package org
   :bind (("C-c o l" . org-store-link)
          ("C-c o a" . org-agenda)
@@ -86,15 +88,19 @@
          ;; #'org-roam-unlinked-references-section
          ))
   (org-roam-capture-templates
-   '(("d" "default" plain "%?"
+   `(("d" "default" plain "%?"
       :target (file+head "${slug}.org"
                          "#+title: ${title}\n#+capture_date: %<%a, %e %b %Y, %H:%M>")
       :unnarrowed t)
-     ("w" "wiki" plain "%?"
+     ("w" "wiki")
+     ("ww" "wiki/default" plain "%?"
       :target (file+head "wiki/${slug}.org"
-                         "#+title: ${title}
-#+capture_date: %<%a, %e %b %Y, %H:%M>
-#+FILETAGS: :inf_writings:")
+                         ,(iduh/org-templates-wiki-template))
+      :immediate-finish t
+      :unnarrowed t)
+     ("wm" "wiki/music" plain "%?"
+      :target (file+head "wiki/${slug}.org"
+                         ,(iduh/org-templates-wiki-music-template))
       :immediate-finish t
       :unnarrowed t)))
   (org-roam-dailies-capture-templates '(("d" "default" entry "* %<%H:%M> %?"
