@@ -65,20 +65,17 @@ The returned buffer is not always guaranteed to be user-buffer.
    (t
     (let* ((pred (or user-buffer-p #'iduh/user-buffer-p))
            (source-buffer (get-buffer from-buffer))
-           (buffer-list (mapcar #'car (window-prev-buffers)))
-           (buffer-list (seq-filter (lambda (buffer) (or (funcall pred buffer)
-                                                         (eq buffer source-buffer)))
-                                    buffer-list))
+           (full-buffer-list (frame-parameter nil 'buffer-list))
+           (buffer-list (seq-filter (lambda (buffer)
+                                      (or (eq source-buffer buffer)
+                                          (funcall pred buffer)))
+                                    full-buffer-list))
            (buffer-list-length (length buffer-list))
            (source-buffer-idx (seq-position buffer-list source-buffer))
            (relative-idx
             (clamp (or count 0) (- (1- buffer-list-length)) (1- buffer-list-length)))
-           (idx (mod (+ source-buffer-idx relative-idx) buffer-list-length))
+           (idx (mod (+ (or source-buffer-idx 0) relative-idx) buffer-list-length))
            (user-buffer (seq-elt buffer-list idx)))
-      ;; (with-current-buffer (get-buffer-create "dlog")
-      ;;   (insert (format "%s\n" buffer-list))
-      ;;   (insert (format "idx = %s\n" idx))
-      ;;   (insert (format "relative-dix %s\n" relative-idx)))
       user-buffer))))
 
 (defun iduh/user-buffer-p (buffer)
@@ -89,13 +86,13 @@ The returned buffer is not always guaranteed to be user-buffer.
           (not (string-suffix-p "*" buffer-name))))))
 
 
+;; TODO: replace these functions and instead use `switch-to-prev-buffer-skip` variable
 (defun iduh/switch-previous-user-buffer (count)
   (interactive "P")
-
-  (let  ((user-count (cond ((eq ?\- count) 1)
-                           ((numberp count) (- count))
-                           ((listp count) (- (or (car count) 1)))
-                           (t -1)))
+  (let  ((user-count (cond ((eq ?\- count) -1)
+                           ((numberp count) count)
+                           ((listp count) (or (car count) 1))
+                           (t 1)))
          (user-buffer nil)
          (source-buffer (current-buffer)))
 
@@ -106,7 +103,9 @@ The returned buffer is not always guaranteed to be user-buffer.
     ;; (message (format "user-count = %s ; fun = %s ; v = %s" user-count switch-buffer-fn v))
     ))
 
-
+(defun iduh/switch-next-user-buffer (count)
+  (interactive "P")
+  (iduh/switch-previous-user-buffer (if count (- count) -1)))
 
 (defun iduh/shell-or-prev-buffer ()
   (interactive)
