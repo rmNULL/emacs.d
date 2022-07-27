@@ -7,9 +7,11 @@
          ("C-c o p" . org-timer-set-timer)
          (  "C-c c" . (lambda () (interactive) (org-capture nil "t")))
          :map org-mode-map
+         ("Τ" . 'org-todo)
+         ("M-p" . 'org-metaup)
+         ("M-n" . 'org-metadown)
          ("C-c a" . 'org-agenda)
-         (  "M-p" . 'org-metaup)
-         (  "M-n" . 'org-metadown))
+         ("<f6>" . org-export-dispatch))
   :custom
   (org-hide-leading-stars t)
   (org-hide-emphasis-markers t)
