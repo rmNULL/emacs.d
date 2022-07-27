@@ -38,6 +38,7 @@
 (require 'iduh-init-shell)
 (require 'iduh-init-buffers)
 (require 'iduh-init-winframes)
+(require 'iduh-init-kmacro)
 (require 'iduh-init-visual-pleasures)
 
 (setq custom-file (concat user-emacs-directory "custom-config.el"))
