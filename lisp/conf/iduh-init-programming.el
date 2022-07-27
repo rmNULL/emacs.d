@@ -2,11 +2,12 @@
 ;; (add-to-list 'electric-pair-pairs '(?\< . ?\>))
 ;; (add-to-list 'electric-pair-pairs '(?\{ . ?\}))
 
-(global-set-key (kbd "C-=") 'eval-defun)
-(global-set-key (kbd "<f6>") 'eval-buffer)
-
 (use-package prog-mode
   :straight nil
+  :bind
+  (:map prog-mode-map
+        ("C-=". eval-defun)
+        ("<f6>" . eval-buffer))
   :hook
   (prog-mode . prettify-symbols-mode))
 
@@ -15,6 +16,7 @@
   :custom
   (flycheck-mode-line-prefix "F")
   (flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+  (flycheck-global-modes '(not org-mode))
   :config
   (defhydra flycheck-hydra
     (:hint nil)
@@ -104,6 +106,10 @@
 
 (use-package python
   :straight nil
+  :bind
+  (:map python-mode-map
+        ("C-=" . python-shell-send-statement)
+        ("<f6>" . python-shell-send-buffer))
   :custom
   (python-shell-interpreter "ipython")
   (python-shell-interpreter-args "--simple-prompt -i"))
