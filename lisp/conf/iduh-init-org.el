@@ -60,7 +60,15 @@
           org-agenda-files iduh-agenda-files
           org-refile-targets iduh-refile-targets
           org-outline-path-complete-in-steps nil
-          org-refile-use-outline-path t)))
+          org-refile-use-outline-path t))
+
+  (iduh/def-repeatable-keys org-heading-navigation
+                            ("p" . org-previous-visible-heading)
+                            ("n" . org-next-visible-heading)
+                            ("b" . org-backward-heading-same-level)
+                            ("f" . org-forward-heading-same-level)
+                            ("6" . org-up-element)
+                            ("^" . org-up-element)))
 
 (use-package org-roam
   :bind
