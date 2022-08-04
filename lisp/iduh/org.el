@@ -1,6 +1,18 @@
-;;; iduh/org-templates.el --- helpers for org-templates  -*- lexical-binding: t -*-
+;;; iduh/org --- helpers for org  -*- lexical-binding: t -*-
 
 ;;; Code:
+
+(require 'org-clock)
+
+(defun iduh/org-last-clock-toggle (&rest args)
+  (interactive "P")
+  (if (org-clocking-p)
+      (apply #'org-clock-out args)
+    (apply #'org-clock-in-last args)))
+
+
+
+;;; Templates for org-roam
 
 (defmacro iduh/org-templates-wiki-template ()
   "\
@@ -27,6 +39,6 @@
 ")
 
 
-(provide 'iduh/org-templates)
+(provide 'iduh/org)
 
-;;; iduh/org-templates.el ends here
+;;; iduh/org.el ends here

@@ -1,10 +1,12 @@
-(require 'iduh/org-templates)
+(require 'iduh/org)
+(require 'iduh/repeat)
 
 (use-package org
   :bind (("C-c o l" . org-store-link)
          ("C-c o a" . org-agenda)
          ("C-c o c" . org-capture)
          ("C-c o p" . org-timer-set-timer)
+         ("C-c o t" . iduh/org-last-clock-toggle)
          (  "C-c c" . (lambda () (interactive) (org-capture nil "t")))
          :map org-mode-map
          ("Τ" . 'org-todo)
@@ -72,13 +74,14 @@
 
 (use-package org-roam
   :bind
-  ("M-." . org-roam-node-visit)
   ("C-c n a" . org-roam-alias-add)
   ("C-c n f" . org-roam-node-find)
   ("C-c n i" . org-roam-node-insert)
   ("C-c n l" . org-roam-buffer-toggle)
   ("C-c n t" . org-roam-tag-add)
   ("C-c d" . org-roam-dailies-map)
+  (:map org-mode-map
+        ("M-." . org-roam-node-visit))
   :config
   (require 'org-roam-dailies)
   (org-roam-db-autosync-mode)
@@ -113,8 +116,9 @@
                          ,(iduh/org-templates-wiki-music-template))
       :immediate-finish t
       :unnarrowed t)))
-  (org-roam-dailies-capture-templates '(("d" "default" entry "* %<%H:%M> %?"
-                                         :if-new (file+head "%<%Y-%m-%d>.org"
-                                                            "#+title: %<%Y-%m-%d>.org\n")))))
+  (org-roam-dailies-capture-templates
+   '(("d" "default" entry "* %<%H:%M> %?"
+      :if-new (file+head "%<%Y-%m-%d>.org"
+                         "#+title: %<%Y-%m-%d>.org\n")))))
 
 (provide 'iduh-init-org)
