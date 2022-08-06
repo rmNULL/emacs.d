@@ -22,6 +22,11 @@ lisp/conf/*~
 !snippets/*/
 !snippets/*/*
 
+## timer and other sounds
+!beeps
+!beeps/*.wav
+
+
 ## regular ignore inside ignored directories
 *~
 \#*\#
