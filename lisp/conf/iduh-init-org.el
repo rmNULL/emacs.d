@@ -19,6 +19,7 @@
   (org-hide-emphasis-markers t)
   (org-adapt-indentation nil)
   (org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "ON-IT(o)" "|" "CANCELLED(c)" "DONE(d)")))
+  (org-clock-sound iduh-stray-files-beep-org-clock)
   :init
   (setq-default org-directory "~/notes/")
   :config

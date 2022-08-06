@@ -7,6 +7,11 @@
 (defvar iduh-stray-files-prefix
   (expand-file-name "backup/" user-emacs-directory))
 
+(defvar iduh-stray-files-beeps
+  (expand-file-name "beeps/" user-emacs-directory))
+(defvar iduh-stray-files-beep-org-clock
+  (expand-file-name "tun.wav" iduh-stray-files-beeps))
+
 (let ((auto-backup-dir
        (expand-file-name "tildes/" iduh-stray-files-prefix))
       (auto-backup-dir-tramp
