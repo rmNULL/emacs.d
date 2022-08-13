@@ -114,6 +114,20 @@
   (python-shell-interpreter "ipython")
   (python-shell-interpreter-args "--simple-prompt -i"))
 
+(use-package ruby-mode
+  :straight nil)
+
+(use-package inf-ruby
+  :hook
+  (ruby-mode . inf-ruby-minor-mode)
+  :bind
+  (:map ruby-mode-map
+        ("C-=" . ruby-send-block)
+        ("<f6>" . ruby-send-buffer)
+        ("C-c C-c" . ruby-send-buffer-and-go)
+        ("C-c C-p" . inf-ruby)
+        ))
+
 (use-package rust-mode)
 
 

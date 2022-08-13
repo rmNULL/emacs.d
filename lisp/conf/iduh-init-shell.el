@@ -2,12 +2,9 @@
 
 (use-package shell
   :requires helm
+  :hook
+  (shell-mode . iduh/shell-kill-buffer-on-exit)
   :config
-  (progn
-    (defun comint--advice-send-eof (&rest _args)
-      (let ((win (selected-window)))
-        (kill-buffer) (delete-window win)))
-    (advice-add 'comint-send-eof :after 'comint--advice-send-eof))
   (setq shell-command-switch "-lc")
   (global-set-key (kbd "C-z") 'iduh/shell-or-prev-buffer)
   (iduh/def-repeatable-keys shell-navigation

@@ -132,4 +132,20 @@ The returned buffer is not always guaranteed to be user-buffer.
       (switch-to-prev-buffer nil 'append))))
 
 
+(defun iduh/shell-kill-buffer-on-exit ()
+  (let ((process (get-buffer-process (current-buffer)))
+        (killadvice (lambda (process signal)
+                      (when (and (buffer-live-p (process-buffer process))
+                                 (eq (process-status process) 'exit)
+                                 (yes-or-no-p "kill shell buffer?"))
+                        (kill-buffer (process-buffer process)))))
+        process-sentinel)
+    (when process
+      (setq process-sentinel (process-sentinel process))
+      (advice-add #'killadvice :after process-sentinel))))
+
+;; (let* ((proc (inf-ruby-proc))
+;;        (proc-sen (process-sentinel proc)))
+;;   proc-sen)
+
 (provide 'iduh/buffers)
