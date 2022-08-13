@@ -6,8 +6,10 @@
   :bind (("C-'" . 'avy-goto-char-timer)
          ("M-g M-g" . 'avy-goto-line)
          ("M-g c" . 'avy-goto-char)
+         ("M-g s" . 'avy-goto-symbol-1)
          ("M-g w" . 'avy-goto-word-1)
-         ("M-g e" . 'avy-goto-word-0)))
+         ("M-g e" . 'avy-goto-word-0)
+         ("M-g '" . 'avy-goto-char-timer)))
 
 (use-package diminish
   :config
