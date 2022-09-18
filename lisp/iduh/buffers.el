@@ -114,6 +114,18 @@ The returned buffer is not always guaranteed to be user-buffer.
       (iduh/switch-previous-user-buffer 1)
     (shell)))
 
+(defun iduh/shell-buffer (u)
+    (interactive "P")
+    (let* ((n (if (numberp u) u -1))
+           (next-buffer
+            (iduh/nth-user-buffer
+             n
+             (current-buffer)
+             (lambda (buffer) (string-match "*shell\d\**" (buffer-name buffer))))))
+      (if (or u (eq next-buffer (current-buffer)))
+          (shell (format "*shell-%d*" (abs n)))
+        (shell next-buffer))))
+
 (defun iduh/kill-or-bury-current-buffer (force-kill)
   "only kill the buffer if its associated with a file, or force kill is passed.
    don't destroy a buffer with contents just like that."

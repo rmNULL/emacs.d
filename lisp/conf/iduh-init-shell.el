@@ -6,7 +6,7 @@
   (shell-mode . iduh/shell-kill-buffer-on-exit)
   :config
   (setq shell-command-switch "-lc")
-  (global-set-key (kbd "C-z") 'iduh/shell-or-prev-buffer)
+  (global-set-key (kbd "C-z") 'iduh/shell-buffer)
   (iduh/def-repeatable-keys shell-navigation
                             ("p" . comint-previous-prompt)
                             ("n" . comint-next-prompt))
