@@ -129,6 +129,7 @@
         ))
 
 (use-package rust-mode)
+(use-package zig-mode)
 
 
 (provide 'iduh-init-programming)
