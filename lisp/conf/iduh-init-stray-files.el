@@ -62,5 +62,7 @@
         create-lockfiles nil
         kept-new-versions 8
         savehist-file (expand-file-name "default" savehist-dir)))
+  (advice-add 'recentf-save-list
+              :around (lambda (f) (let ((inhibit-message t)) (funcall f)))))
 
 (provide 'iduh-init-stray-files)
