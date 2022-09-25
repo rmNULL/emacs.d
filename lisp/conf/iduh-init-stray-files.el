@@ -11,6 +11,10 @@
   (expand-file-name "beeps/" user-emacs-directory))
 (defvar iduh-stray-files-beep-org-clock
   (expand-file-name "tun.wav" iduh-stray-files-beeps))
+(defvar iduh-server-name
+  (if (boundp 'server-name)
+      server-name
+    (if (stringp (daemonp)) (daemonp) "default")))
 
 (let ((auto-backup-dir
        (expand-file-name "tildes/" iduh-stray-files-prefix))
@@ -39,18 +43,19 @@
   (defvar iduh-stray-files-perspective-default-file
     (expand-file-name
      ;; (format-time-string "default-%s-%d_%h_%Y")
-     (if (boundp 'server-name) server-name "default")
+     iduh-server-name
      perspective-dir))
 
   (save-place-mode 1)
   (run-at-time nil (* 4 60) 'recentf-save-list)
   (savehist-mode 1)
 
-  (setq-default
-   recentf-max-menu-items 24
-   recentf-max-saved-items 24
-   save-place-file (expand-file-name "default" places-dir))
-  (setq backup-by-copying t
+
+  (setq recentf-auto-cleanup 'never
+        recentf-max-menu-items 24
+        recentf-max-saved-items 24
+        save-place-file (expand-file-name iduh-server-name places-dir)
+        backup-by-copying t
         backup-directory-alist
         `(("." . ,auto-backup-dir))
         tramp-backup-directory-alist
@@ -61,7 +66,8 @@
         delete-old-versions t
         create-lockfiles nil
         kept-new-versions 8
-        savehist-file (expand-file-name "default" savehist-dir)))
+        savehist-file (expand-file-name iduh-server-name savehist-dir))
+
   (advice-add 'recentf-save-list
               :around (lambda (f) (let ((inhibit-message t)) (funcall f)))))
 
