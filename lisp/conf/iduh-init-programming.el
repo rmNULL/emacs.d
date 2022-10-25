@@ -36,7 +36,8 @@
 (use-package lsp-mode
   :commands lsp
   :custom
-  (lsp-clients-typescript-server-args '("--stdio" "--tsserver-log-file" "/tmp/tsserver.log"))
+  ;; (lsp-clients-typescript-server-args '("--stdio" "--tsserver-log-file" "/tmp/tsserver.log"))
+  (lsp-clients-typescript-server-args '("--stdio" ))
   (lsp-keymap-prefix "C-c l")
   (lsp-keep-workspace-alive nil)
   (gc-cons-threshold (* 200 1024 1024))
@@ -51,7 +52,8 @@
   (setq read-process-output-max (* 3 1024 1024))
   :config
   (add-to-list 'lsp--formatting-indent-alist '(web-mode . web-mode-code-indent-offset))
-  (add-to-list 'auto-mode-alist '("\\.ts$" . js-mode)))
+  (add-to-list 'auto-mode-alist '("\\.ts$" . js-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx$" . web-mode)))
 
 (use-package helm-lsp
   :commands helm-lsp-workspace-symbol

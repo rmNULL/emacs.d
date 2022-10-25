@@ -11,9 +11,11 @@
   (web-mode-markup-indent-offset 2)
   (web-mode-css-indent-offset 2)
   (web-mode-code-indent-offset 2)
-  (web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+  (web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")
+                                  ("tsx" . "\\.ts[x]?\\'")))
   :config
   (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx?$" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
 
 
