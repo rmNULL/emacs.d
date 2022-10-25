@@ -123,5 +123,10 @@
   :config
   (repeat-mode))
 
+(use-package auth-source
+  :straight nil
+  :custom
+  (auth-sources '("~/.authinfo.gpg")))
+
 (provide 'iduh-init-core-packages)
 ;;
