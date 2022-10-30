@@ -36,7 +36,7 @@
    :map helm-command-map
    ("SPC" . helm-all-mark-rings)
    ("o" . helm-occur)
-   ("r" . helm-register)
+   ("r" . helm-bookmarks)
    ("s" . helm-do-grep-ag)
    ("w" . helm-google-suggest)
    ("x" . helm-regexp)
@@ -49,10 +49,16 @@
   (helm-commands-using-frame '(helm-apropos
                                helm-imenu
                                helm-imenu-in-all-buffers))
+  (helm-mini-default-sources '(helm-source-buffers-list
+                               helm-source-bookmarks
+                               helm-source-recentf
+                               helm-source-buffer-not-found))
   (helm-recentf-fuzzy-match t)
   (helm-buffers-fuzzy-matching t)
   (helm-M-x-fuzzy-matching t)
   (helm-candidate-number-limit 64)
+  (helm-default-external-file-browser "Thunar")
+  (helm-raise-command "wmctrl -xa %s")
   :config
   (global-unset-key (kbd "C-x c"))
 
