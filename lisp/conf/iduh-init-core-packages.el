@@ -33,6 +33,7 @@
    ("<menu>" . execute-extended-command) ;; helm fail backup
    ("C-x C-f" . helm-find-files)
    ("M-y" . helm-show-kill-ring)
+   ("Β" . helm-mini)
    :map helm-command-map
    ("SPC" . helm-all-mark-rings)
    ("o" . helm-occur)
