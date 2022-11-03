@@ -65,16 +65,16 @@
   (switch-window-threshold 3)
   (switch-window-shortcut-style 'qwerty))
 
-(use-package perspective
-  :bind
-  ("Β" . helm-mini)
-  :custom
-  (persp-sort 'created)
-  (persp-state-default-file iduh-stray-files-perspective-default-file)
-  (persp-modestring-short t)
-  (persp-mode-prefix-key (kbd "C-c w"))
-  :init
-  (persp-mode))
+;; (use-package perspective
+;;   :bind
+;;   ("Β" . helm-mini)
+;;   :custom
+;;   (persp-sort 'created)
+;;   (persp-state-default-file iduh-stray-files-perspective-default-file)
+;;   (persp-modestring-short t)
+;;   (persp-mode-prefix-key (kbd "C-c w"))
+;;   :init
+;;   (persp-mode))
 
 (use-package pulse
   :straight nil
