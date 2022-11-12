@@ -4,6 +4,13 @@
 (use-package magit
   :bind (("<f7>" . magit-status)
          ("<f8>" . magit-dispatch)))
+
+(use-package magit-delta
+  :straight t
+  :ensure-system-package delta
+  :hook
+  (magit-mode . magit-delta-mode))
+
 (use-package git-timemachine
   :straight
   (git-timemachine
