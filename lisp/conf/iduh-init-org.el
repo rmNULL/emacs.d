@@ -8,6 +8,7 @@
          ("C-c o p" . org-timer-set-timer)
          ("C-c o t" . iduh/org-last-clock-toggle)
          (  "C-c c" . (lambda () (interactive) (org-capture nil "t")))
+         (  "⁵" . org-todo-list)
          :map org-mode-map
          ("Τ" . 'org-todo)
          ("M-p" . 'org-metaup)
