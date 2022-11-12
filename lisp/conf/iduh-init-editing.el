@@ -1,4 +1,5 @@
 (setq-default indent-tabs-mode nil)
+(setq mouse-yank-at-point t)            ; middle button paste
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 

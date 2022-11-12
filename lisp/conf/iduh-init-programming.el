@@ -29,7 +29,7 @@
     ("C" flycheck-select-checker "change-linter")
     ("V" flycheck-verify-setup "Verify-setup"))
   (flycheck-define-checker javascript-xo
-    "💖 JS/TS linter with great defaults
+    "💖 JS/TS linter with horrible defaults that i have to use for work
 
 See URL `https://github.com/xojs/xo`.
 "
