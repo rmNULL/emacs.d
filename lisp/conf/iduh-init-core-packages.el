@@ -1,5 +1,10 @@
 (define-key key-translation-map (kbd "💖") (kbd "C-c"))
 
+(use-package auth-source
+  :straight nil
+  :custom
+  (auth-sources '("~/.authinfo.gpg")))
+
 (use-package avy
   :custom
   (avy-timeout-seconds 0.3)
@@ -11,17 +16,17 @@
          ("M-g e" . 'avy-goto-word-0)
          ("M-g '" . 'avy-goto-char-timer)))
 
-(use-package diminish
-  :config
-  (diminish 'eldoc-mode)
-  (diminish 'electric-pair-mode))
-
 (use-package beginend
   :diminish
   beginend-global-mode
   beginend-prog-mode
   :config
   (beginend-global-mode))
+
+(use-package diminish
+  :config
+  (diminish 'eldoc-mode)
+  (diminish 'electric-pair-mode))
 
 (use-package helm
   :straight t
@@ -99,10 +104,16 @@
   :init
   (helm-mode 1))
 
-(use-package which-key
-  :diminish
-  :init
-  (which-key-mode))
+(use-package helpful
+  :straight t
+  :bind
+  (:map help-map
+   ("f" . helpful-callable)
+   ("k" . helpful-key)
+   ("v" . helpful-variable)
+   ("x" . helpful-command)))
+
+(use-package hydra)
 
 (use-package projectile
   :requires helm
@@ -123,17 +134,15 @@
   (projectile-sort-order 'recently-active)
   (projectile-file-exists-remote-cache-expire nil))
 
-
-(use-package hydra)
 (use-package repeat
   :straight nil
   :config
   (repeat-mode))
 
-(use-package auth-source
-  :straight nil
-  :custom
-  (auth-sources '("~/.authinfo.gpg")))
+(use-package which-key
+  :diminish
+  :init
+  (which-key-mode))
 
 (provide 'iduh-init-core-packages)
 ;;
