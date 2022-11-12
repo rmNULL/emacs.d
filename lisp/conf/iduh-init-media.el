@@ -16,7 +16,6 @@
   :init
   (defun iduh/mpdel-do-delete (arg)
     (interactive "P")
-    (debug)
     (tablist-do-delete t))
   :bind
   (:map mpdel-playlist-mode-map
