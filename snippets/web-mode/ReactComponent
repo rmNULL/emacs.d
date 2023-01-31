@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: React Component
+# key: RC
+# --
+
+interface PropsT {
+}
+
+function ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}(props: PropsT) {
+         $2
+         return (
+                $0
+         );
+}
+
+export default $1;

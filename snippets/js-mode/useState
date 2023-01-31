@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: use state
+# key: ust
+# --
+
+const [${1:state}, set${1:$(concat (capitalize (substring yas-text nil 1)) (substring yas-text 1))}] = useState<${2:}>(${3:});
+$0
