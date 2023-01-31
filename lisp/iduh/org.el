@@ -11,7 +11,6 @@
     (apply #'org-clock-in-last args)))
 
 
-
 ;;; Templates for org-roam
 
 (defmacro iduh/org-templates-wiki-template ()

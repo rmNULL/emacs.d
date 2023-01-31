@@ -16,17 +16,17 @@
          ("M-g e" . 'avy-goto-word-0)
          ("M-g '" . 'avy-goto-char-timer)))
 
+(use-package diminish
+  :config
+  (diminish 'eldoc-mode)
+  (diminish 'electric-pair-mode))
+
 (use-package beginend
   :diminish
   beginend-global-mode
   beginend-prog-mode
   :config
   (beginend-global-mode))
-
-(use-package diminish
-  :config
-  (diminish 'eldoc-mode)
-  (diminish 'electric-pair-mode))
 
 (use-package helm
   :straight t
