@@ -26,6 +26,7 @@
     ("f" flycheck-first-error "first")
     ("l" flycheck-list-errors "list")
     ("s" flycheck-error-list-set-filter "filter")
+    ("e" flycheck-explain-error-at-point "explain")
     ("C" flycheck-select-checker "change-linter")
     ("V" flycheck-verify-setup "Verify-setup"))
   (flycheck-define-checker javascript-xo
@@ -39,8 +40,8 @@ See URL `https://github.com/xojs/xo`.
     :modes (web-mode js-jsx-mode js-mode typescript-mode))
   :bind
   ("C-c 1" . flycheck-hydra/body)
-  :hook
-  (lsp-mode . (lambda () (add-to-list 'flycheck-checkers 'javascript-xo)))
+  ;; :hook
+  ;; (lsp-mode . (lambda () (add-to-list 'flycheck-checkers 'javascript-xo)))
   :init
   (global-flycheck-mode))
 
@@ -56,7 +57,7 @@ See URL `https://github.com/xojs/xo`.
    (expand-file-name "local/phpactor/binphpactor" (getenv "HOME")))
   (lsp-eslint-enable nil)
   :hook
-  ((js-mode php-mode rust-mode web-mode) . lsp)
+  ((js-mode php-mode rust-mode web-mode elixir-mode) . lsp)
   (lsp-mode . lsp-enable-which-key-integration)
   :init
   (with-eval-after-load 'js
@@ -139,11 +140,10 @@ See URL `https://github.com/xojs/xo`.
         ("C-=" . ruby-send-block)
         ("<f6>" . ruby-send-buffer)
         ("C-c C-c" . ruby-send-buffer-and-go)
-        ("C-c C-p" . inf-ruby)
-        ))
+        ("C-c C-p" . inf-ruby)))
 
 (use-package rust-mode)
 (use-package zig-mode)
-
+(use-package elixir-mode)
 
 (provide 'iduh-init-programming)
