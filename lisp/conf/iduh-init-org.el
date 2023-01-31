@@ -19,8 +19,23 @@
   (org-hide-leading-stars t)
   (org-hide-emphasis-markers t)
   (org-adapt-indentation nil)
+  (org-log-into-drawer t)
   (org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "ON-IT(o)" "|" "CANCELLED(c)" "DONE(d)")))
   (org-clock-sound iduh-stray-files-beep-org-clock)
+  (org-clock-idle-time 8)
+  (org-clock-out-remove-zero-time-clocks t)
+  (org-clock-out-when-done t)
+  (org-clock-into-drawer t)
+  (org-clock-persist t)
+  :hook
+  (org-mode . (lambda ()
+                (setq org-todo-keyword-faces
+                      '(("WAITING" .  "SlateBlue")
+                        ("TODO" . "SlateGray")
+                        ("ON-IT" . "DarkOrchid")
+                        ("CANCELLED" . "Firebrick")
+                        ("QA" . "Teal")
+                        ("DONE" . "ForestGreen")))))
   :init
   (setq-default org-directory "~/notes/")
   :config
