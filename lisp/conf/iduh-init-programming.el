@@ -77,6 +77,13 @@ See URL `https://github.com/xojs/xo`.
   (add-to-list 'auto-mode-alist '("\\.ts$" . js-mode))
   (add-to-list 'auto-mode-alist '("\\.tsx$" . web-mode)))
 
+(use-package lsp-ui
+  :custom
+  (lsp-ui-mode nil)
+  (lsp-ui-peek-always-show t)
+  (lsp-ui-sideline-show-hover t)
+  (lsp-ui-doc-enable nil))
+
 (use-package helm-lsp
   :commands helm-lsp-workspace-symbol
   :config
