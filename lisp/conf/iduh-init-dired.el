@@ -18,6 +18,18 @@
   (dired-listing-switches "-lhA --group-directories-first")
   (delete-by-moving-to-trash t))
 
+(use-package helm-zoxide
+  :straight (helm-zoxide
+             :type git
+             :host github
+             :repo "rmnull/helm-zoxide")
+  :bind
+  (:map dired-mode-map
+        ("j" . helm-zoxide)
+        ("z" . helm-zoxide)
+        ("C-j" . dired-goto-file)))
+
+
 (use-package dired-x
   :straight nil
   :custom
