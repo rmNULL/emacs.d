@@ -125,4 +125,11 @@ _h_   _l_     _y_ank        _t_ype       _e_xchange-point          /,`.-'`'   ..
   :init
   (global-undo-tree-mode))
 
+(use-package simple
+  :straight nil
+  :hook
+  (org-mode . visual-line-mode)
+  (markdown-mode . visual-line-mode)
+  (fundamental-mode . visual-line-mode))
+
 (provide 'iduh-init-editing)
