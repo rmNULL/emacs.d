@@ -65,9 +65,9 @@
   (helm-candidate-number-limit 64)
   (helm-default-external-file-browser "Thunar")
   (helm-raise-command "wmctrl -xa %s")
+  (helm-top-command "env COLUMNS=%s top -e m -b -c -n 1")
   :config
   (global-unset-key (kbd "C-x c"))
-
   (when (executable-find "rg")
     (setq helm-grep-default-command
           (concat "rg"
