@@ -16,7 +16,7 @@
          ("C-c a" . 'org-agenda)
          ("<f6>" . org-export-dispatch))
   :custom
-  (org-hide-leading-stars t)
+  (org-hide-leading-stars nil)
   (org-hide-emphasis-markers t)
   (org-adapt-indentation nil)
   (org-log-into-drawer t)
@@ -137,5 +137,12 @@
    '(("d" "default" entry "* %<%H:%M> %?"
       :if-new (file+head "%<%Y-%m-%d>.org"
                          "#+title: %<%Y-%m-%d>.org\n")))))
+
+(use-package org-superstar
+  :custom
+  (org-superstar-special-todo-items 'hide)
+  (org-superstar-leading-bullet ?\s)
+  :hook
+  (org-mode . org-superstar-mode))
 
 (provide 'iduh-init-org)
