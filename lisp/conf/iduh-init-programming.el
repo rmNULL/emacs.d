@@ -56,8 +56,17 @@ See URL `https://github.com/xojs/xo`.
   (lsp-phpactor-path
    (expand-file-name "local/phpactor/binphpactor" (getenv "HOME")))
   (lsp-eslint-enable nil)
+  ;; copied from https://github.com/rksm/emacs-rust-config/blob/ec562f005152fabba0447ce64687cbb572a7d49b/init.el#L55
+  (lsp-rust-analyzer-server-display-inlay-hints t)
+  (lsp-rust-analyzer-display-lifetime-elision-hints-enable "skip_trivial")
+  (lsp-rust-analyzer-display-chaining-hints t)
+  (lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names nil)
+  (lsp-rust-analyzer-display-closure-return-type-hints t)
+  (lsp-rust-analyzer-display-parameter-hints nil)
+  (lsp-rust-analyzer-display-reborrow-hints nil)
+  ;; end copy
   :hook
-  ((js-mode php-mode rust-mode web-mode elixir-mode) . lsp)
+  ((js-mode php-mode rustic-mode web-mode elixir-mode) . lsp)
   (lsp-mode . lsp-enable-which-key-integration)
   :init
   (with-eval-after-load 'js
@@ -142,7 +151,10 @@ See URL `https://github.com/xojs/xo`.
         ("C-c C-c" . ruby-send-buffer-and-go)
         ("C-c C-p" . inf-ruby)))
 
-(use-package rust-mode)
+(use-package rustic
+  :bind (:map rustic-mode-map
+              ("<f6>" . rustic-cargo-run)))
+
 (use-package zig-mode)
 (use-package elixir-mode)
 
