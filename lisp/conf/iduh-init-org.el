@@ -27,6 +27,8 @@
   (org-clock-out-when-done t)
   (org-clock-into-drawer t)
   (org-clock-persist t)
+  (org-agenda-span 6)
+  (org-agenda-start-day "-2d")
   :hook
   (org-mode . (lambda ()
                 (setq org-todo-keyword-faces
