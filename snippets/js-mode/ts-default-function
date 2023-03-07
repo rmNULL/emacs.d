@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: typescript default function
+# key: tdf
+# --
+
+interface $1ValueT {
+}
+
+interface $1ArgT {
+}
+
+interface $1T {
+          (arg: $1ArgT): $1ValueT;
+}
+
+const ${1:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`}: $1T = {
+         $2
+         return (
+                $0
+         );
+};
+
+export default $1;

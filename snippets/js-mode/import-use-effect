@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: import use effect
+# key: imfx
+
+import { useEffect } from 'react';
