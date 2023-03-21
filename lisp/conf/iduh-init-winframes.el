@@ -6,16 +6,17 @@
 (require 'hydra)
 (defhydra hydra-scroll-window ()
   "scroll-window"
-  ;; note: inverted scrolling
-  ("n" scroll-up-command)
+  ;; note: scroll function names are inverted, but behaves as expected
+  ("n" next-line)
+  ("p" previous-line)
   ("C-v" scroll-up-command)
-  ("p" scroll-down-command)
   ("M-v" scroll-down-command)
   ("k" scroll-down-command)
   ("j" scroll-up-command)
   ("f" scroll-other-window-down)
   ("d" scroll-other-window)
-  ("l" recenter-top-bottom))
+  ("l" recenter-top-bottom "recenter")
+  ("s" recenter-other-window "recenter-other"))
 (global-set-key (kbd "Λ") 'hydra-scroll-window/body)
 
 (use-package winner
@@ -28,7 +29,7 @@
     "switch-window"
     ("a" (other-window -1) "previous")
     ("s" other-window "next")
-    ("w" switch-window "list")
+    ("w" switch-window nil)
     ("e" switch-window-then-swap-buffer "exchange")
     ("u" winner-undo "undo")
     ("r" winner-redo "redo")
