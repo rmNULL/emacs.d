@@ -39,6 +39,7 @@
    ("C-x C-f" . helm-find-files)
    ("M-y" . helm-show-kill-ring)
    ("Β" . helm-mini)
+   ("³" . helm-bookmarks)
    :map helm-command-map
    ("SPC" . helm-all-mark-rings)
    ("o" . helm-occur)
