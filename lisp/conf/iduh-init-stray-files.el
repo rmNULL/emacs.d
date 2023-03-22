@@ -7,6 +7,9 @@
 (defvar iduh-stray-files-prefix
   (expand-file-name "backup/" user-emacs-directory))
 
+(defvar iduh-stray-files-bookmarks
+  (expand-file-name "bookmarks" iduh-stray-files-prefix))
+
 (defvar iduh-stray-files-beeps
   (expand-file-name "beeps/" user-emacs-directory))
 (defvar iduh-stray-files-beep-org-clock
@@ -29,7 +32,8 @@
       (places-dir
        (expand-file-name "places/" iduh-stray-files-prefix))
       (savehist-dir
-       (expand-file-name "history/" iduh-stray-files-prefix)))
+       (expand-file-name "history/" iduh-stray-files-prefix))
+      (bookmarks-dir iduh-stray-files-bookmarks))
 
   (make-directory auto-backup-dir t)
   (make-directory auto-backup-dir-tramp t)
@@ -38,6 +42,7 @@
   (make-directory perspective-dir t)
   (make-directory places-dir t)
   (make-directory savehist-dir t)
+  (make-directory bookmarks-dir t)
 
   (defvar iduh-stray-files-undo-tree-directory undo-tree-dir)
   (defvar iduh-stray-files-perspective-default-file
