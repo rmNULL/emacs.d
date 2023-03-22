@@ -18,5 +18,18 @@
                   (list server-name " --- %b")
                 "%b")))
 
-(add-hook 'emacs-startup-hook (load-theme 'modus-operandi))
+(defun iduh/detect-user-preffered-theme (light-theme night-theme)
+  (let ((hour (string-to-number
+               (substring (current-time-string) 11 13))))
+    (if (member hour (number-sequence 8 17))
+        light-theme
+      night-theme)))
+
+(defun iduh/load-user-theme (light-theme night-theme)
+  (let ((theme-name
+         (iduh/detect-user-preffered-theme light-theme night-theme)))
+   (load-theme theme-name)))
+
+(add-hook 'emacs-startup-hook
+          (iduh/load-user-theme 'modus-operandi 'modus-vivendi))
 (provide 'iduh-init-visual-pleasures)
