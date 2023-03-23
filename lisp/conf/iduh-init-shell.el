@@ -22,6 +22,9 @@
                    (define-key eshell-mode-map [remap eshell-pcomplete] 'helm-esh-pcomplete)
                    (add-to-list 'eshell-visual-commands "ipython")))
   :custom
-  (eshell-history-size 8192))
+  (eshell-history-size 8192)
+  (eshell-visual-subcommands
+   '(("git" "help" "log" "diff" "show")
+     ("npm" "help"))))
 
 (provide 'iduh-init-shell)
