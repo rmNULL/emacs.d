@@ -15,7 +15,7 @@
   :straight
   (git-timemachine
    :type git
-   :host "https://codeberg.org/"
+   :host codeberg
    :repo "pidu/git-timemachine"))
 
 (use-package git-modes
