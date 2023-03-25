@@ -16,7 +16,8 @@
   ("C-c C-j" . dired-jump)
   :custom
   (dired-listing-switches "-lhA --group-directories-first")
-  (delete-by-moving-to-trash t))
+  (delete-by-moving-to-trash t)
+  (dired-dwim-target t))
 
 (use-package helm-zoxide
   :straight (helm-zoxide
