@@ -125,6 +125,9 @@ _h_   _l_     _y_ank        _t_ype       _e_xchange-point          /,`.-'`'   ..
   :init
   (global-undo-tree-mode))
 
+(use-package cycle-quotes
+  :straight t )
+
 (use-package simple
   :straight nil
   :hook
