@@ -146,5 +146,23 @@
   :init
   (which-key-mode))
 
+(use-package keyfreq
+  :straight (keyfreq
+             :type git
+             :host github
+             :repo "dacap/keyfreq")
+  :init
+  (setq iduh-stray-files-keyfreq
+        (expand-file-name "keyfreq" iduh-stray-files-prefix))
+  (make-directory iduh-stray-files-keyfreq t)
+  :config
+  (keyfreq-mode 1)
+  (keyfreq-autosave-mode 1)
+  :custom
+  (keyfreq-autosave-timeout 900) ;; value in seconds
+  (keyfreq-file (expand-file-name "freq" iduh-stray-files-keyfreq))
+  (keyfreq-file-lock
+   (expand-file-name "freq.lock" iduh-stray-files-keyfreq)))
+
 (provide 'iduh-init-core-packages)
 ;;
