@@ -128,7 +128,8 @@
   :bind
   ("C-/" . projectile-ripgrep)
   (:map projectile-command-map
-        ("Π" . projectile-find-file)
+        ("Π" . projectile-switch-project)
+        ("Φ" . projectile-find-file)
         ("/" . projectile-ripgrep))
   :custom
   (projectile-completion-system 'helm)
