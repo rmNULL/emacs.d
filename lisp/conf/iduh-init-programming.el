@@ -52,6 +52,7 @@ See URL `https://github.com/xojs/xo`"
   :custom
   ;; (lsp-clients-typescript-server-args '("--stdio" "--tsserver-log-file" "/tmp/tsserver.log"))
   (lsp-clients-typescript-server-args '("--stdio" ))
+  (lsp-log-io nil)
   (lsp-keymap-prefix "C-c l")
   (lsp-keep-workspace-alive nil)
   (gc-cons-threshold (* 200 1024 1024))
