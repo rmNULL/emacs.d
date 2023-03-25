@@ -121,9 +121,12 @@ _h_   _l_     _y_ank        _t_ype       _e_xchange-point          /,`.-'`'   ..
      (".*" . ,iduh-stray-files-undo-tree-directory)))
   (undo-tree-visualizer-timestamps t)
   :config
+  (global-undo-tree-mode)
   (add-to-list 'undo-tree-incompatible-major-modes #'inferior-python-mode)
-  :init
-  (global-undo-tree-mode))
+  (let ((keys '("C-/" "C-_" "C-?" "M-_")))
+    (dolist (key keys)
+      (unbind-key key undo-tree-map))))
+
 
 (use-package cycle-quotes
   :straight t )
