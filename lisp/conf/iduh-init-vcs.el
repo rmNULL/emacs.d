@@ -1,5 +1,5 @@
 ;; don't prompt for symlink follow, but display warning.
-(setq vc-follow-symlinks nil)
+(setq vc-follow-symlinks t)
 
 (use-package magit
   :bind (("<f7>" . magit-status)
