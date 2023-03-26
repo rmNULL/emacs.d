@@ -129,7 +129,9 @@ _h_   _l_     _y_ank        _t_ype       _e_xchange-point          /,`.-'`'   ..
 
 
 (use-package cycle-quotes
-  :straight t )
+  :straight t
+  :bind
+  ("M-'" . cycle-quotes))
 
 (use-package simple
   :straight nil
