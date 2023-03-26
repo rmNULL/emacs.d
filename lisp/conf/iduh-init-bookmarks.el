@@ -2,6 +2,13 @@
 
 (use-package bookmark
   :straight nil
+  :bind
+  ("M-SPC" . iduh/bookmark-immediate-set)
+  :init
+  (defun iduh/bookmark-immediate-set ()
+    (interactive)
+    (let ((default-bookmark-name "."))
+      (bookmark-set default-bookmark-name t)))
   :custom
   (bookmark-default-file
    (expand-file-name
