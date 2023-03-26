@@ -8,7 +8,8 @@
  '(epg-pinentry-mode 'loopback)
  '(helm-external-programs-associations '(("pdf" . "mupdf")))
  '(safe-local-variable-values
-   '((org-todo-keyword-faces
+   '((js-indent-level . 2)
+     (org-todo-keyword-faces
       ("REJECTED" :foreground "#f41885"))))
  '(show-paren-mode t)
  '(warning-suppress-types '((comp) (iedit))))
