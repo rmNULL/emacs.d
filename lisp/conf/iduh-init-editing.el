@@ -104,7 +104,11 @@ _h_   _l_     _y_ank        _t_ype       _e_xchange-point          /,`.-'`'   ..
   (:map undo-tree-map
         ("Υ" . undo-tree-undo)
         ("C-υ" . undo-tree-visualize)
-        ("Ρ" . undo-tree-redo))
+        ("Ρ" . undo-tree-redo)
+        ("C-/" . nil)
+        ("C-_" . nil)
+        ("M-_" . nil)
+        ("C-?" . nil))
   :custom
   ;; in Bytes
   (undo-tree-limit (* 4 1024 1024))
@@ -120,12 +124,10 @@ _h_   _l_     _y_ank        _t_ype       _e_xchange-point          /,`.-'`'   ..
      ("/su:..*:.*" . "/dev/null")
      (".*" . ,iduh-stray-files-undo-tree-directory)))
   (undo-tree-visualizer-timestamps t)
-  :config
+  :init
   (global-undo-tree-mode)
-  (add-to-list 'undo-tree-incompatible-major-modes #'inferior-python-mode)
-  (let ((keys '("C-/" "C-_" "C-?" "M-_")))
-    (dolist (key keys)
-      (unbind-key key undo-tree-map))))
+  :config
+  (add-to-list 'undo-tree-incompatible-major-modes #'inferior-python-mode))
 
 
 (use-package cycle-quotes
