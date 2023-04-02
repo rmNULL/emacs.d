@@ -161,4 +161,18 @@ See URL `https://github.com/xojs/xo`"
 (use-package zig-mode)
 (use-package elixir-mode)
 
+(require 'iduh/repeat)
+(iduh/def-repeatable-keys iduh-ctrl-meta-prefix
+                          ("a" . beginning-of-defun)
+                          ("b" . backward-sexp)
+                          ("d" . down-list)
+                          ("e" . end-of-defun)
+                          ("f" . forward-sexp)
+                          ("j" . default-indent-new-line)
+                          ("k" . kill-sexp)
+                          ("n" . forward-list)
+                          ("p" . backward-list)
+                          ("t" . transpose-sexps)
+                          ("u" . backward-up-list))
+
 (provide 'iduh-init-programming)
