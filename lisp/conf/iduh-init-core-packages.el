@@ -45,7 +45,7 @@
    ("o" . helm-occur)
    ("r" . helm-bookmarks)
    ("s" . helm-do-grep-ag)
-   ("w" . helm-google-suggest)
+   ("w" . helm-surfraw)
    ("x" . helm-regexp)
    ("q" . helm-eval-expression-with-eldoc)
    ("!" . helm-run-external-command)
