@@ -29,21 +29,8 @@
     ("e" flycheck-explain-error-at-point "explain")
     ("C" flycheck-select-checker "change-linter")
     ("V" flycheck-verify-setup "Verify-setup"))
-  (flycheck-define-checker javascript-xo
-    "JS/TS linter with horrible defaults that i have to use for work.
-See URL `https://github.com/xojs/xo`"
-    :command ("flycheck-xo"
-              "--reporter=compact"
-              "--stdin"
-              "--stdin-filename" (eval (buffer-file-name)))
-    :standard-input t
-    :error-patterns
-    ((error line-start (file-name) ": line " line ", col " column ", Error - " (message) line-end))
-    :modes (web-mode js-jsx-mode js-mode typescript-mode))
   :bind
   ("C-c 1" . flycheck-hydra/body)
-  :hook
-  (lsp-mode . (lambda () (add-to-list 'flycheck-checkers 'javascript-xo)))
   :init
   (global-flycheck-mode))
 
