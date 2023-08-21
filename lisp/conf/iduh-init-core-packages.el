@@ -31,8 +31,6 @@
 (use-package helm
   :straight t
   :diminish
-  :bind-keymap
-  ("C-c h" . helm-command-prefix)
   :bind
   (("M-x" . helm-M-x)
    ("<menu>" . execute-extended-command) ;; helm fail backup
@@ -67,6 +65,7 @@
   (helm-default-external-file-browser "Thunar")
   (helm-raise-command "wmctrl -xa %s")
   (helm-top-command "env COLUMNS=%s top -e m -b -c -n 1")
+  (helm-command-prefix-key "C-c h")
   :config
   (global-unset-key (kbd "C-x c"))
   (when (executable-find "rg")
@@ -102,7 +101,6 @@
                   " %s %s %s")
           helm-grep-ag-pipe-cmd-switches
           '("--colors 'match:fg:black'" "--colors 'match:bg:yellow'")))
-  :init
   (helm-mode 1))
 
 (use-package helpful
