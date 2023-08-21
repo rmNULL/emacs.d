@@ -1,14 +1,14 @@
-(require 'iduh/org)
 (require 'iduh/repeat)
 
 (use-package org
+  :straight nil
+  ; :pin org
   :bind (("C-c o l" . org-store-link)
          ("C-c o a" . org-agenda)
          ("C-c o c" . org-capture)
          ("C-c o p" . org-timer-set-timer)
          ("C-c o t" . iduh/org-last-clock-toggle)
          (  "C-c c" . (lambda () (interactive) (org-capture nil "t")))
-         (  "⁵" . org-todo-list)
          :map org-mode-map
          ("Τ" . 'org-todo)
          ("M-p" . 'org-metaup)
@@ -43,6 +43,7 @@
   :init
   (setq-default org-directory "~/notes/")
   :config
+  (require 'iduh/org)
   (require 'org-protocol)
   (let* ((iduh-org-private-dir (expand-file-name "private/org" org-directory))
          (iduh-org-inbox (expand-file-name "eos.org" iduh-org-private-dir))

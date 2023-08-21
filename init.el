@@ -23,6 +23,7 @@
 
 (require 'iduh-init-stray-files)
 (require 'iduh-init-package-manager)
+(require 'iduh-init-org)
 (require 'iduh-init-core-packages)
 (require 'iduh-init-bookmarks)
 (require 'iduh-init-calc)
@@ -35,7 +36,6 @@
 (require 'iduh-init-prolog)
 (require 'iduh-init-lisp)
 (require 'iduh-init-racket)
-(require 'iduh-init-org)
 (require 'iduh-init-markdown)
 (require 'iduh-init-shell)
 (require 'iduh-init-buffers)
