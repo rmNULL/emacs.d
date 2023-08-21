@@ -8,7 +8,7 @@
   (defun iduh/bookmark-immediate-set ()
     (interactive)
     (let ((default-bookmark-name "."))
-      (bookmark-set default-bookmark-name t)))
+      (bookmark-set default-bookmark-name nil)))
   :custom
   (bookmark-default-file
    (expand-file-name
