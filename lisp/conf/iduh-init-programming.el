@@ -43,8 +43,8 @@
   (lsp-keymap-prefix "C-c l")
   (lsp-keep-workspace-alive nil)
   (gc-cons-threshold (* 200 1024 1024))
-  (lsp-phpactor-path
-   (expand-file-name "local/phpactor/binphpactor" (getenv "HOME")))
+  ;; (lsp-phpactor-path
+  ;;  (expand-file-name "local/phpactor/binphpactor" (getenv "HOME")))
   (lsp-eslint-enable nil)
   ;; copied from https://github.com/rksm/emacs-rust-config/blob/ec562f005152fabba0447ce64687cbb572a7d49b/init.el#L55
   (lsp-rust-analyzer-server-display-inlay-hints t)

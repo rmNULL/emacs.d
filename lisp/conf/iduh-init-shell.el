@@ -1,16 +1,19 @@
 (require 'iduh/repeat)
 
+(use-package helm-comint)
+
 (use-package shell
-  :requires helm
+  :straight nil
+  :demand t
   :hook
   (shell-mode . iduh/shell-kill-buffer-on-exit)
   :config
   (setq shell-command-switch "-lc")
-  (global-set-key (kbd "C-z") 'iduh/shell-buffer)
   (iduh/def-repeatable-keys shell-navigation
                             ("p" . comint-previous-prompt)
                             ("n" . comint-next-prompt))
   :bind
+  ("C-c j z" . iduh/shell-buffer)
   (:map shell-mode-map
         ("M-r" . helm-comint-input-ring)))
 
@@ -25,6 +28,7 @@
   (eshell-history-size 8192)
   (eshell-visual-subcommands
    '(("git" "help" "log" "diff" "show")
-     ("npm" "help"))))
+     ("npm" "help")
+     ("guix" "search"))))
 
 (provide 'iduh-init-shell)
