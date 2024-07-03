@@ -3,7 +3,8 @@
 (use-package bookmark
   :straight nil
   :bind
-  ("M-SPC" . iduh/bookmark-immediate-set)
+  (("M-SPC" . iduh/bookmark-immediate-set)
+   ("<XF86Favorites>" . bookmark-set))
   :init
   (defun iduh/bookmark-immediate-set ()
     (interactive)
