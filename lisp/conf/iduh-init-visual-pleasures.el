@@ -21,7 +21,7 @@
 (defun iduh/detect-user-preffered-theme (light-theme night-theme)
   (let ((hour (string-to-number
                (substring (current-time-string) 11 13))))
-    (if (member hour (number-sequence 8 17))
+    (if (member hour (number-sequence 8 18))
         light-theme
       night-theme)))
 
