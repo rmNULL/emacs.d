@@ -162,4 +162,11 @@
                           ("t" . transpose-sexps)
                           ("u" . backward-up-list))
 
+
+(use-package tree-sitter
+  :straight t)
+
+(use-package tree-sitter-langs
+  :straight t)
+
 (provide 'iduh-init-programming)
