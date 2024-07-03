@@ -4,20 +4,6 @@
 ;;;
 
 (require 'hydra)
-(defhydra hydra-scroll-window ()
-  "scroll-window"
-  ;; note: scroll function names are inverted, but behaves as expected
-  ("n" next-line)
-  ("p" previous-line)
-  ("C-v" scroll-up-command)
-  ("M-v" scroll-down-command)
-  ("k" scroll-down-command)
-  ("j" scroll-up-command)
-  ("f" scroll-other-window-down)
-  ("d" scroll-other-window)
-  ("l" recenter-top-bottom "recenter")
-  ("s" recenter-other-window "recenter-other"))
-(global-set-key (kbd "Λ") 'hydra-scroll-window/body)
 
 (use-package winner
   :config
@@ -55,9 +41,8 @@
     ("L" (enlarge-window 5 t) nil)
     ("q" nil))
   :bind
-  ("Φ" . hydra-switch-window/body)
-  ("∛" . delete-window)
-  ("¹" . delete-other-windows)
+  ("C-c z f" . hydra-switch-window/body)
+  ("<f1>" . delete-other-windows)
   :custom
   (switch-window-qwerty-shortcuts
    '("a" "s" "d" "f" "j" "k" "l" "g" "h"

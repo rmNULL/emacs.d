@@ -3,6 +3,7 @@
 
 (use-package magit
   :bind (("<f7>" . magit-status)
+         ("C-c j g" . magit-status)
          ("<f8>" . magit-dispatch)))
 
 (use-package magit-delta

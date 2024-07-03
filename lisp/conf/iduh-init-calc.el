@@ -4,10 +4,9 @@
 (use-package calc
   :straight nil
   :bind
-  ("⁸" . calc-dispatch)
-  (:map calc-dispatch-map
-        ("⁸" . calc)))
-
+  (("<XF86Launch9>" . calc)
+   :map calc-mode-map
+   (("<XF86Launch9>" . calc-dispatch))))
 
 (provide 'iduh-init-calc)
 ;;; iduh-init-calc.el ends here

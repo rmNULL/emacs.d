@@ -1,5 +1,3 @@
-(define-key key-translation-map (kbd "💖") (kbd "C-c"))
-
 (use-package auth-source
   :straight nil
   :custom
@@ -34,10 +32,11 @@
   :bind
   (("M-x" . helm-M-x)
    ("<menu>" . execute-extended-command) ;; helm fail backup
-   ("C-x C-f" . helm-find-files)
+   ("C-c j f" . helm-find-files)
+   ("C-c j r" . helm-bookmarks)
    ("M-y" . helm-show-kill-ring)
-   ("Β" . helm-mini)
-   ("³" . helm-bookmarks)
+   ("C-c z b" . helm-mini)
+   ("C-h i" . helm-info)
    :map helm-command-map
    ("SPC" . helm-all-mark-rings)
    ("o" . helm-occur)
@@ -101,6 +100,7 @@
                   " %s %s %s")
           helm-grep-ag-pipe-cmd-switches
           '("--colors 'match:fg:black'" "--colors 'match:bg:yellow'")))
+  :init
   (helm-mode 1))
 
 (use-package helpful
@@ -115,19 +115,19 @@
 (use-package hydra)
 
 (use-package projectile
-  :requires helm
+  :straight t
   :diminish " P"
   :init
   (use-package ripgrep)
   :hook
   (prog-mode . projectile-mode)
   :bind-keymap
-  ("Π" . projectile-command-map)
+  ("C-c z p" . projectile-command-map)
   :bind
   ("C-/" . projectile-ripgrep)
   (:map projectile-command-map
-        ("Π" . projectile-switch-project)
-        ("Φ" . projectile-find-file)
+        ("C-c z p" . projectile-switch-project)
+        ("C-c z f" . projectile-find-file)
         ("/" . projectile-ripgrep))
   :custom
   (projectile-completion-system 'helm)
@@ -144,23 +144,28 @@
   :init
   (which-key-mode))
 
-(use-package keyfreq
-  :straight (keyfreq
-             :type git
-             :host github
-             :repo "dacap/keyfreq")
-  :init
-  (setq iduh-stray-files-keyfreq
-        (expand-file-name "keyfreq" iduh-stray-files-prefix))
-  (make-directory iduh-stray-files-keyfreq t)
-  :config
-  (keyfreq-mode 1)
-  (keyfreq-autosave-mode 1)
-  :custom
-  (keyfreq-autosave-timeout 900) ;; value in seconds
-  (keyfreq-file (expand-file-name "freq" iduh-stray-files-keyfreq))
-  (keyfreq-file-lock
-   (expand-file-name "freq.lock" iduh-stray-files-keyfreq)))
+;; (use-package keyfreq
+;;   :straight (keyfreq
+;;              :type git
+;;              :host github
+;;              :repo "dacap/keyfreq")
+;;   :init
+;;   (setq iduh-stray-files-keyfreq
+;;         (expand-file-name "keyfreq" iduh-stray-files-prefix))
+;;   (make-directory iduh-stray-files-keyfreq t)
+;;   :config
+;;   (keyfreq-mode 1)
+;;   (keyfreq-autosave-mode 1)
+;;   :custom
+;;   (keyfreq-autosave-timeout 900) ;; value in seconds
+;;   (keyfreq-file (expand-file-name "freq" iduh-stray-files-keyfreq))
+;;   (keyfreq-file-lock
+;;    (expand-file-name "freq.lock" iduh-stray-files-keyfreq)))
+
+(use-package kbd-mode
+  :straight (kbd-mode
+             :host github :repo "kmonad/kbd-mode"
+             :type git))
 
 (provide 'iduh-init-core-packages)
 ;;

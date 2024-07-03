@@ -2,7 +2,7 @@
 
 (use-package org
   :straight nil
-  ; :pin org
+                                        ; :pin org
   :bind (("C-c o l" . org-store-link)
          ("C-c o a" . org-agenda)
          ("C-c o c" . org-capture)
@@ -10,10 +10,11 @@
          ("C-c o t" . iduh/org-last-clock-toggle)
          (  "C-c c" . (lambda () (interactive) (org-capture nil "t")))
          :map org-mode-map
-         ("Τ" . 'org-todo)
+         ("C-c z t" . 'org-todo)
          ("M-p" . 'org-metaup)
          ("M-n" . 'org-metadown)
          ("C-c a" . 'org-agenda)
+         ("C-c z m" . org-insert-subheading)
          ("<f6>" . org-export-dispatch))
   :custom
   (org-hide-leading-stars nil)
@@ -97,11 +98,11 @@
 (use-package org-roam
   :bind
   ("C-c n a" . org-roam-alias-add)
+  ("C-c n d" . org-roam-dailies-map)
   ("C-c n f" . org-roam-node-find)
   ("C-c n i" . org-roam-node-insert)
   ("C-c n l" . org-roam-buffer-toggle)
   ("C-c n t" . org-roam-tag-add)
-  ("C-c d" . org-roam-dailies-map)
   (:map org-mode-map
         ("M-." . org-roam-node-visit))
   :config

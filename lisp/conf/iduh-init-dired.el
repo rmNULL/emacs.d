@@ -13,7 +13,9 @@
 (use-package dired
   :straight nil
   :bind
-  ("C-c C-j" . dired-jump)
+  (("C-c C-j" . dired-jump)
+   :map dired-mode-map
+   ("6" . dired-up-directory))
   :custom
   (dired-listing-switches "-lhA --group-directories-first")
   (delete-by-moving-to-trash t)
@@ -25,10 +27,11 @@
              :host github
              :repo "rmnull/helm-zoxide")
   :bind
-  (:map dired-mode-map
-        ("j" . helm-zoxide)
-        ("z" . helm-zoxide)
-        ("C-j" . dired-goto-file)))
+  (("C-c j d" . helm-zoxide)
+   (:map dired-mode-map
+         ("j" . helm-zoxide)
+         ("z" . helm-zoxide)
+         ("C-j" . dired-goto-file))))
 
 
 (use-package dired-x

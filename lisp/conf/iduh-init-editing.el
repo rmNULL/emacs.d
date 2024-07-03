@@ -2,8 +2,13 @@
 (setq mouse-yank-at-point t)            ; middle button paste
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
+(set-language-environment "UTF-8")
+(prefer-coding-system 'utf-8)
 
 (define-key isearch-mode-map (kbd "C-j") 'isearch-done)
+;; (global-set-key (kbd "<f12>") 'ctl-x-map)
+;(global-set-key (kbd "C-x") 'kill-region)
+(global-set-key (kbd "C-v") 'yank)
 (global-set-key (kbd "M-j") 'join-line)
 (global-set-key (kbd "M-n") 'ewiki/move-line-region-down)
 (global-set-key (kbd "M-p") 'ewiki/move-line-region-up)
@@ -11,9 +16,8 @@
 (global-set-key (kbd "M-z") 'zap-up-to-char)
 (global-set-key (kbd "M-\\") 'fixup-whitespace)
 (global-set-key (kbd "C-a") 'iduh/move-beginning-of-line)
-(global-set-key (kbd "M-?") 'mark-paragraph)
+;; (global-set-key (kbd "M-?") 'mark-paragraph)
 (global-set-key (kbd "C-S-k") 'kill-whole-line)
-
 (global-set-key (kbd "C-<backspace>") (lambda ()
                                         "source: emacsredux.com"
                                         (interactive)
@@ -21,6 +25,8 @@
                                         (indent-according-to-mode)))
 (global-set-key (kbd "C-o") 'iduh/open-next-line)
 (global-set-key (kbd "C-S-o") 'iduh/open-previous-line)
+(global-set-key (kbd "C-c z n") 'hippie-expand)
+
 
 (use-package rect
   :straight nil
@@ -54,7 +60,7 @@ _h_   _l_     _y_ank        _t_ype       _e_xchange-point          /,`.-'`'   ..
     ("u" undo nil)
     ("g" nil))
   :bind
-  ("C-x SPC" . hydra-rectangle/body))
+  (("C-c z SPC" . hydra-rectangle/body)))
 
 
 (use-package flyspell
@@ -80,7 +86,7 @@ _h_   _l_     _y_ank        _t_ype       _e_xchange-point          /,`.-'`'   ..
 
 (use-package easy-kill
   :bind
-  ("Ω" . easy-mark)
+  ("C-c z w" . easy-mark)
   ([remap kill-ring-save] . easy-kill)
   ([remap mark-sexp] . easy-mark)
   :config
@@ -89,11 +95,13 @@ _h_   _l_     _y_ank        _t_ype       _e_xchange-point          /,`.-'`'   ..
     (dolist (key keys)
       (unbind-key key))))
 
+
 (use-package ws-butler
   :diminish
   :hook
   (prog-mode . ws-butler-mode)
   (ws-butler-mode . (lambda () (setq show-trailing-whitespace t))))
+
 
 (use-package undo-tree
   :diminish undo-tree-mode
@@ -101,14 +109,14 @@ _h_   _l_     _y_ank        _t_ype       _e_xchange-point          /,`.-'`'   ..
                        :host gitlab
                        :repo "tsc25/undo-tree")
   :bind
-  (:map undo-tree-map
-        ("Υ" . undo-tree-undo)
-        ("C-υ" . undo-tree-visualize)
-        ("Ρ" . undo-tree-redo)
-        ("C-/" . nil)
-        ("C-_" . nil)
-        ("M-_" . nil)
-        ("C-?" . nil))
+  ((:map undo-tree-map
+         ("C-z" . undo-tree-undo)
+         ("C-c z r" . undo-tree-redo)
+         ("C-c j u" . undo-tree-visualize)
+         ("C-/" . nil)
+         ("C-_" . nil)
+         ("M-_" . nil)
+         ("C-?" . nil)))
   :custom
   ;; in Bytes
   (undo-tree-limit (* 4 1024 1024))
@@ -127,6 +135,14 @@ _h_   _l_     _y_ank        _t_ype       _e_xchange-point          /,`.-'`'   ..
   :init
   (global-undo-tree-mode)
   :config
+  (let ((kbmap (current-global-map))
+        (keys '("C-/" "C-_" "M-_" "C-?")))
+    (dolist (key keys)
+      (when (and
+             (lookup-key kbmap (kbd key))
+             (string-match-p "undo"
+                             (symbol-name (lookup-key kbmap (kbd key)))))
+        (unbind-key key kbmap))))
   (add-to-list 'undo-tree-incompatible-major-modes #'inferior-python-mode))
 
 
