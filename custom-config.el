@@ -7,6 +7,7 @@
  '(electric-pair-mode t)
  '(epg-pinentry-mode 'loopback)
  '(helm-external-programs-associations '(("pdf" . "mupdf")))
+ '(projectile-git-fd-args "-H -0 -E .git -tf -c never")
  '(safe-local-variable-values
    '((js-indent-level . 2)
      (org-todo-keyword-faces
