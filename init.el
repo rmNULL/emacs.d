@@ -25,6 +25,7 @@
 (require 'iduh-init-package-manager)
 (require 'iduh-init-org)
 (require 'iduh-init-core-packages)
+(require 'iduh-init-guix)
 (require 'iduh-init-bookmarks)
 (require 'iduh-init-calc)
 (require 'iduh-init-dired)
