@@ -11,6 +11,20 @@
     (apply #'org-clock-in-last args)))
 
 
+(defun iduh/days-between (date1 date2)
+  "Calculate the number of days until the selected date in the calendar.
+date1 and date2 are expected to be in the org time format"
+  (/ (time-subtract (org-time-string-to-time date2) (org-time-string-to-time date1))
+     86400))
+
+(defun iduh/days-until ()
+  "Open a date selector and calculate days until the selected date."
+  (interactive)
+  (let ((today (format-time-string "%Y-%m-%d"))
+        (selected-date (org-read-date nil nil nil "Select a date: ")))
+    (let ((days (days-between selected-date today)))
+      (message "There are %d days until %s." days selected-date))))
+
 ;;; Templates for org-roam
 
 (defmacro iduh/org-templates-wiki-template ()
@@ -36,6 +50,7 @@
 **
 * Summary
 ")
+
 
 
 (provide 'iduh/org)
