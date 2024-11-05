@@ -112,12 +112,13 @@
   :config
   (require 'org-roam-dailies)
   (org-roam-db-autosync-mode)
-  (dolist (directory '(z/diary z/wiki))
-    (make-directory (expand-file-name (format "%s" directory) org-directory) t))
   :init
   (setq org-roam-v2-ack t)
+  (dolist (directory '(z/diary z/wiki))
+    (make-directory (expand-file-name (format "%s" directory) org-directory) t))
+  (setq iduh-org-roam-directory (expand-file-name "z/" org-directory))
   :custom
-  (org-roam-directory (expand-file-name "z/" org-directory))
+  (org-roam-directory iduh-org-roam-directory)
   (org-roam-dailies-directory "diary")
   (org-roam-node-display-template
    (concat "${title:*} "
@@ -147,6 +148,28 @@
    '(("d" "default" entry "* %<%H:%M> %?"
       :if-new (file+head "%<%Y-%m-%d>.org"
                          "#+title: %<%Y-%m-%d>.org\n")))))
+
+(use-package ox-publish
+  :straight nil
+  :custom
+  (org-export-with-broken-links "mark")
+  :config
+  (setq
+   org-publish-project-alist
+   `(("public-wiki"
+      :base-directory ,(expand-file-name "wiki" iduh-org-roam-directory)
+      :publishing-directory "~/af/dirty/serve/org-wiki-output"
+      :recursive t
+      :publishing-function org-html-publish-to-html
+      :headline-levels 4
+      :htmlized-source t
+      :section-numbers nil
+      :with-toc nil
+      :auto-sitemap t
+      :sitemap-filename "sitemap.org"
+      :sitemap-title "Sitemap of rmnull's  Public Wiki"
+      :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />"
+      :html-postamble "<time class=\"modified-at\">Modified at %C </time>"))))
 
 (use-package org-superstar
   :custom
