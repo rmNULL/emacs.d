@@ -8,6 +8,7 @@
 (define-key isearch-mode-map (kbd "C-j") 'isearch-done)
 ;; (global-set-key (kbd "<f12>") 'ctl-x-map)
 ;(global-set-key (kbd "C-x") 'kill-region)
+(global-set-key (kbd "C-z") 'keyboard-quit)
 (global-set-key (kbd "C-v") 'yank)
 (global-set-key (kbd "M-j") 'join-line)
 (global-set-key (kbd "M-n") 'ewiki/move-line-region-down)
