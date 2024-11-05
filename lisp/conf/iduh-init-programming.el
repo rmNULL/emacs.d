@@ -11,6 +11,13 @@
   :hook
   (prog-mode . prettify-symbols-mode))
 
+(use-package cc-mode
+  :straight nil
+  :bind
+  (:map c++-mode-map
+        ;; ("C-=" . python-shell-send-statement)
+        ("<f6>" . projectile-compile-project)))
+
 (use-package flycheck
   :diminish "F "
   :custom
