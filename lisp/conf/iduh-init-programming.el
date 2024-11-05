@@ -133,7 +133,9 @@
         ("<f6>" . python-shell-send-buffer))
   :custom
   (python-shell-interpreter "ipython")
-  (python-shell-interpreter-args "--simple-prompt -i"))
+  (python-shell-interpreter-args "--simple-prompt -i --no-confirm-exit")
+  (python-shell-completion-native-disabled-interpreters '("pypy" "ipython")))
+
 
 (use-package ruby-mode
   :straight nil)
