@@ -32,6 +32,10 @@
   (org-agenda-start-day "-3d")
   ;; weird, but org requires this for org-agenda-start-day to be respected, org-agenda-span is 7
   (org-agenda-start-on-weekday nil)
+  ;;
+  (org-babel-load-languages '((python . t)
+                              (emacs-lisp . t)
+                              (shell . t)))
   :hook
   (org-mode . (lambda ()
                 (setq org-todo-keyword-faces
