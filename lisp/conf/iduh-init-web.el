@@ -18,5 +18,7 @@
   (add-to-list 'auto-mode-alist '("\\.tsx?$" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
 
+(use-package nginx-mode
+ :commands nginx-mode)
 
 (provide 'iduh-init-web)
