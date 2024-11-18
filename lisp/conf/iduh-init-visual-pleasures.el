@@ -18,18 +18,30 @@
                   (list server-name " --- %b")
                 "%b")))
 
-(defun iduh/detect-user-preffered-theme (light-theme night-theme)
-  (let ((hour (string-to-number
-               (substring (current-time-string) 11 13))))
-    (if (member hour (number-sequence 8 18))
-        light-theme
-      night-theme)))
+;;; Font selections
+(when (x-list-fonts "Fira Code Retina")
+  (set-frame-font "Fira Code Retina:size=17" nil t))
 
-(defun iduh/load-user-theme (light-theme night-theme)
-  (let ((theme-name
-         (iduh/detect-user-preffered-theme light-theme night-theme)))
-   (load-theme theme-name)))
+(use-package apropospriate-theme
+  :straight t
+  :config
+  (load-theme 'apropospriate-dark t t))
 
-(add-hook 'emacs-startup-hook
-          (iduh/load-user-theme 'modus-operandi 'modus-vivendi))
+(use-package ample-theme
+  :straight t
+  :init
+  (load-theme 'ample t t)
+  (load-theme 'ample-flat t t)
+  (load-theme 'ample-light t t)
+  (enable-theme 'ample-flat))
+
+(use-package all-the-icons
+  :straight t
+  :if (display-graphic-p))
+
+(use-package all-the-icons-dired
+  :straight t
+  :hook
+  (dired-mode . all-the-icons-dired-mode))
+
 (provide 'iduh-init-visual-pleasures)
