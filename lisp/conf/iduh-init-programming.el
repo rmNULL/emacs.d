@@ -63,7 +63,7 @@
   (lsp-rust-analyzer-display-reborrow-hints nil)
   ;; end copy
   :hook
-  ((js-mode php-mode rustic-mode web-mode elixir-mode) . lsp)
+  ((js-mode php-mode rustic-mode web-mode elixir-mode python-mode) . lsp)
   (lsp-mode . lsp-enable-which-key-integration)
   :init
   (with-eval-after-load 'js
