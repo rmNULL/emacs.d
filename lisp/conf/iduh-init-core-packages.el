@@ -186,9 +186,16 @@
 	   :default-chat-non-standard-params '(("num_ctx" . 8192))))
   (setopt ellama-summarization-provider
 	  (make-llm-ollama
-	   :chat-model "qwen2.5:7b"
+	   :chat-model "qwen2.5-coder:3b"
 	   :embedding-model "nomic-embed-text"
+           ;;; context size = 32K
 	   :default-chat-non-standard-params '(("num_ctx" . 32768))))
+  (setopt ellama-summarization-provider
+	  (make-llm-ollama
+	   :chat-model "qwen2.5-coder:7b"
+	   :embedding-model "nomic-embed-text"
+           ;; context size = 131072(128K)
+	   :default-chat-non-standard-params '(("num_ctx" . 131072))))
   ;; Predefined llm providers for interactive switching.
   ;; You shouldn't add ollama providers here - it can be selected interactively
   ;; without it. It is just example.
