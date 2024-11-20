@@ -31,7 +31,11 @@
    (:map dired-mode-map
          ("j" . helm-zoxide)
          ("z" . helm-zoxide)
-         ("C-j" . dired-goto-file))))
+         ("C-j" . dired-goto-file)))
+  :custom
+  (helm-zoxide-actions
+   `(("Find in dired" . helm-zoxide-find-in-dired)
+     ("Exec Shell" . iduh/helm-zoxide-exec-shell))))
 
 
 (use-package dired-x
