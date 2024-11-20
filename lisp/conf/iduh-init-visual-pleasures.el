@@ -40,6 +40,7 @@
   :if (display-graphic-p))
 
 (use-package all-the-icons-dired
+  :diminish ""
   :straight t
   :hook
   (dired-mode . all-the-icons-dired-mode))
