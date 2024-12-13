@@ -16,8 +16,11 @@
   (("C-c C-j" . dired-jump)
    :map dired-mode-map
    ("6" . dired-up-directory))
+  :hook
+  (dired-mode . dired-hide-details-mode)
   :custom
-  (dired-listing-switches "-lhA --group-directories-first")
+;;; sort flag exists, as I keep forgetting the flag.
+  (dired-listing-switches "-lohA --group-directories-first")
   (delete-by-moving-to-trash t)
   (dired-dwim-target t))
 
