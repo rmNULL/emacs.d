@@ -126,8 +126,12 @@ The returned buffer is not always guaranteed to be user-buffer.
               (iduh/nth-user-buffer
                n
                (current-buffer)
-               (lambda (buffer) (string-match "*shell\d\**" (buffer-name buffer)))))
-        (if (or (> n -1) (eq next-buffer (current-buffer)))
+               (lambda (buffer) (string-match "*shell-\d\**" (buffer-name buffer)))))
+
+        (when (eq next-buffer (current-buffer))
+          ;; no shell buffers found, so lets start from 0
+          (setq n (if (> n -1) n 0)))
+        (if (> n -1)
             (shell (format "*shell-%d*" n))
           (shell next-buffer))
         (if (or (not cdp)
