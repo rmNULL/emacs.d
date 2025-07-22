@@ -62,6 +62,8 @@
   (lsp-rust-analyzer-display-closure-return-type-hints t)
   (lsp-rust-analyzer-display-parameter-hints nil)
   (lsp-rust-analyzer-display-reborrow-hints nil)
+;;;
+  (lsp-make-interactive-code-action remove-unused-imports "source.removeUnusedImports.ts")
   ;; end copy
   :hook
   ((js-mode php-mode rustic-mode web-mode elixir-mode python-mode) . lsp)
@@ -178,5 +180,20 @@
 
 (use-package tree-sitter-langs
   :straight t)
+
+
+(use-package aider
+  :straight (:host github :repo "tninja/aider.el")
+  :config
+  (setq aider-args '("--model" "openrouter/deepseek/deepseek-r1" )) ;; add --no-auto-commits if you don't want it
+  ;; ;;
+  ;; Optional: Set a key binding for the transient menu
+  (global-set-key (kbd "C-c a") 'aider-transient-menu) ;; for wider screen
+  ;; or use aider-transient-menu-2cols / aider-transient-menu-1col, for narrow screen
+  ;; (aider-magit-setup-transients)
+  ;; add aider magit function to magit menu
+  ;; auto revert buffer
+  (global-auto-revert-mode 1)
+  (auto-revert-mode 1))
 
 (provide 'iduh-init-programming)

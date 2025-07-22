@@ -56,7 +56,7 @@
          (iduh-refile-targets
           (mapcar (lambda (q) `(,(expand-file-name (format "%s.org" q) iduh-org-private-dir)
                            :maxlevel . 3))
-                  '(watch learn listen read long-term bugs work)))
+                  '(eos)))
          (iduh-agenda-files
           `(,iduh-org-inbox
             ,iduh-org-reminder
@@ -158,6 +158,7 @@
    org-publish-project-alist
    `(("public-wiki"
       :base-directory ,(expand-file-name "wiki" iduh-org-roam-directory)
+      :body-only nil
       :publishing-directory "~/af/dirty/serve/org-wiki-output"
       :recursive t
       :publishing-function org-html-publish-to-html
@@ -166,9 +167,10 @@
       :section-numbers nil
       :with-toc nil
       :auto-sitemap t
+      :org-html-head-include-default-style nil
       :sitemap-filename "sitemap.org"
       :sitemap-title "Sitemap of rmnull's  Public Wiki"
-      :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />"
+      :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"style_2.css\" />"
       :html-postamble "<time class=\"modified-at\">Modified at %C </time>"))))
 
 (use-package org-superstar
@@ -177,5 +179,19 @@
   (org-superstar-leading-bullet ?\s)
   :hook
   (org-mode . org-superstar-mode))
+
+
+(use-package org-habit
+  :straight nil
+  :after org
+  :config
+  (add-to-list 'org-modules 'org-habit)
+  (setq
+   org-habit-graph-column 60
+   org-habit-preceding-days 21
+   org-habit-following-days 7
+   org-agenda-sorting-strategy
+   '((agenda habit-up time-up priority-down category-keep))
+   org-habit-show-habits-only-for-today t))
 
 (provide 'iduh-init-org)

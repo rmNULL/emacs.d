@@ -12,5 +12,3 @@
 
 (provide 'iduh-init-calc)
 ;;; iduh-init-calc.el ends here
-
-'

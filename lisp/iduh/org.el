@@ -22,8 +22,11 @@ date1 and date2 are expected to be in the org time format"
   (interactive)
   (let ((today (format-time-string "%Y-%m-%d"))
         (selected-date (org-read-date nil nil nil "Select a date: ")))
-    (let ((days (days-between selected-date today)))
-      (message "There are %d days until %s." days selected-date))))
+    (let* ((days (days-between selected-date today))
+           (year (/ days 365))
+           (mons (/ (- days (* year 365)) 30)))
+      (message "There are %d days until %s." days selected-date)
+      (message "Approx Breakdown. %dy %dm" year mons))))
 
 ;;; Templates for org-roam
 

@@ -6,11 +6,11 @@
          ("C-c j g" . magit-status)
          ("<f8>" . magit-dispatch)))
 
-(use-package magit-delta
-  :straight t
-  :ensure-system-package delta
-  :hook
-  (magit-mode . magit-delta-mode))
+;; (use-package magit-delta
+;;   :straight t
+;;   :ensure-system-package delta
+;;   :hook
+;;   (magit-mode . magit-delta-mode))
 
 (use-package git-timemachine
   :straight

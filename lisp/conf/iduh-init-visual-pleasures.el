@@ -20,7 +20,7 @@
 
 ;;; Font selections
 (when (x-list-fonts "Fira Code Retina")
-  (set-frame-font "Fira Code Retina:size=17" nil t))
+  (set-frame-font "Fira Code Retina:size=16" nil t))
 
 (use-package apropospriate-theme
   :straight t
@@ -33,7 +33,14 @@
   (load-theme 'ample t t)
   (load-theme 'ample-flat t t)
   (load-theme 'ample-light t t)
-  (enable-theme 'ample-flat))
+  ;; (enable-theme 'ample-flat)
+  )
+
+(use-package modus-themes
+  :straight nil
+  :init
+  (load-theme 'modus-vivendi-tritanopia)
+  (enable-theme 'modus-vivendi-tritanopia))
 
 (use-package all-the-icons
   :straight t
