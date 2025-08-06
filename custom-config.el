@@ -9,9 +9,15 @@
  '(helm-external-programs-associations '(("pdf" . "mupdf")))
  '(projectile-git-fd-args "-H -0 -E .git -tf -c never")
  '(safe-local-variable-values
-   '((js-indent-level . 2)
-     (org-todo-keyword-faces
-      ("REJECTED" :foreground "#f41885"))))
+   '((eval setq-local org-todo-keyword-faces
+           '(("SCREEN" :foreground "#1f77b4" :weight bold)
+             ("INTERVIEW" :foreground "#ff7f0e" :weight bold)
+             ("CEO" :foreground "#2ca02c" :weight bold)
+             ("REJECTED" :foreground "#d62728" :weight bold)))
+     (eval setq-local org-todo-keyword-faces
+           '(("REJECTED" :foreground "#f41885" :weight bold)))
+     (js-indent-level . 2)
+     (org-todo-keyword-faces ("REJECTED" :foreground "#f41885"))))
  '(show-paren-mode t)
  '(warning-suppress-types '((comp) (iedit))))
 
