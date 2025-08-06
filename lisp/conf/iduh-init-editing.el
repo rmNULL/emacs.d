@@ -97,11 +97,12 @@ _h_   _l_     _y_ank        _t_ype       _e_xchange-point          /,`.-'`'   ..
       (unbind-key key))))
 
 
-(use-package ws-butler
-  :diminish
-  :hook
-  (prog-mode . ws-butler-mode)
-  (ws-butler-mode . (lambda () (setq show-trailing-whitespace t))))
+;; (use-package ws-butler
+;;   :straight t
+;;   :diminish
+;;   :hook
+;;   (prog-mode . ws-butler-mode)
+;;   (ws-butler-mode . (lambda () (setq show-trailing-whitespace t))))
 
 
 (use-package undo-tree
