@@ -226,5 +226,41 @@
 ;;   ;;          '(("num_ctx" . 32768))))
 ;;   )
 
+
+(require 'iduh/gptel)
+(use-package gptel
+  :straight t
+  :custom
+  (gptel-model "deepseek/deepseek-r1:free")
+  (gptel-backend (gptel-make-openai "OpenRouter"
+                   :host "openrouter.ai"
+                   :endpoint "/api/v1/chat/completions"
+                   :stream t
+                   :key (iduh/gptel-get-key)
+                   :models '(
+                             deepseek/deepseek-chat-v3-0324:free
+                             deepseek/deepseek-r1:free
+                             deepseek/deepseek-r1
+                             anthropic/claude-sonnet-4
+                             google/gemini-2.5-flash-exp:free
+                             google/gemini-2.5-pro
+                             qwen/qwen3-14b
+                             qwen/qwen3-coder:free
+                             qwen/qwen3-coder
+                             z-ai/glm-4.5))))
+
+(use-package mcp
+  :ensure t
+  :after gptel
+  :custom (mcp-hub-servers
+           `(("filesystem" . (:command "npx" :args ("-y" "@modelcontextprotocol/server-filesystem" "/home/sham/work/biocore/aaeaao/")))
+             ("sequentialthinking" . (:command "npx" :args ("-y" "@modelcontextprotocol/server-sequential-thinking")))
+             ("fetch" . (:command "uvx" :args ("mcp-server-fetch")))
+             ("git" . (:command "uvx" :args ("mcp-server-git")))
+             ("time" . (:command "uvx" :args ("mcp-server-time")))))
+  :config (require 'mcp-hub)
+  :hook (after-init . mcp-hub-start-all-server))
+
+
 (provide 'iduh-init-core-packages)
 ;;
