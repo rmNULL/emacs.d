@@ -54,42 +54,34 @@
          (iduh-org-inbox (expand-file-name "eos.org" iduh-org-private-dir))
          (iduh-org-reminder (expand-file-name "reminder.org" iduh-org-private-dir))
          (iduh-refile-targets
-          (mapcar (lambda (q) `(,(expand-file-name (format "%s.org" q) iduh-org-private-dir)
-                           :maxlevel . 3))
-                  '(eos)))
-         (iduh-agenda-files
-          `(,iduh-org-inbox
-            ,iduh-org-reminder
-            ,@(mapcar (lambda (e) (car-safe e))
-                      (seq-remove (lambda (e)
-                                    (let ((basename (file-name-base (car-safe e))))
-                                      (or (string= basename "long-term")
-                                          (string= basename "watch"))))
-                                  iduh-refile-targets))))
-         (iduh-lit-filename (lambda () (expand-file-name
-                                   (format "private/litmus/%s.org.gpg"
-                                           (or (read-string "~~>> ")
-                                               "default"))
-                                   org-directory))))
+          `((,iduh-org-inbox :maxlevel . 2)
+            (,iduh-org-reminder :maxlevel . 1)))
+         (iduh-agenda-files `(,iduh-org-inbox ,iduh-org-reminder)))
+    (let (
+          (iduh-lit-filename (lambda () (expand-file-name
+                                    (format "private/litmus/%s.org.gpg"
+                                            (or (read-string "~~>> ")
+                                                "default"))
+                                    org-directory))))
 
-    (setq org-capture-templates `(("r" "🕤 Reminder" entry
-                                   (file+headline ,iduh-org-reminder "Reminder")
-                                   "* %i%? \n %U")
-                                  ("t" "📥 Todo" entry
-                                   (file+headline ,iduh-org-inbox "Tasks")
-                                   "* TODO %T %i%?"
-                                   ~:refile-targets iduh-refile-targets)
-                                  ("s" "🧯 Solit" plain
-                                   (file ,iduh-lit-filename)
-                                   "* %t %i%?")
-                                  ("p" "Protocol" entry (file+headline ,iduh-org-inbox "Inbox")
-                                   "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
-                                  ("L" "Protocol Link" entry (file+headline ,iduh-org-inbox "Inbox")
-                                   "* %U %? [[%:link][%:description]]\n"))
-          org-agenda-files iduh-agenda-files
-          org-refile-targets iduh-refile-targets
-          org-outline-path-complete-in-steps nil
-          org-refile-use-outline-path t))
+      (setq org-capture-templates `(("r" "🕤 Reminder" entry
+                                     (file+headline ,iduh-org-reminder "Reminder")
+                                     "* %i%? \n %U")
+                                    ("t" "📥 Todo" entry
+                                     (file+headline ,iduh-org-inbox "Tasks")
+                                     "* TODO %T %i%?"
+                                     ~:refile-targets iduh-refile-targets)
+                                    ("s" "🧯 Solit" plain
+                                     (file ,iduh-lit-filename)
+                                     "* %t %i%?")
+                                    ("p" "Protocol" entry (file+headline ,iduh-org-inbox "Inbox")
+                                     "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+                                    ("L" "Protocol Link" entry (file+headline ,iduh-org-inbox "Inbox")
+                                     "* %U %? [[%:link][%:description]]\n"))
+            org-agenda-files iduh-agenda-files
+            org-refile-targets iduh-refile-targets
+            org-outline-path-complete-in-steps nil
+            org-refile-use-outline-path t)))
 
   (iduh/def-repeatable-keys org-heading-navigation
                             ("p" . org-previous-visible-heading)
