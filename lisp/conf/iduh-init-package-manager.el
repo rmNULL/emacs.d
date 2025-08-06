@@ -17,7 +17,7 @@
 (straight-use-package 'use-package)
 (setq straight-use-package-by-default t)
 
-(use-package use-package-ensure-system-package
-  :straight t)
+;; (use-package use-package-ensure-system-package)
+
 
 (provide 'iduh-init-package-manager)
