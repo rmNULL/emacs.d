@@ -24,7 +24,7 @@
   (flycheck-mode-line-prefix "F")
   (flycheck-disabled-checkers '(emacs-lisp-checkdoc))
   (flycheck-global-modes '(not org-mode))
-  (flycheck-python-ruff-executable "~/.local/bin/ruff")
+  (flycheck-python-ruff-executable "/home/sham/.local/bin/ruff")
   :config
   (defhydra flycheck-hydra
     (:hint nil)
