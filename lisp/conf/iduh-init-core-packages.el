@@ -23,8 +23,7 @@
   :diminish
   beginend-global-mode
   beginend-prog-mode
-  :config
-  (beginend-global-mode))
+  :hook (after-init . beginend-global-mode))
 
 (use-package helm
   :straight t
@@ -100,8 +99,7 @@
                   " %s %s %s")
           helm-grep-ag-pipe-cmd-switches
           '("--colors 'match:fg:black'" "--colors 'match:bg:yellow'")))
-  :init
-  (helm-mode 1))
+  :hook (after-init . helm-mode))
 
 (use-package helpful
   :straight t
@@ -114,11 +112,12 @@
 
 (use-package hydra)
 
+(use-package ripgrep :defer t)
+
 (use-package projectile
   :straight t
   :diminish " P"
-  :init
-  (use-package ripgrep)
+  :defer t
   :hook
   (prog-mode . projectile-mode)
   :bind-keymap
@@ -136,13 +135,11 @@
 
 (use-package repeat
   :straight nil
-  :config
-  (repeat-mode))
+  :hook (after-init . repeat-mode))
 
 (use-package which-key
   :diminish
-  :init
-  (which-key-mode))
+  :hook (after-init . which-key-mode))
 
 ;; (use-package keyfreq
 ;;   :straight (keyfreq
@@ -166,101 +163,6 @@
   :straight (kbd-mode
              :host github :repo "kmonad/kbd-mode"
              :type git))
-
-
-;; (use-package ellama
-;;   :straight t
-;;   :bind ("C-c e" . ellama-transient-main-menu)
-;;   :init
-;;   ;; setup key bindings
-;;   (setopt ellama-keymap-prefix "C-c e")
-;;   ;; language you want ellama to translate to
-;;   ;; (setopt ellama-language "German")
-;;   ;; could be llm-openai for example
-;;   (require 'llm-ollama)
-;;   (setopt ellama-provider
-;; 	  (make-llm-ollama
-;; 	   ;; this model should be pulled to use it
-;; 	   ;; value should be the same as you print in terminal during pull
-;; 	   :chat-model "llama3.2:latest"
-;; 	   ;; :embedding-model "nomic-embed-text"
-;; 	   :default-chat-non-standard-params '(("num_ctx" . 8192))))
-;;   (setopt ellama-summarization-provider
-;; 	  (make-llm-ollama
-;; 	   :chat-model "qwen2.5-coder:3b"
-;; 	   :embedding-model "nomic-embed-text"
-;;            ;;; context size = 32K
-;; 	   :default-chat-non-standard-params '(("num_ctx" . 32768))))
-;;   (setopt ellama-summarization-provider
-;; 	  (make-llm-ollama
-;; 	   :chat-model "qwen2.5-coder:7b"
-;; 	   :embedding-model "nomic-embed-text"
-;;            ;; context size = 131072(128K)
-;; 	   :default-chat-non-standard-params '(("num_ctx" . 131072))))
-;;   ;; Predefined llm providers for interactive switching.
-;;   ;; You shouldn't add ollama providers here - it can be selected interactively
-;;   ;; without it. It is just example.
-;;   ;; (setopt ellama-providers
-;;   ;;           '(("zephyr" . (make-llm-ollama
-;;   ;;       		   :chat-model "zephyr:7b-beta-q6_K"
-;;   ;;       		   :embedding-model "zephyr:7b-beta-q6_K"))
-;;   ;;             ("mistral" . (make-llm-ollama
-;;   ;;       		    :chat-model "mistral:7b-instruct-v0.2-q6_K"
-;;   ;;       		    :embedding-model "mistral:7b-instruct-v0.2-q6_K"))
-;;   ;;             ("mixtral" . (make-llm-ollama
-;;   ;;       		    :chat-model "mixtral:8x7b-instruct-v0.1-q3_K_M-4k"
-;;   ;;       		    :embedding-model "mixtral:8x7b-instruct-v0.1-q3_K_M-4k"))))
-;;   ;; Naming new sessions with llm
-;;   ;; (setopt ellama-naming-provider
-;;   ;;           (make-llm-ollama
-;;   ;;            :chat-model "llama3:8b-instruct-q8_0"
-;;   ;;            :embedding-model "nomic-embed-text"
-;;   ;;            :default-chat-non-standard-params '(("stop" . ("\n")))))
-;;   ;; (setopt ellama-naming-scheme 'ellama-generate-name-by-llm)
-;;   ;; Translation llm provider
-;;   ;; (setopt ellama-translation-provider
-;;   ;;         (make-llm-ollama
-;;   ;;          :chat-model "qwen2.5:3b"
-;;   ;;          :embedding-model "nomic-embed-text"
-;;   ;;          :default-chat-non-standard-params
-;;   ;;          '(("num_ctx" . 32768))))
-;;   )
-
-
-(require 'iduh/gptel)
-(use-package gptel
-  :straight t
-  :custom
-  (gptel-model "deepseek/deepseek-r1:free")
-  (gptel-backend (gptel-make-openai "OpenRouter"
-                   :host "openrouter.ai"
-                   :endpoint "/api/v1/chat/completions"
-                   :stream t
-                   :key (iduh/gptel-get-key)
-                   :models '(
-                             deepseek/deepseek-chat-v3-0324:free
-                             deepseek/deepseek-r1:free
-                             deepseek/deepseek-r1
-                             anthropic/claude-sonnet-4
-                             google/gemini-2.5-flash-exp:free
-                             google/gemini-2.5-pro
-                             qwen/qwen3-14b
-                             qwen/qwen3-coder:free
-                             qwen/qwen3-coder
-                             z-ai/glm-4.5))))
-
-(use-package mcp
-  :ensure t
-  :after gptel
-  :custom (mcp-hub-servers
-           `(("filesystem" . (:command "npx" :args ("-y" "@modelcontextprotocol/server-filesystem" "/home/sham/work/biocore/aaeaao/")))
-             ("sequentialthinking" . (:command "npx" :args ("-y" "@modelcontextprotocol/server-sequential-thinking")))
-             ("fetch" . (:command "uvx" :args ("mcp-server-fetch")))
-             ("git" . (:command "uvx" :args ("mcp-server-git")))
-             ("time" . (:command "uvx" :args ("mcp-server-time")))))
-  :config (require 'mcp-hub)
-  :hook (after-init . mcp-hub-start-all-server))
-
 
 (provide 'iduh-init-core-packages)
 ;;

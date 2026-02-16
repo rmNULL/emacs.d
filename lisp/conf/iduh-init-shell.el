@@ -18,6 +18,7 @@
         ("M-r" . helm-comint-input-ring)))
 
 (use-package eshell
+  :defer t
   :hook
   (eshell-mode . (lambda ()
                    (eshell-cmpl-initialize)
@@ -33,6 +34,7 @@
 
 
 (use-package eat
+  :defer t
   :straight 
   '(eat :type git
         :host codeberg

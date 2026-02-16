@@ -20,6 +20,7 @@
 
 (use-package flycheck
   :diminish "F "
+  :hook (after-init . global-flycheck-mode)
   :custom
   (flycheck-mode-line-prefix "F")
   (flycheck-disabled-checkers '(emacs-lisp-checkdoc))
@@ -38,9 +39,7 @@
     ("C" flycheck-select-checker "change-linter")
     ("V" flycheck-verify-setup "Verify-setup"))
   :bind
-  ("C-c 1" . flycheck-hydra/body)
-  :init
-  (global-flycheck-mode))
+  ("C-c 1" . flycheck-hydra/body))
 
 (use-package lsp-mode
   :commands lsp
@@ -66,7 +65,7 @@
   (lsp-make-interactive-code-action remove-unused-imports "source.removeUnusedImports.ts")
   ;; end copy
   :hook
-  ((js-mode php-mode rustic-mode web-mode elixir-mode python-mode) . lsp)
+  ((js-mode php-mode rustic-mode web-mode elixir-mode) . lsp)
   (lsp-mode . lsp-enable-which-key-integration)
   :init
   (with-eval-after-load 'js
@@ -87,8 +86,8 @@
   :custom
   (company-minimum-prefix-length 4)
   (company-idle-delay 0)
-  :config
-  (global-company-mode))
+  :hook
+  (after-init . global-company-mode))
 
 (use-package helm-company
   :requires helm
@@ -102,8 +101,7 @@
 
 (use-package editorconfig
   :diminish editorconfig-mode
-  :config
-  (editorconfig-mode 1))
+  :hook (after-init . editorconfig-mode))
 
 (use-package lispy
   :diminish
@@ -115,16 +113,21 @@
 (use-package yasnippet-snippets)
 
 (use-package yasnippet
+  :defer t
   :diminish
   (yas-minor-mode . " Y")
   :hook
   (prog-mode . yas-minor-mode)
-  :config
-  (yas-reload-all))
+  ;; (after-init . yas-reload-all)
+  ;; :config
+  ;; (yas-reload-all)
+  )
 
-(use-package julia-mode)
+(use-package julia-mode
+  :defer t)
 (use-package julia-repl
   :requires julia-mode
+  :defer t
   :hook
   (julia-mode . julia-repl-mode))
 
@@ -139,9 +142,24 @@
   (python-shell-interpreter-args "--simple-prompt -i --no-confirm-exit")
   (python-shell-completion-native-disabled-interpreters '("pypy" "ipython")))
 
+(use-package eglot
+  :straight nil ;; built-in in Emacs 29+
+  :defer t
+  :commands (eglot eglot-ensure)
+  :hook ((python-ts-mode . eglot-ensure)
+         (python-mode    . eglot-ensure))
+  :config
+  ;; Prefer pyright or pylsp explicitly if you want determinism
+  ;; (add-to-list 'eglot-server-programs
+  ;;              '(python-ts-mode . ("pyright-langserver" "--stdio")))
 
-(use-package ruby-mode
-  :straight nil)
+  ;; Performance / noise reduction
+  (setq eglot-autoshutdown t
+        eglot-events-buffer-size 0))
+
+
+;; (use-package ruby-mode
+;;   :straight nil)
 
 (use-package inf-ruby
   :hook
@@ -157,8 +175,8 @@
   :bind (:map rustic-mode-map
               ("<f6>" . rustic-cargo-run)))
 
-(use-package zig-mode)
-(use-package elixir-mode)
+;; (use-package zig-mode)
+;; (use-package elixir-mode)
 
 (require 'iduh/repeat)
 (iduh/def-repeatable-keys iduh-ctrl-meta-prefix
@@ -176,24 +194,12 @@
 
 
 (use-package tree-sitter
-  :straight t)
+  :straight t
+  :defer t)
 
 (use-package tree-sitter-langs
-  :straight t)
+  :straight t
+  :defer t)
 
-
-(use-package aider
-  :straight (:host github :repo "tninja/aider.el")
-  :config
-  (setq aider-args '("--model" "openrouter/deepseek/deepseek-r1" )) ;; add --no-auto-commits if you don't want it
-  ;; ;;
-  ;; Optional: Set a key binding for the transient menu
-  (global-set-key (kbd "C-c a") 'aider-transient-menu) ;; for wider screen
-  ;; or use aider-transient-menu-2cols / aider-transient-menu-1col, for narrow screen
-  ;; (aider-magit-setup-transients)
-  ;; add aider magit function to magit menu
-  ;; auto revert buffer
-  (global-auto-revert-mode 1)
-  (auto-revert-mode 1))
 
 (provide 'iduh-init-programming)

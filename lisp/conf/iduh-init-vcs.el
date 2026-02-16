@@ -8,7 +8,7 @@
 
 (use-package magit-delta
   :straight t
-  :ensure-system-package delta
+  ;; :ensure-system-package delta
   :hook
   (magit-mode . magit-delta-mode))
 

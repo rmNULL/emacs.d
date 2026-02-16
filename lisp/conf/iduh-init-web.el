@@ -4,7 +4,7 @@
   :hook
   (css-mode sgml-mode web-mode))
 
-(use-package php-mode)
+;; (use-package php-mode)
 
 (use-package web-mode
   :custom
