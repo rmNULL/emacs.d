@@ -16,6 +16,7 @@
 
 (straight-use-package 'use-package)
 (setq straight-use-package-by-default t)
+(setq use-package-always-defer t)
 
 ;; (use-package use-package-ensure-system-package)
 
