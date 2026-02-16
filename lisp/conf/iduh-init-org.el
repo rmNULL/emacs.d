@@ -2,7 +2,7 @@
 
 (use-package org
   :straight nil
-                                        ; :pin org
+; :pin org
   :bind (("C-c o l" . org-store-link)
          ("C-c o a" . org-agenda)
          ("C-c o c" . org-capture)
@@ -32,10 +32,12 @@
   (org-agenda-start-day "-3d")
   ;; weird, but org requires this for org-agenda-start-day to be respected, org-agenda-span is 7
   (org-agenda-start-on-weekday nil)
+  (org-agenda-skip-scheduled-if-deadline-is-shown t)
   ;;
   (org-babel-load-languages '((python . t)
                               (emacs-lisp . t)
                               (shell . t)))
+  (org-clock-idle-time nil)
   :hook
   (org-mode . (lambda ()
                 (setq org-todo-keyword-faces
@@ -121,7 +123,12 @@
          ;; #'org-roam-unlinked-references-section
          ))
   (org-roam-capture-templates
-   `(("d" "default" plain "%?"
+   `(("b" "blog" plain "%?"
+      :target (file+head "blog/posts/${slug}.org"
+                         ,(iduh/org-templates-blog-template))
+      :immediate-finish t
+      :unnarrowed t)
+     ("d" "default" plain "%?"
       :target (file+head "${slug}.org"
                          "#+title: ${title}\n#+capture_date: %<%a, %e %b %Y, %H:%M>")
       :unnarrowed t)
@@ -164,6 +171,24 @@
       :sitemap-title "Sitemap of rmnull's  Public Wiki"
       :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"style_2.css\" />"
       :html-postamble "<time class=\"modified-at\">Modified at %C </time>"))))
+
+;; Static site generator for Org posts
+(use-package iduh-org-mode-ssg
+  :straight (iduh-org-mode-ssg
+             :type git
+             :host github
+             :repo "rmnull/iduh-org-mode-ssg")
+  :commands (iduh-org-ssg-build-site
+             iduh-org-ssg-generate-file
+             iduh-org-mode-ssg-preview
+             iduh-org-ssg-clean)
+  :custom
+  ;; Repo defaults are "posts/" but this checkout keeps sample posts in tests.
+  (iduh-org-ssg-posts-directory "/home/sham/notes/z/blog/posts")
+  (iduh-org-ssg-output-directory "~/af/dirty/serve/blog.liglambda.com")
+  (iduh-org-ssg-skeleton-directory "/home/sham/lab/github/iduh-org-mode-ssg/skeleton/")
+  :bind (("C-c o s b" . iduh-org-ssg-build-site)
+         ("C-c o s c" . iduh-org-ssg-clean)))
 
 (use-package org-superstar
   :custom

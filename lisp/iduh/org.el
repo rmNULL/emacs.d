@@ -55,7 +55,22 @@ date1 and date2 are expected to be in the org time format"
 ")
 
 
+(defmacro iduh/org-templates-blog-template ()
+  "
+#+TITLE: ${title}
+#+SUBTITLE: 
+#+DATE: %<%a, %e %b %Y, %H:%M>
+#+AUTHOR: rmnull
+#+FILETAGS: :blog:\
 
-(provide 'iduh/org)
+
+* Level 1 heading
+some content
+"
+  )
+  
+
+
+  (provide 'iduh/org)
 
 ;;; iduh/org.el ends here
