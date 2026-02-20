@@ -2,13 +2,14 @@
 
 (use-package org
   :straight nil
-; :pin org
   :bind (("C-c o l" . org-store-link)
          ("C-c o a" . org-agenda)
          ("C-c o c" . org-capture)
          ("C-c o p" . org-timer-set-timer)
          ("C-c o t" . iduh/org-last-clock-toggle)
-         (  "C-c c" . (lambda () (interactive) (org-capture nil "t")))
+         ("C-c o d" . (lambda () (interactive) (org-agenda nil "d")))
+         ("C-c o r" . (lambda () (interactive) (org-agenda nil "r")))
+         ("C-c c" . (lambda () (interactive) (org-capture nil "t")))
          :map org-mode-map
          ("C-c z t" . 'org-todo)
          ("M-p" . 'org-metaup)
@@ -30,10 +31,8 @@
   (org-clock-persist t)
   (org-agenda-span 7)
   (org-agenda-start-day "-3d")
-  ;; weird, but org requires this for org-agenda-start-day to be respected, org-agenda-span is 7
   (org-agenda-start-on-weekday nil)
   (org-agenda-skip-scheduled-if-deadline-is-shown t)
-  ;;
   (org-babel-load-languages '((python . t)
                               (emacs-lisp . t)
                               (shell . t)))
@@ -41,57 +40,69 @@
   :hook
   (org-mode . (lambda ()
                 (setq org-todo-keyword-faces
-                      '(("WAITING" .  "SlateBlue")
-                        ("TODO" . "SlateGray")
-                        ("ON-IT" . "DarkOrchid")
+                      '(("WAITING"   . "SlateBlue")
+                        ("TODO"      . "SlateGray")
+                        ("ON-IT"     . "DarkOrchid")
                         ("CANCELLED" . "Firebrick")
-                        ("QA" . "Teal")
-                        ("DONE" . "ForestGreen")))))
+                        ("QA"        . "Teal")
+                        ("DONE"      . "ForestGreen")))))
   :init
   (setq-default org-directory "~/notes/")
   :config
   (require 'iduh/org)
   (require 'org-protocol)
   (let* ((iduh-org-private-dir (expand-file-name "private/org" org-directory))
-         (iduh-org-inbox (expand-file-name "eos.org" iduh-org-private-dir))
-         (iduh-org-reminder (expand-file-name "reminder.org" iduh-org-private-dir))
+         (iduh-org-inbox   (expand-file-name "eos.org"    iduh-org-private-dir))
+         (iduh-org-tasks   (expand-file-name "tasks.org"  iduh-org-private-dir))
+         (iduh-org-habits  (expand-file-name "habits.org" iduh-org-private-dir))
+         (iduh-org-next    (expand-file-name "next.org"   iduh-org-private-dir))
          (iduh-refile-targets
-          `((,iduh-org-inbox :maxlevel . 2)
-            (,iduh-org-reminder :maxlevel . 1)))
-         (iduh-agenda-files `(,iduh-org-inbox ,iduh-org-reminder)))
-    (let (
-          (iduh-lit-filename (lambda () (expand-file-name
-                                    (format "private/litmus/%s.org.gpg"
-                                            (or (read-string "~~>> ")
-                                                "default"))
-                                    org-directory))))
+          `((,iduh-org-tasks :maxlevel . 1)
+            (,iduh-org-next  :maxlevel . 1)))
+         (iduh-agenda-files `(,iduh-org-tasks ,iduh-org-habits ,iduh-org-next))
+         (iduh-lit-filename (lambda () (expand-file-name
+                                        (format "private/litmus/%s.org.gpg"
+                                                (or (read-string "~~>> ")
+                                                    "default"))
+                                        org-directory))))
 
-      (setq org-capture-templates `(("r" "🕤 Reminder" entry
-                                     (file+headline ,iduh-org-reminder "Reminder")
-                                     "* %i%? \n %U")
-                                    ("t" "📥 Todo" entry
-                                     (file+headline ,iduh-org-inbox "Tasks")
-                                     "* TODO %T %i%?"
-                                     ~:refile-targets iduh-refile-targets)
-                                    ("s" "🧯 Solit" plain
-                                     (file ,iduh-lit-filename)
-                                     "* %t %i%?")
-                                    ("p" "Protocol" entry (file+headline ,iduh-org-inbox "Inbox")
-                                     "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
-                                    ("L" "Protocol Link" entry (file+headline ,iduh-org-inbox "Inbox")
-                                     "* %U %? [[%:link][%:description]]\n"))
-            org-agenda-files iduh-agenda-files
-            org-refile-targets iduh-refile-targets
-            org-outline-path-complete-in-steps nil
-            org-refile-use-outline-path t)))
+    (setq org-capture-templates
+          `(("t" "📥 Todo" entry
+             (file+headline ,iduh-org-inbox "Tasks")
+             "* TODO %T %i%?")
+            ("s" "🧯 Solit" plain
+             (file ,iduh-lit-filename)
+             "* %t %i%?")
+            ("p" "Protocol" entry (file+headline ,iduh-org-inbox "Inbox")
+             "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+            ("L" "Protocol Link" entry (file+headline ,iduh-org-inbox "Inbox")
+             "* %U %? [[%:link][%:description]]\n"))
 
+          org-agenda-files iduh-agenda-files
+          org-refile-targets iduh-refile-targets
+          org-outline-path-complete-in-steps nil
+          org-refile-use-outline-path t
+
+          org-agenda-custom-commands
+          '(("d" "daily important tasks agenda"
+             ((agenda ""
+                      ((org-agenda-span 1)
+                       (org-agenda-start-on-weekday nil)
+                       (org-agenda-filter-preset '("-checkup" "-habits"))
+                       (org-agenda-tag-filter-preset '("-checkup" "-habits"))))))
+            ("h" "Habits"
+             tags-todo
+             "STYLE=\"habit\""
+             ((org-agenda-overriding-header "Habits")
+              (org-agenda-span 1)
+              (org-agenda-start-on-weekday nil))))))
   (iduh/def-repeatable-keys org-heading-navigation
                             ("p" . org-previous-visible-heading)
                             ("n" . org-next-visible-heading)
                             ("b" . org-backward-heading-same-level)
                             ("f" . org-forward-heading-same-level)
                             ("6" . org-up-element)
-                            ("^" . org-up-element)))
+                            ("^" . org-up-element))))
 
 (use-package org-roam
   :bind
