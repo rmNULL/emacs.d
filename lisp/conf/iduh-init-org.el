@@ -1,5 +1,16 @@
 (require 'iduh/repeat)
 
+;; === ORG WORKFLOW ===
+;;
+;; INBOX (eos.org)
+;;   └── refile to:
+;;       ├── tasks.org  → actionable, must have a concrete date
+;;       ├── next.org   → events, appointments, someday-with-a-date
+;;       └── org-roam   → reference, knowledge, project details
+;; TAGS:
+;;   :checkup: → recurring reviews, hidden from daily view
+;;   :habits:  → habit tracking, hidden from daily view
+;;
 (use-package org
   :straight nil
   :bind (("C-c o l" . org-store-link)
@@ -8,7 +19,7 @@
          ("C-c o p" . org-timer-set-timer)
          ("C-c o t" . iduh/org-last-clock-toggle)
          ("C-c o d" . (lambda () (interactive) (org-agenda nil "d")))
-         ("C-c o r" . (lambda () (interactive) (org-agenda nil "r")))
+         ("C-c o h" . (lambda () (interactive) (org-agenda nil "h")))
          ("C-c c" . (lambda () (interactive) (org-capture nil "t")))
          :map org-mode-map
          ("C-c z t" . 'org-todo)
@@ -90,12 +101,17 @@
                        (org-agenda-start-on-weekday nil)
                        (org-agenda-filter-preset '("-checkup" "-habits"))
                        (org-agenda-tag-filter-preset '("-checkup" "-habits"))))))
+
             ("h" "Habits"
-             tags-todo
-             "STYLE=\"habit\""
-             ((org-agenda-overriding-header "Habits")
-              (org-agenda-span 1)
-              (org-agenda-start-on-weekday nil))))))
+                     ((agenda ""
+                              ((org-agenda-span 1)
+                               (org-agenda-start-day nil)
+                               (org-agenda-start-on-weekday nil)
+                               (org-agenda-entry-types '(:scheduled))
+                               (org-agenda-overriding-header "Habits")))))
+
+            
+            )))
   (iduh/def-repeatable-keys org-heading-navigation
                             ("p" . org-previous-visible-heading)
                             ("n" . org-next-visible-heading)
@@ -213,7 +229,6 @@
   :straight nil
   :after org
   :config
-  (add-to-list 'org-modules 'org-habit)
   (setq
    org-habit-graph-column 60
    org-habit-preceding-days 21
