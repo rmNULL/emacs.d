@@ -201,5 +201,11 @@
   :straight t
   :defer t)
 
+(use-package bqn-mode
+  :straight (bqn-mode
+             :type git
+             :host github
+             :repo "museoa/bqn-mode"))
+
 
 (provide 'iduh-init-programming)
