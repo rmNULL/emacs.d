@@ -16,7 +16,12 @@
   :bind
   (:map c++-mode-map
         ;; ("C-=" . python-shell-send-statement)
-        ("<f6>" . projectile-compile-project)))
+        ("<f6>" . projectile-compile-project))
+  (:map c-mode-map
+        ("<f6>" . compile))
+  :custom
+  (compile-command "make")
+  (compilation-read-command nil))
 
 (use-package flycheck
   :diminish "F "
@@ -146,8 +151,10 @@
   :straight nil ;; built-in in Emacs 29+
   :defer t
   :commands (eglot eglot-ensure)
-  :hook ((python-ts-mode . eglot-ensure)
-         (python-mode    . eglot-ensure))
+  :hook ((python-mode    . eglot-ensure)
+         (python-ts-mode . eglot-ensure)
+         (c-mode . eglot-ensure)
+         (c-ts-mode . eglot-ensure))
   :config
   ;; Prefer pyright or pylsp explicitly if you want determinism
   ;; (add-to-list 'eglot-server-programs
