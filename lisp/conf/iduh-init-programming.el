@@ -154,7 +154,9 @@
   :hook ((python-mode    . eglot-ensure)
          (python-ts-mode . eglot-ensure)
          (c-mode . eglot-ensure)
-         (c-ts-mode . eglot-ensure))
+         (c-ts-mode . eglot-ensure)
+         (go-mode . eglot-ensure)
+         (go-ts-mode . eglot-ensure))
   :config
   ;; Prefer pyright or pylsp explicitly if you want determinism
   ;; (add-to-list 'eglot-server-programs
@@ -162,7 +164,17 @@
 
   ;; Performance / noise reduction
   (setq eglot-autoshutdown t
-        eglot-events-buffer-size 0))
+        eglot-events-buffer-size 0)
+  ;; gopls settings: stricter formatting + staticcheck diagnostics
+  (setq-default eglot-workspace-configuration
+                '((gopls
+                   (gofumpt . t)
+                   (staticcheck . t))))
+  ;; format-on-save for Go via gopls
+  (defun iduh/go-mode-format-on-save ()
+    (add-hook 'before-save-hook #'eglot-format-buffer nil t))
+  (add-hook 'go-mode-hook #'iduh/go-mode-format-on-save)
+  (add-hook 'go-ts-mode-hook #'iduh/go-mode-format-on-save))
 
 
 ;; (use-package ruby-mode
