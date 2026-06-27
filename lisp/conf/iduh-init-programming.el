@@ -155,7 +155,6 @@
          (python-ts-mode . eglot-ensure)
          (c-mode . eglot-ensure)
          (c-ts-mode . eglot-ensure)
-         (go-mode . eglot-ensure)
          (go-ts-mode . eglot-ensure))
   :config
   ;; Prefer pyright or pylsp explicitly if you want determinism
@@ -174,7 +173,7 @@
   (defun iduh/go-mode-format-on-save ()
     (add-hook 'before-save-hook #'eglot-format-buffer nil t))
   (add-hook 'go-mode-hook #'iduh/go-mode-format-on-save)
-  (add-hook 'go-ts-mode-hook #'iduh/go-mode-format-on-save))
+  (add-to-list 'auto-mode-alist '("\\.go$" . go-ts-mode)))
 
 
 ;; (use-package ruby-mode
@@ -226,5 +225,7 @@
              :host github
              :repo "museoa/bqn-mode"))
 
+(use-package reformatter
+  :straight t)
 
 (provide 'iduh-init-programming)
