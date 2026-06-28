@@ -115,7 +115,11 @@
 (use-package ripgrep :defer t)
 
 (use-package projectile
-  :straight t
+  :straight (projectile
+             :type git
+             :host github
+             :repo "bbatsov/projectile"
+             :commit "ef17d2971bbcce13b1ac16e0e36d44fa0defca63")
   :diminish " P"
   :defer t
   :hook
