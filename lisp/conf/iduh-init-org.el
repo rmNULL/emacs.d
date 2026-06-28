@@ -118,7 +118,7 @@
                             ("b" . org-backward-heading-same-level)
                             ("f" . org-forward-heading-same-level)
                             ("6" . org-up-element)
-                            ("^" . org-up-element))))
+                            ("^" . org-up-element)))
 
 (use-package org-roam
   :bind
