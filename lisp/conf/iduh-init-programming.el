@@ -46,40 +46,40 @@
   :bind
   ("C-c 1" . flycheck-hydra/body))
 
-(use-package lsp-mode
-  :commands lsp
-  :custom
-  ;; (lsp-clients-typescript-server-args '("--stdio" "--tsserver-log-file" "/tmp/tsserver.log"))
-  (lsp-clients-typescript-server-args '("--stdio" ))
-  (lsp-log-io nil)
-  (lsp-keymap-prefix "C-c l")
-  (lsp-keep-workspace-alive nil)
-  (gc-cons-threshold (* 200 1024 1024))
-  ;; (lsp-phpactor-path
-  ;;  (expand-file-name "local/phpactor/binphpactor" (getenv "HOME")))
-  (lsp-eslint-enable nil)
-  ;; copied from https://github.com/rksm/emacs-rust-config/blob/ec562f005152fabba0447ce64687cbb572a7d49b/init.el#L55
-  (lsp-rust-analyzer-server-display-inlay-hints t)
-  (lsp-rust-analyzer-display-lifetime-elision-hints-enable "skip_trivial")
-  (lsp-rust-analyzer-display-chaining-hints t)
-  (lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names nil)
-  (lsp-rust-analyzer-display-closure-return-type-hints t)
-  (lsp-rust-analyzer-display-parameter-hints nil)
-  (lsp-rust-analyzer-display-reborrow-hints nil)
-;;;
-  (lsp-make-interactive-code-action remove-unused-imports "source.removeUnusedImports.ts")
-  ;; end copy
-  :hook
-  ((js-mode php-mode rustic-mode web-mode elixir-mode) . lsp)
-  (lsp-mode . lsp-enable-which-key-integration)
-  :init
-  (with-eval-after-load 'js
-    (define-key js-mode-map (kbd "M-.") nil))
-  (setq read-process-output-max (* 3 1024 1024))
-  :config
-  (add-to-list 'lsp--formatting-indent-alist '(web-mode . web-mode-code-indent-offset))
-  (add-to-list 'auto-mode-alist '("\\.ts$" . js-mode))
-  (add-to-list 'auto-mode-alist '("\\.tsx$" . web-mode)))
+;; (use-package lsp-mode
+;;   :commands lsp
+;;   :custom
+;;   ;; (lsp-clients-typescript-server-args '("--stdio" "--tsserver-log-file" "/tmp/tsserver.log"))
+;;   (lsp-clients-typescript-server-args '("--stdio" ))
+;;   (lsp-log-io nil)
+;;   (lsp-keymap-prefix "C-c l")
+;;   (lsp-keep-workspace-alive nil)
+;;   (gc-cons-threshold (* 200 1024 1024))
+;;   ;; (lsp-phpactor-path
+;;   ;;  (expand-file-name "local/phpactor/binphpactor" (getenv "HOME")))
+;;   (lsp-eslint-enable nil)
+;;   ;; copied from https://github.com/rksm/emacs-rust-config/blob/ec562f005152fabba0447ce64687cbb572a7d49b/init.el#L55
+;;   (lsp-rust-analyzer-server-display-inlay-hints t)
+;;   (lsp-rust-analyzer-display-lifetime-elision-hints-enable "skip_trivial")
+;;   (lsp-rust-analyzer-display-chaining-hints t)
+;;   (lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names nil)
+;;   (lsp-rust-analyzer-display-closure-return-type-hints t)
+;;   (lsp-rust-analyzer-display-parameter-hints nil)
+;;   (lsp-rust-analyzer-display-reborrow-hints nil)
+;; ;;;
+;;   (lsp-make-interactive-code-action remove-unused-imports "source.removeUnusedImports.ts")
+;;   ;; end copy
+;;   :hook
+;;   ((js-mode php-mode rustic-mode web-mode elixir-mode) . lsp)
+;;   (lsp-mode . lsp-enable-which-key-integration)
+;;   :init
+;;   (with-eval-after-load 'js
+;;     (define-key js-mode-map (kbd "M-.") nil))
+;;   (setq read-process-output-max (* 3 1024 1024))
+;;   :config
+;;   (add-to-list 'lsp--formatting-indent-alist '(web-mode . web-mode-code-indent-offset))
+;;   (add-to-list 'auto-mode-alist '("\\.ts$" . js-mode))
+;;   (add-to-list 'auto-mode-alist '("\\.tsx$" . web-mode)))
 
 (use-package helm-lsp
   :commands helm-lsp-workspace-symbol
@@ -155,6 +155,7 @@
          (python-ts-mode . eglot-ensure)
          (c-mode . eglot-ensure)
          (c-ts-mode . eglot-ensure)
+         (go-mode . eglot-ensure)
          (go-ts-mode . eglot-ensure))
   :config
   ;; Prefer pyright or pylsp explicitly if you want determinism
@@ -172,8 +173,9 @@
   ;; format-on-save for Go via gopls
   (defun iduh/go-mode-format-on-save ()
     (add-hook 'before-save-hook #'eglot-format-buffer nil t))
-  (add-hook 'go-mode-hook #'iduh/go-mode-format-on-save)
-  (add-to-list 'auto-mode-alist '("\\.go$" . go-ts-mode)))
+  (add-hook 'go-mode-hook #'iduh/go-mode-format-on-save))
+
+(add-to-list 'auto-mode-alist '("\\.go$" . go-ts-mode))
 
 
 ;; (use-package ruby-mode
@@ -218,6 +220,11 @@
 (use-package tree-sitter-langs
   :straight t
   :defer t)
+
+(setq treesit-language-source-alist
+      '((typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+        (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")))
+
 
 (use-package bqn-mode
   :straight (bqn-mode
