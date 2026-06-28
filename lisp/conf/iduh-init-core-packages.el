@@ -118,8 +118,10 @@
   :straight (projectile
              :type git
              :host github
-             :repo "bbatsov/projectile"
-             :commit "ef17d2971bbcce13b1ac16e0e36d44fa0defca63")
+             :repo "bbatsov/projectile")
+  ;; projectile is pinned to v2.9.1 via the straight lockfile
+  ;; (straight/versions/default.el). straight.el ignores :tag/:commit
+  ;; in inline recipes; only the lockfile enforces a commit (at clone time).
   :diminish " P"
   :defer t
   :hook

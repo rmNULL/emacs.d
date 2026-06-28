@@ -156,7 +156,9 @@
          (c-mode . eglot-ensure)
          (c-ts-mode . eglot-ensure)
          (go-mode . eglot-ensure)
-         (go-ts-mode . eglot-ensure))
+         (go-ts-mode . eglot-ensure)
+         (typescript-ts-mode . eglot-ensure)
+         (tsx-ts-mode . eglot-ensure))
   :config
   ;; Prefer pyright or pylsp explicitly if you want determinism
   ;; (add-to-list 'eglot-server-programs
@@ -224,6 +226,8 @@
 (setq treesit-language-source-alist
       '((typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
         (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
 
 
 (use-package bqn-mode
