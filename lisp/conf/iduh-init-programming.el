@@ -155,10 +155,7 @@
          (python-ts-mode . eglot-ensure)
          (c-mode . eglot-ensure)
          (c-ts-mode . eglot-ensure)
-         (go-mode . eglot-ensure)
-         (go-ts-mode . eglot-ensure)
-         (typescript-ts-mode . eglot-ensure)
-         (tsx-ts-mode . eglot-ensure))
+         (go-mode . eglot-ensure))
   :config
   ;; Prefer pyright or pylsp explicitly if you want determinism
   ;; (add-to-list 'eglot-server-programs
@@ -176,12 +173,6 @@
   (defun iduh/go-mode-format-on-save ()
     (add-hook 'before-save-hook #'eglot-format-buffer nil t))
   (add-hook 'go-mode-hook #'iduh/go-mode-format-on-save))
-
-(add-to-list 'auto-mode-alist '("\\.go$" . go-ts-mode))
-
-
-;; (use-package ruby-mode
-;;   :straight nil)
 
 (use-package inf-ruby
   :hook
@@ -226,8 +217,22 @@
 (setq treesit-language-source-alist
       '((typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
         (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")))
-(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
+
+;; Built-in tree-sitter modes — `:mode' keeps auto-mode-alist in sync.
+(use-package go-ts-mode
+  :straight nil
+  :mode "\\.go\\'"
+  :hook (go-ts-mode . eglot-ensure))
+
+(use-package typescript-ts-mode
+  :straight nil
+  :mode "\\.ts\\'"
+  :hook (typescript-ts-mode . eglot-ensure))
+
+(use-package tsx-ts-mode
+  :straight nil
+  :mode "\\.tsx\\'"
+  :hook (tsx-ts-mode . eglot-ensure))
 
 
 (use-package bqn-mode
