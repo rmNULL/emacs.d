@@ -1,0 +1,5 @@
+# name: console.debug
+# key: cdb
+# group: console
+# --
+console.debug(${1:object})
